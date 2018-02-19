@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vitaliteit_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:padding="1dp"
+    android:layout_margin="1dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vitaliteit_title"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"/>
+
+</FrameLayout>
