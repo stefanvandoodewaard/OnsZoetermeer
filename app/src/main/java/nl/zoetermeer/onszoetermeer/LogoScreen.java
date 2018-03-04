@@ -7,14 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 
 public class LogoScreen extends AppCompatActivity
 {
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logoscreen);
 
-        new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable()
+        {
             @Override
             public void run() {
                 Intent intent;
@@ -24,3 +24,13 @@ public class LogoScreen extends AppCompatActivity
         }, 5000);
     }
 }
+
+
+
+
+
+
+
+
+
+
