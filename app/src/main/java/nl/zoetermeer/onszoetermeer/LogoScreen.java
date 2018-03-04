@@ -18,7 +18,7 @@ public class LogoScreen extends AppCompatActivity
             @Override
             public void run() {
                 Intent intent;
-                intent = new Intent(getApplicationContext(), LoginScreen.class);
+                intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         }, 5000);

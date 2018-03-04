@@ -3,20 +3,15 @@ package nl.zoetermeer.onszoetermeer;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
-
-import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.Data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.Models.User;
 
 
-public class LoginScreen extends AppCompatActivity
+public class Login extends AppCompatActivity
 {
     private DummyDatabase dummyDB;
     private User user1 = new User();
