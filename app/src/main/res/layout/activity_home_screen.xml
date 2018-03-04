@@ -15,28 +15,26 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/contact_fragement"
+            android:id="@+id/contact_button"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:padding="1dp"
             android:layout_margin="1dp"
+            android:background="@drawable/activity_button_custom"
             android:onClick="sendMessage"
             android:text="@string/contact_title"
-            android:background="@color/colorPrimaryDark"
             android:textColor="@color/colorWhite"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <Button
-            android:id="@+id/vitaliteit_fragement"
+            android:id="@+id/vitaliteit_button"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:padding="1dp"
             android:layout_margin="1dp"
+            android:background="@drawable/activity_button_custom"
             android:onClick="sendMessage"
             android:text="@string/vitaliteit_title"
-            android:background="@color/colorPrimaryDark"
             android:textColor="@color/colorWhite"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
