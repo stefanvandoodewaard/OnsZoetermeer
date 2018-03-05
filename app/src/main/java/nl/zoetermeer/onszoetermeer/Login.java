@@ -1,6 +1,5 @@
 package nl.zoetermeer.onszoetermeer;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,19 +13,19 @@ import nl.zoetermeer.onszoetermeer.Models.User;
 public class Login extends AppCompatActivity
 {
     private DummyDatabase dummyDB;
-    private User user1 = new User();
-    private User user2 = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        //Dummy database aanmaken
-        dummyDB = Room.databaseBuilder(getApplicationContext(),
-                DummyDatabase.class, "DUMMY_DATABASE").allowMainThreadQueries().build();
-        //testdata aanmaken
-        createData();
+        dummyDB = DummyDatabase.getDatabase(getApplicationContext());
+        dummyDB.createData(getApplicationContext());
+
+        //check of gebruiker is aangemaakt
+        User user = dummyDB.userDAO().getByName("Jannie").get(0);
+        Toast.makeText(this, String.valueOf("Gebruiker " + user.getM_first_name() + " aangemaakt"), Toast.LENGTH_LONG).show();
+
     }
 
     public void sendMessage(View view) {
@@ -34,26 +33,4 @@ public class Login extends AppCompatActivity
         startActivity(mainHomeScreenBinder);
     }
 
-    private void createData() {
-//        dummyDB.userDAO().deleteAll();
-//        List<User> users = dummyDB.userDAO().getAll();
-//        if (users.size() == 0) {
-
-            user1.setM_email("tante_jannie@casema.nl");
-            user1.setM_password("password");
-            user1.setM_gender("Female");
-            user1.setM_first_name("Jannie");
-            user1.setM_last_name("Jansen");
-            dummyDB.userDAO().insert(user1);
-
-            Toast.makeText(this, "Users created.", Toast.LENGTH_SHORT).show();
-
-//            user2 = dummyDB.userDAO().getByID(0);
-//            Toast.makeText(this, String.valueOf(user2.getM_first_name()), Toast.LENGTH_LONG).show();
-
-
-//        } else {
-//            Toast.makeText(this, "Stuff? happend", Toast.LENGTH_SHORT).show();
-//        }
-    }
 }

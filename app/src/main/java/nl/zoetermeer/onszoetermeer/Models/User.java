@@ -3,6 +3,8 @@ package nl.zoetermeer.onszoetermeer.Models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 
 import java.sql.Date;
 
@@ -10,21 +12,69 @@ import java.sql.Date;
 public class User
 {
 
-    @PrimaryKey(autoGenerate = true) private int id;
-    @ColumnInfo(name = "EMAIL") private String m_email;
-    @ColumnInfo(name = "PASSWORD") private String m_password;
-    @ColumnInfo(name = "GENDER") private String m_gender; // enum van maken
-    @ColumnInfo(name = "FIRST_NAME") private String m_first_name;
-    @ColumnInfo(name = "LAST_NAME") private String m_last_name;
-    @ColumnInfo(name = "PICTURE_SOURCE") private String m_picture_src;
-    @ColumnInfo(name = "POSTAL_CODE") private String m_postal_code;
-    @ColumnInfo(name = "GPS") private String m_GPS;
-    @ColumnInfo(name = "VITALITY_MENTAL") private String m_vit_ment;
-    @ColumnInfo(name = "VITALITY_PHYSICAL") private String m_vit_phys;
-    @ColumnInfo(name = "LAST_ACTIVE") private Date m_last_active;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo(name = "EMAIL")
+    private String m_email;
+    @ColumnInfo(name = "PASSWORD")
+    private String m_password;
 
-    public User(){
+    @TypeConverters(User.Gender.class)
+    @ColumnInfo(name = "GENDER")
+    public Gender gender;
+
+    @ColumnInfo(name = "FIRST_NAME")
+    private String m_first_name;
+    @ColumnInfo(name = "LAST_NAME")
+    private String m_last_name;
+    @ColumnInfo(name = "PICTURE_SOURCE")
+    private String m_picture_src;
+    @ColumnInfo(name = "POSTAL_CODE")
+    private String m_postal_code;
+    @ColumnInfo(name = "GPS")
+    private String m_GPS;
+    @ColumnInfo(name = "VITALITY_MENTAL")
+    private String m_vit_ment;
+    @ColumnInfo(name = "VITALITY_PHYSICAL")
+    private String m_vit_phys;
+    @ColumnInfo(name = "LAST_ACTIVE")
+    private Date m_last_active;
+
+    public User() {
     }
+
+    public enum Gender {
+    Onbekend(0),
+    Man(1),
+    Vrouw(2);
+
+    private int code;
+
+    Gender(int code){
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+
+        @TypeConverter
+        public static Gender getGender(int code){
+            for(Gender gender : values()){
+                if(gender.code == code){
+                    return gender;
+                }
+            }
+            return null;
+        }
+
+        @TypeConverter
+        public static int getGenderInt(Gender gender){
+            return gender.code;
+        }
+
+}
 
 //    public User(String email, String password, String gender, String firstName, String lastName) {
 //        this.m_email = email;
@@ -56,14 +106,6 @@ public class User
 
     public void setM_password(String m_password) {
         this.m_password = m_password;
-    }
-
-    public String getM_gender() {
-        return m_gender;
-    }
-
-    public void setM_gender(String m_gender) {
-        this.m_gender = m_gender;
     }
 
     public String getM_first_name() {
