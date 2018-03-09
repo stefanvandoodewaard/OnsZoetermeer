@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/contact_button"
+            android:id="@+id/contact_fragement"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:padding="1dp"
@@ -27,7 +27,7 @@
             android:layout_gravity="center"/>
 
         <Button
-            android:id="@+id/vitaliteit_button"
+            android:id="@+id/vitaliteit_fragement"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:padding="1dp"
