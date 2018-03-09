@@ -1,7 +1,9 @@
-package nl.zoetermeer.onszoetermeer;
+package nl.zoetermeer.onszoetermeer.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import nl.zoetermeer.onszoetermeer.R;
 
 public class Contact extends AppCompatActivity
 {

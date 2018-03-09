@@ -1,9 +1,11 @@
-package nl.zoetermeer.onszoetermeer;
+package nl.zoetermeer.onszoetermeer.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+
+import nl.zoetermeer.onszoetermeer.R;
 
 public class LogoScreen extends AppCompatActivity
 {

@@ -1,4 +1,4 @@
-package nl.zoetermeer.onszoetermeer;
+package nl.zoetermeer.onszoetermeer.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import nl.zoetermeer.onszoetermeer.Data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.Models.User;
+import nl.zoetermeer.onszoetermeer.R;
 
 
 public class Login extends AppCompatActivity
