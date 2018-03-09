@@ -5,7 +5,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
 
-@Entity(tableName = "REQUESTS",foreignKeys = {
+@Entity(tableName = "REQUESTS", foreignKeys = {
         @ForeignKey(
                 entity = User.class,
                 parentColumns = "id",
@@ -14,20 +14,38 @@ import android.arch.persistence.room.ColumnInfo;
         )})
 public class Request
 {
-    @PrimaryKey(autoGenerate = true) private int id;
-    @ColumnInfo(name = "DETAILS") private String mDetails;
-    @ColumnInfo(name = "REQUEST_DATE") private String mRequestDate;
+    @PrimaryKey(autoGenerate = true)
+    private int ID;
+    @ColumnInfo(name = "USER_ID")
+    private int mUserId;
+    @ColumnInfo(name = "DETAILS")
+    private String mDetails;
+    @ColumnInfo(name = "REQUEST_DATE")
+    private String mRequestDate;
 
-    public Request () {
+    public Request(int ID, int mUserId, String mDetails, String mRequestDate) {
+        this.ID = ID;
+        this.mUserId = mUserId;
+        this.mDetails = mDetails;
+        this.mRequestDate = mRequestDate;
 
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int iD) {
+        this.ID = ID;
+    }
+
+
+    public int getmUserId() {
+        return mUserId;
+    }
+
+    public void setmUserId(int mUserId) {
+        this.mUserId = mUserId;
     }
 
     public String getmDetails() {
