@@ -18,11 +18,9 @@ public class User
     private String m_email;
     @ColumnInfo(name = "PASSWORD")
     private String m_password;
-
     @TypeConverters(User.Gender.class)
     @ColumnInfo(name = "GENDER")
     public Gender gender;
-
     @ColumnInfo(name = "FIRST_NAME")
     private String m_first_name;
     @ColumnInfo(name = "LAST_NAME")
