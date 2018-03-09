@@ -1,15 +1,15 @@
 package nl.zoetermeer.onszoetermeer.Models;
 
-
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "ACHIEVEMENT")
+
+@Entity(tableName = "ACHIEVEMENTS")
 public class Achievement
 {
 
-    @PrimaryKey(autoGenerate = true) private int id;
+    @PrimaryKey(autoGenerate = true) private int ID;
     @ColumnInfo(name = "NAME") private String mName;
     @ColumnInfo(name = "PICTURE_SOURCE") String mPctrSrc;
 
@@ -17,12 +17,12 @@ public class Achievement
 
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getmName() {

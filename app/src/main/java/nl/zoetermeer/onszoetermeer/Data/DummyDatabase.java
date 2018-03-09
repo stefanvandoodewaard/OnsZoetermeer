@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.util.Log;
 
 import nl.zoetermeer.onszoetermeer.Models.User;
 import nl.zoetermeer.onszoetermeer.Models.UserDAO;
@@ -23,12 +24,15 @@ public abstract class DummyDatabase extends RoomDatabase
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .build();
+            Log.i("DATABASE:", "New instance created.");
         }
         return INSTANCE;
     }
 
     public static void destroyInstance() {
+
         INSTANCE = null;
+        Log.i("DATABASE:", "Instance destroyed.");
     }
 
     public void createData(Context context) {
