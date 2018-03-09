@@ -15,8 +15,26 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home_screen);
     }
 
-    public void SendMessage(View view)
+    public void sendMessage(View view)
     {
-        //TO DO
+        switch (view.getId())
+        {
+            case R.id.contact_button:
+            {
+                Intent messageContact = new Intent(this, Contact.class);
+                startActivity(messageContact);
+            }
+            break;
+            case R.id.vitaliteit_button:
+            {
+                Intent messageVitaliteit = new Intent(this, Vitaliteit.class);
+                startActivity(messageVitaliteit);
+            }
+            break;
+            default:
+            {
+                setContentView(R.layout.activity_home_screen);
+            }
+        }
     }
 }
