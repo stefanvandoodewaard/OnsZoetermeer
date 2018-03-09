@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nl.zoetermeer.onszoetermeer.LogoScreen">
+    tools:context="nl.zoetermeer.onszoetermeer.Activities.LogoScreen">
 
     <ImageView
         android:id="@+id/ons_zoetermeer_icon"

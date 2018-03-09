@@ -1,9 +1,11 @@
-package nl.zoetermeer.onszoetermeer;
+package nl.zoetermeer.onszoetermeer.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import nl.zoetermeer.onszoetermeer.R;
 
 public class Home extends AppCompatActivity
 {
