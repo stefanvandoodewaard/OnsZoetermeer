@@ -4,4 +4,6 @@
     <string name="contact_title">Contact</string>
     <string name="vitaliteit_title">Vitaliteit</string>
     <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="login_text">"Bent u een bestaande gebruiker? \n     Voer dan uw gegevens in."</string>
+    <string name="login_text2">Heeft u nog geen inlog gegevens?</string>
 </resources>

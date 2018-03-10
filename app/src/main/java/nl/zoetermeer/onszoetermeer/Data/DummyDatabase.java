@@ -37,20 +37,20 @@ public abstract class DummyDatabase extends RoomDatabase
         Log.i("DATABASE:", "Instance destroyed.");
     }
 
-    public void createData(Context context) {
-        User user1 = new User();
-
-        user1.setM_email("tante_jannie@casema.nl");
-        user1.setM_password("password");
-        user1.gender = User.Gender.Vrouw;
-        user1.setM_first_name("Jannie");
-        user1.setM_last_name("Jansen");
-        Date date = new Date();
-        user1.setM_last_active(date);
-
-        INSTANCE.userDAO().insert(user1);
-
-        Log.i("DATABASE:", "Test Data created");
-
-    }
+//    public void createData() {
+//        User user1 = new User();
+//
+//        user1.setM_email("tante_jannie@casema.nl");
+//        user1.setM_password("password");
+//        user1.gender = User.Gender.Vrouw;
+//        user1.setM_first_name("Jannie");
+//        user1.setM_last_name("Jansen");
+//        Date date = new Date();
+//        user1.setM_last_active(date);
+//
+//        INSTANCE.userDAO().insert(user1);
+//
+//        Log.i("DATABASE:", "Test Data created");
+//
+//    }
 }

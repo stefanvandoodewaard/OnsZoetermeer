@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/GridLayout2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:columnCount="8"
+    android:useDefaultMargins="true">
+
+    <TextView
+        android:layout_column="1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_row="0"
+        android:text="Registratie"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_column="1"
+        android:layout_gravity="center"
+        android:layout_row="1"
+        android:text="Vul uw gegevens in"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/reg_input_mail"
+        android:layout_column="1"
+        android:layout_gravity="center"
+        android:layout_row="2"
+        android:ems="12"
+        android:hint="E-mail" />
+
+    <EditText
+        android:id="@+id/reg_input_fname"
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="3"
+        android:ems="12"
+        android:hint="Voornaam" />
+
+    <EditText
+        android:id="@+id/reg_input_lname"
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="4"
+        android:ems="12"
+        android:hint="Achternaam (Optioneel)" />
+
+    <RadioGroup
+        android:id="@+id/gender"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_row="5"
+        android:orientation="horizontal"
+        android:textAlignment="center">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Man"
+            android:textSize="20sp">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vrouw"
+            android:textSize="20sp">
+        </RadioButton>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/reg_input_pw1"
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="6"
+        android:ems="12"
+        android:hint="Wachtwoord"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/reg_input_pw2"
+        android:layout_column="1"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="7"
+        android:ems="12"
+        android:hint="Wachtwoord (controle)"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/registration_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="center"
+        android:layout_row="8"
+        android:onClick="validateRegistration"
+        android:text="Registreren" />
+
+</GridLayout>

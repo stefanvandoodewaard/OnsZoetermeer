@@ -3,6 +3,7 @@ package nl.zoetermeer.onszoetermeer.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,19 +20,40 @@ public class Login extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+        Log.i("ACTIVITY:", "Login created.");
 
         dummyDB = DummyDatabase.getDatabase(getApplicationContext());
-        dummyDB.createData(getApplicationContext());
 
-        //check of gebruiker is aangemaakt
-        User user = dummyDB.userDAO().getByName("Jannie").get(0);
-        Toast.makeText(this, String.valueOf("Gebruiker " + user.getM_first_name() + " aangemaakt"), Toast.LENGTH_LONG).show();
 
     }
 
-    public void sendMessage(View view) {
-        Intent mainHomeScreenBinder = new Intent(this, Home.class);
-        startActivity(mainHomeScreenBinder);
+    public void sendMessage(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.login_button:
+            {
+                Log.i("BUTTON:", "Login Activity > Login.");
+                Intent mainHomeScreenBinder = new Intent(this, Home.class);
+                startActivity(mainHomeScreenBinder);
+            }
+            break;
+            case R.id.recovery_button:
+            {
+                Log.i("BUTTON:", "Login Activity > Password Recovery.");
+            }
+            break;
+            case R.id.register_button:
+            {
+                Log.i("BUTTON:", "Login Activity > Register.");
+                Intent messageRegistration = new Intent(this, Registration.class);
+                startActivity(messageRegistration);
+            }
+            break;
+            default:
+            {
+                setContentView(R.layout.activity_login_screen);
+            }
+        }
     }
-
 }
