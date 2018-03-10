@@ -7,11 +7,14 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
+
+import java.util.Date;
+
 import nl.zoetermeer.onszoetermeer.Models.User;
 import nl.zoetermeer.onszoetermeer.Models.UserDAO;
 
 @Database(entities = {User.class}, version = 2)
-@TypeConverters({Converters.class})
+@TypeConverters({DateConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
@@ -43,6 +46,8 @@ public abstract class DummyDatabase extends RoomDatabase
         user1.gender = User.Gender.Vrouw;
         user1.setM_first_name("Jannie");
         user1.setM_last_name("Jansen");
+        Date date = new Date();
+        user1.setM_last_active(date);
 
 
         INSTANCE.userDAO().insert(user1);
