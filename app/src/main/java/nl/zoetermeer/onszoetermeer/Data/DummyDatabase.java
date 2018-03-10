@@ -6,15 +6,14 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
-
-
 import java.util.Date;
 
+import nl.zoetermeer.onszoetermeer.Helpers.DateConverter;
+import nl.zoetermeer.onszoetermeer.Helpers.GenderConverter;
 import nl.zoetermeer.onszoetermeer.Models.User;
-import nl.zoetermeer.onszoetermeer.Models.UserDAO;
 
 @Database(entities = {User.class}, version = 2)
-@TypeConverters({DateConverter.class})
+@TypeConverters({DateConverter.class, GenderConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
@@ -49,9 +48,9 @@ public abstract class DummyDatabase extends RoomDatabase
         Date date = new Date();
         user1.setM_last_active(date);
 
-
         INSTANCE.userDAO().insert(user1);
 
+        Log.i("DATABASE:", "Test Data created");
 
     }
 }

@@ -1,4 +1,4 @@
-package nl.zoetermeer.onszoetermeer.Models;
+package nl.zoetermeer.onszoetermeer.Data;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
@@ -7,6 +7,9 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Update;
 import android.arch.persistence.room.Delete;
 import java.util.List;
+
+import nl.zoetermeer.onszoetermeer.Models.Achievement;
+import nl.zoetermeer.onszoetermeer.Models.User;
 
 @Dao
 public interface UserAchievementsDAO

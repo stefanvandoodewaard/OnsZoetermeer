@@ -1,20 +1,22 @@
-package nl.zoetermeer.onszoetermeer.Models;
+package nl.zoetermeer.onszoetermeer.Data;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Update;
 import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.OnConflictStrategy;
+
+import nl.zoetermeer.onszoetermeer.Models.Request;
 
 @Dao
-public interface AchievementDAO
+public interface RequestDAO
 {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User user);
+    void insert(Request request);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void update(User user);
+    void update(Request request);
 
     @Delete
-    void delete(User user);
+    void delete(Request request);
 }

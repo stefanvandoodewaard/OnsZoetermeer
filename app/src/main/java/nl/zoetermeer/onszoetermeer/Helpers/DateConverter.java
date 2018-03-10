@@ -1,4 +1,4 @@
-package nl.zoetermeer.onszoetermeer.Data;
+package nl.zoetermeer.onszoetermeer.Helpers;
 
 import android.arch.persistence.room.TypeConverter;
 
