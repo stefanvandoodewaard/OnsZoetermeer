@@ -59,8 +59,9 @@ public class Home extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-        return super.onOptionsItemSelected(item);
         Log.i("ACTIVITY:", "Home created.");
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void sendMessage(View view)
