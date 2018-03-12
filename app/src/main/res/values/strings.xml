@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Ons Zoetermeer</string>
     <string name="main_question">Hoe sta ik er nu voor?</string>
+
+    <string name="home_title">Home</string>
     <string name="contact_title">Contact</string>
     <string name="vitaliteit_title">Vitaliteit</string>
+    <string name="hulp_title">Hulp</string>
+    <string name="achievement_title">Achievement</string>
+    <string name="uitloggen_title">Uitloggen</string>
+    <string name="loginscreen_title">LoginScreen</string>
     <string name="title_activity_login_screen">LoginScreen</string>
     <string name="login_text">"Bent u een bestaande gebruiker? \n     Voer dan uw gegevens in."</string>
     <string name="login_text2">Heeft u nog geen inlog gegevens?</string>

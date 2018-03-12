@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/home_title" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_menu_contact"
+            android:title="@string/contact_title" />
+        <item
+            android:id="@+id/nav_vitaliteit"
+            android:icon="@drawable/ic_menu_vitaliteit"
+            android:title="@string/vitaliteit_title" />
+        <item
+            android:id="@+id/nav_hulp"
+            android:icon="@drawable/ic_menu_hulp"
+            android:title="@string/hulp_title" />
+        <item
+            android:id="@+id/nav_achievement"
+            android:icon="@drawable/ic_menu_achievement"
+            android:title="@string/achievement_title" />
+        <item
+            android:id="@+id/nav_uitloggen"
+            android:icon="@drawable/ic_menu_uitloggen"
+            android:title="@string/uitloggen_title" />
+    </group>
+</menu>
