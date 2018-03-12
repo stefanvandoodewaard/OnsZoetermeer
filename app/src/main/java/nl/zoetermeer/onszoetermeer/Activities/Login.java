@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity
         validationStatus = false;
 
         loginEmail = findViewById(R.id.login_email);
-        loginPassword = findViewById(R.id.login_email);
+        loginPassword = findViewById(R.id.login_password);
 
 
         addListeners();
@@ -74,23 +74,22 @@ public class Login extends AppCompatActivity
 
     public void addListeners() {
 
-        loginEmail.addTextChangedListener(new TextWatcher()
-        {
+        loginEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateEmail(loginEmail);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateEmail(loginEmail);
+                }
             }
         });
 
+        loginPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateNotNull(loginPassword);
+                }
+            }
+        });
     }
 }

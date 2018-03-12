@@ -56,142 +56,111 @@ public class Registration extends AppCompatActivity
 
 
     private void addListeners() {
-
-        regEmail.addTextChangedListener(new TextWatcher()
-        {
+        regEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateEmail(regEmail);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateEmail(regEmail);
+                }
             }
         });
 
-        regFname.addTextChangedListener(new TextWatcher()
-        {
+        regFname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateName(regFname);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateName(regFname);
+                }
             }
         });
 
-        regLname.addTextChangedListener(new TextWatcher()
-        {
+        regLname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateName(regLname);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateName(regLname);
+                }
             }
         });
 
-        regGndr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        regGndrFemale.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.male: {
-                        newUser.gender = User.Gender.Man;
-                        break;
-                    }
-                    case R.id.female: {
-                        newUser.gender = User.Gender.Vrouw;
-                        break;
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (newUser.gender == null) {
+                        regGndrMale.setError("Selecteer een optie!");
+                        regGndrFemale.setError("Selecteer een optie!");
+
+                        genderStatus = false;
+                    } else {
+                        regGndrMale.setError(null);
+                        regGndrFemale.setError(null);
+
+                        genderStatus = true;
                     }
                 }
             }
         });
 
-        regPw1.addTextChangedListener(new TextWatcher()
-        {
+//        regGndr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch (checkedId) {
+//                    case R.id.male: {
+//                        newUser.gender = User.Gender.Man;
+//                        break;
+//                    }
+//                    case R.id.female: {
+//                        newUser.gender = User.Gender.Vrouw;
+//                        break;
+//                    }
+//                }
+//            }
+//        });
+
+        regPw1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validatePassword(regPw1, regPw2);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateNotNull(regPw1);
+                }
             }
         });
 
-        regPw2.addTextChangedListener(new TextWatcher()
-        {
+        regPw2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validatePassword(regPw2, regPw1);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validatePassword(regPw2, regPw1);
+                }
             }
         });
     }
 
-    private boolean checkGender() {
-
-        if (newUser.gender == null) {
-            regGndrMale.setFocusable(true);
-            regGndrMale.setError("Selecteer een optie!");
-            regGndrMale.requestFocus();
-
-            regGndrFemale.setFocusable(true);
-            regGndrFemale.setError("Selecteer een optie!");
-            regGndrFemale.requestFocus();
-
-            genderStatus = false;
-        } else {
-            regGndrMale.setError(null);
-            regGndrFemale.setError(null);
-            genderStatus = true;
-        }
-        return genderStatus;
-    }
+//    private boolean checkGender() {
+//
+//        if (newUser.gender == null) {
+//            regGndrMale.setError("Selecteer een optie!");
+//            regGndrFemale.setError("Selecteer een optie!");
+//
+//            genderStatus = false;
+//        } else {
+//            regGndrMale.setError(null);
+//            regGndrFemale.setError(null);
+//
+//            genderStatus = true;
+//        }
+//        return genderStatus;
+//    }
 
 
     public void validateRegistration(View view) {
 
         //TO-DO check validator statusses
 
-        if (checkGender()) {
+//        if (checkGender()) {
             createUser(view);
-        }
+//        }
     }
 
     private void createUser(View view) {
