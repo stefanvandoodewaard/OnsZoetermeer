@@ -127,7 +127,7 @@ public class Registration extends AppCompatActivity
             }
         });
 
-        regPw2.addTextChangedListener(new TextWatcher()
+        regPw1.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -142,6 +142,24 @@ public class Registration extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable s) {
                 inputValidator.validatePassword(regPw1, regPw2);
+            }
+        });
+
+        regPw2.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                inputValidator.validatePassword(regPw2, regPw1);
             }
         });
     }

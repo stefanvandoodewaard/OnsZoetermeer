@@ -55,17 +55,10 @@ public class InputValidator
             editText1.setFocusable(true);
             editText1.setError("Veld mag niet leeg zijn!");
             editText1.requestFocus();
-        } else if (input2.length() == 0) {
-            editText2.setFocusable(true);
-            editText2.setError("Veld mag niet leeg zijn!");
-            editText2.requestFocus();
         } else if (!input1.equals(input2)) {
             editText1.setFocusable(true);
             editText1.setError("Wachtwoorden niet gelijk!");
             editText1.requestFocus();
-            editText2.setFocusable(true);
-            editText2.setError("Wachtwoorden niet gelijk!");
-            editText2.requestFocus();
         }
     }
 

@@ -6,4 +6,9 @@
     <string name="title_activity_login_screen">LoginScreen</string>
     <string name="login_text">"Bent u een bestaande gebruiker? \n     Voer dan uw gegevens in."</string>
     <string name="login_text2">Heeft u nog geen inlog gegevens?</string>
+    <string name="login_password_hint">Wachtwoord</string>
+    <string name="login_email_hint">E-mail</string>
+    <string name="login_header">Inloggen</string>
+    <string name="kaart_titel">Kaart</string>
+    <string name="hulp_titel">Hulp</string>
 </resources>
