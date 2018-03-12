@@ -4,25 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context="nl.zoetermeer.onszoetermeer.Activities.LogoScreen">
+
+    <FrameLayout
+        android:id="@+id/basic_frame"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:background="@color/colorPrimary">
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/ons_zoetermeer_icon"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_logo"
-        app:layout_constraintBottom_toTopOf="@+id/ons_zoetermeer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:paddingTop="103dp"
+        android:src="@drawable/ic_logoscreen_logo" />
 
-    <TextView
-        android:id="@+id/ons_zoetermeer"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/src_logo_onszoetermeer"
+        android:paddingTop="390dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/src_logo_gemeente_zoetermeer"
+        android:paddingTop="520dp"/>
 
 </android.support.constraint.ConstraintLayout>
