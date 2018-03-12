@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/GridLayout1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:columnCount="8"
-    android:useDefaultMargins="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
 
-    <TextView
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:layout_row="0"
-        android:text="@string/login_header"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+    <FrameLayout
+        android:id="@+id/basic_frame"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:background="@color/colorPrimary">
 
-    <TextView
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_row="1"
-        android:text="@string/login_text"
-        android:textSize="20sp" />
+    </FrameLayout>
+
+
+    <GridLayout
+        android:id="@+id/login_input_grid"
+        android:layout_marginTop="225dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="130dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/login_email"
         android:layout_column="1"
         android:layout_gravity="center"
@@ -36,8 +39,10 @@
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_column="1"
         android:layout_gravity="center_horizontal"
         android:layout_row="3"
@@ -54,34 +59,41 @@
         android:layout_gravity="center"
         android:layout_row="4"
         android:onClick="onClick"
-        android:text="Inloggen" />
+        android:text="@string/login_button_login" />
 
-    <Button
-        android:id="@+id/recovery_button"
-        android:layout_width="250dp"
+        <LinearLayout
+            android:layout_column="1"
+            android:layout_row="7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="0dp"
+                android:layout_weight=".50"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:onClick="onClick"
+                android:text="@string/login_button_register" />
+
+            <Button
+                android:id="@+id/recovery_button"
+                android:layout_width="0dp"
+                android:layout_weight=".50"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:onClick="onClick"
+                android:text="@string/login_button_password" />
+
+        </LinearLayout>
+
+    </GridLayout>
+
+    <ImageView
+        android:id="@+id/ons_zoetermeer_icon"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:layout_row="5"
-        android:onClick="onClick"
-        android:text="Wachtwoord vergeten?" />
+        android:paddingTop="125dp"
+        android:src="@drawable/ic_logoscreen_logo_login" />
 
-    <TextView
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_row="6"
-        android:text="@string/login_text2"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_row="7"
-        android:onClick="onClick"
-        android:text="Registreer!" />
-
-</GridLayout>
+</RelativeLayout>

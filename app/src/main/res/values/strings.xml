@@ -14,7 +14,9 @@
     <string name="login_text2">Heeft u nog geen inlog gegevens?</string>
     <string name="login_password_hint">Wachtwoord</string>
     <string name="login_email_hint">E-mail</string>
-    <string name="login_header">Inloggen</string>
     <string name="kaart_titel">Kaart</string>
     <string name="hulp_titel">Hulp</string>
+    <string name="login_button_password">Wachtwoord\nvergeten</string>
+    <string name="login_button_register">Account\naanmaken</string>
+    <string name="login_button_login">Inloggen</string>
 </resources>
