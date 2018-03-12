@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.Helpers;
 
+import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 import android.util.Patterns;
 
@@ -33,6 +34,14 @@ public class InputValidator
 
         if (input.length() == 0) {
             editText.setError("Veld mag niet leeg zijn!");
+        }
+    }
+
+    public void validateNotNullPassword(EditText editText, TextInputLayout textInputLayout) {
+        String input = editText.getText().toString();
+
+        if (input.length() == 0) {
+            textInputLayout.setError("Veld mag niet leeg zijn!");
         }
     }
 

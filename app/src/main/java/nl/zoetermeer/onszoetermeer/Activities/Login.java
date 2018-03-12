@@ -2,6 +2,7 @@ package nl.zoetermeer.onszoetermeer.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +23,7 @@ public class Login extends AppCompatActivity
     private InputValidator inputValidator;
     private boolean validationStatus;
     EditText loginEmail, loginPassword;
+    TextInputLayout loginPasswordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class Login extends AppCompatActivity
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
-
+        loginPasswordLayout = findViewById(R.id.login_password_layout);
 
         addListeners();
 
@@ -87,7 +89,7 @@ public class Login extends AppCompatActivity
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    inputValidator.validateNotNull(loginPassword);
+                    inputValidator.validateNotNullPassword(loginPassword, loginPasswordLayout);
                 }
             }
         });
