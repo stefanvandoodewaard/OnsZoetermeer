@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,6 +60,7 @@ public class Home extends AppCompatActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+        Log.i("ACTIVITY:", "Home created.");
     }
 
     public void sendMessage(View view)
@@ -67,12 +69,14 @@ public class Home extends AppCompatActivity
         {
             case R.id.contact_button:
             {
+                Log.i("BUTTON:", "Home > Contact.");
                 Intent messageContact = new Intent(this, Contact.class);
                 startActivity(messageContact);
             }
             break;
             case R.id.vitaliteit_button:
             {
+                Log.i("BUTTON:", "Home > Vitaliteit.");
                 Intent messageVitaliteit = new Intent(this, Vitaliteit.class);
                 startActivity(messageVitaliteit);
             }

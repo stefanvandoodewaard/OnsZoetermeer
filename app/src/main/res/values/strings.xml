@@ -9,4 +9,7 @@
     <string name="achievement_title">Achievement</string>
     <string name="uitloggen_title">Uitloggen</string>
     <string name="loginscreen_title">LoginScreen</string>
+    <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="login_text">"Bent u een bestaande gebruiker? \n     Voer dan uw gegevens in."</string>
+    <string name="login_text2">Heeft u nog geen inlog gegevens?</string>
 </resources>

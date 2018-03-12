@@ -3,22 +3,18 @@ package nl.zoetermeer.onszoetermeer.Models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.TypeConverter;
-import android.arch.persistence.room.TypeConverters;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity(tableName = "USERS")
 public class User
 {
-
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(name = "EMAIL")
     private String m_email;
     @ColumnInfo(name = "PASSWORD")
     private String m_password;
-    @TypeConverters(User.Gender.class)
     @ColumnInfo(name = "GENDER")
     public Gender gender;
     @ColumnInfo(name = "FIRST_NAME")
@@ -41,46 +37,22 @@ public class User
     public User() {
     }
 
-    public enum Gender {
-    Onbekend(0),
-    Man(1),
-    Vrouw(2);
+    public enum Gender
+    {
+        Onbekend(0),
+        Man(1),
+        Vrouw(2);
 
-    private int code;
+        public int code;
 
-    Gender(int code){
-        this.code = code;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-
-        @TypeConverter
-        public static Gender getGender(int code){
-            for(Gender gender : values()){
-                if(gender.code == code){
-                    return gender;
-                }
-            }
-            return null;
+        Gender(int code) {
+            this.code = code;
         }
 
-        @TypeConverter
-        public static int getGenderInt(Gender gender){
-            return gender.code;
+        public int getCode() {
+            return code;
         }
-
-}
-
-//    public User(String email, String password, String gender, String firstName, String lastName) {
-//        this.m_email = email;
-//        this.m_first_name = password;
-//        this.m_gender  = gender;
-//        this.m_first_name = firstName;
-//        this.m_last_name = lastName;
-//    }
+    }
 
     public int getId() {
         return id;
