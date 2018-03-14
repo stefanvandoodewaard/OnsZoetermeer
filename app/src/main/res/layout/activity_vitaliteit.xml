@@ -2,7 +2,7 @@
     android:id="@+id/vitaliteit_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryLight"
     android:padding="1dp"
     android:layout_margin="1dp">
 

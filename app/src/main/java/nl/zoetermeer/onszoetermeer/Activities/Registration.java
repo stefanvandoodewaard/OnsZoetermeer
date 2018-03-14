@@ -83,6 +83,22 @@ public class Registration extends AppCompatActivity
             }
         });
 
+        regGndr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.male: {
+                        newUser.gender = User.Gender.Man;
+                        break;
+                    }
+                    case R.id.female: {
+                        newUser.gender = User.Gender.Vrouw;
+                        break;
+                    }
+                }
+            }
+        });
+
         regGndrFemale.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -95,28 +111,11 @@ public class Registration extends AppCompatActivity
                     } else {
                         regGndrMale.setError(null);
                         regGndrFemale.setError(null);
-
                         genderStatus = true;
                     }
                 }
             }
         });
-
-//        regGndr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                switch (checkedId) {
-//                    case R.id.male: {
-//                        newUser.gender = User.Gender.Man;
-//                        break;
-//                    }
-//                    case R.id.female: {
-//                        newUser.gender = User.Gender.Vrouw;
-//                        break;
-//                    }
-//                }
-//            }
-//        });
 
         regPw1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -131,39 +130,28 @@ public class Registration extends AppCompatActivity
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    inputValidator.validatePassword(regPw2, regPw1);
+                    inputValidator.validateNotNull(regPw2);
                 }
             }
         });
     }
 
-//    private boolean checkGender() {
-//
-//        if (newUser.gender == null) {
-//            regGndrMale.setError("Selecteer een optie!");
-//            regGndrFemale.setError("Selecteer een optie!");
-//
-//            genderStatus = false;
-//        } else {
-//            regGndrMale.setError(null);
-//            regGndrFemale.setError(null);
-//
-//            genderStatus = true;
-//        }
-//        return genderStatus;
-//    }
+    public void validateRegistration(final View view) {
+
+//            createUser(view);
 
 
-    public void validateRegistration(View view) {
-
-        //TO-DO check validator statusses
-
-//        if (checkGender()) {
-            createUser(view);
-//        }
+        dummyDB.runInTransaction(new Runnable() {
+            @Override
+            public void run() {
+                createUser(view);
+            }
+        });
     }
 
     private void createUser(View view) {
+
+
 
 
         newUser.setM_email(regEmail.getText().toString());

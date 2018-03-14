@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity
     private InputValidator inputValidator;
     private boolean validationStatus;
     EditText loginEmail, loginPassword;
-    TextInputLayout loginPasswordLayout;
+//    TextInputLayout loginPasswordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
-        loginPasswordLayout = findViewById(R.id.login_password_layout);
+//        loginPasswordLayout = findViewById(R.id.login_password_layout);
 
         addListeners();
 
@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    inputValidator.validateNotNullPassword(loginPassword, loginPasswordLayout);
+                    inputValidator.validateNotNull(loginPassword);
                 }
             }
         });

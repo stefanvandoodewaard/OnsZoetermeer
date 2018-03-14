@@ -37,22 +37,21 @@ public class InputValidator
         }
     }
 
-    public void validateNotNullPassword(EditText editText, TextInputLayout textInputLayout) {
-        String input = editText.getText().toString();
-
-        if (input.length() == 0) {
-            textInputLayout.setError("Veld mag niet leeg zijn!");
-        }
-    }
+//    public void validateNotNullPassword(EditText editText) {
+//        String input = editText.getText().toString();
+//
+//        if (input.length() == 0) {
+//            EditText.setError("Veld mag niet leeg zijn!");
+//        }
+//    }
 
     public void validatePassword(EditText editText1, EditText editText2) {
         String input1 = editText1.getText().toString();
         String input2 = editText2.getText().toString();
 
-        if (input1.length() == 0) {
-            editText1.setError("Veld mag niet leeg zijn!");
-        } else if (!input1.equals(input2)) {
+        if (!input1.equals(input2)) {
             editText1.setError("Wachtwoorden niet gelijk!");
+            editText2.setError("Wachtwoorden niet gelijk!");
         }
     }
 
