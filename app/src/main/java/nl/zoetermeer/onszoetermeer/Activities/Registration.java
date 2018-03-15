@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class Registration extends AppCompatActivity
     private boolean validationStatus;
     private EditText regEmail, regFname, regLname, regPw1, regPw2;
     private RadioGroup regGndr;
+    private RadioButton regGndrMale, regGndrFemale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,73 +46,42 @@ public class Registration extends AppCompatActivity
         regFname = findViewById(R.id.reg_input_fname);
         regLname = findViewById(R.id.reg_input_lname);
         regGndr = findViewById(R.id.gender);
+        regGndrMale = findViewById(R.id.male);
+        regGndrFemale = findViewById(R.id.female);
         regPw1 = findViewById(R.id.reg_input_pw1);
         regPw2 = findViewById(R.id.reg_input_pw2);
 
         addListeners();
-        checkGender();
-
     }
 
 
-    public void addListeners() {
-
-        regEmail.addTextChangedListener(new TextWatcher()
-        {
+    private void addListeners() {
+        regEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateEmail(regEmail);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateEmail(regEmail);
+                }
             }
         });
 
-        regFname.addTextChangedListener(new TextWatcher()
-        {
+        regFname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateName(regFname);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateName(regFname);
+                }
             }
         });
 
-        regLname.addTextChangedListener(new TextWatcher()
-        {
+        regLname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateName(regLname);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateName(regLname);
+                }
             }
         });
-    }
-
-    public void checkGender() {
 
         regGndr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -118,32 +89,69 @@ public class Registration extends AppCompatActivity
                 switch (checkedId) {
                     case R.id.male: {
                         newUser.gender = User.Gender.Man;
-                        genderStatus = true;
                         break;
                     }
                     case R.id.female: {
                         newUser.gender = User.Gender.Vrouw;
-                        genderStatus = true;
                         break;
-                    }
-                    default: {
-                        genderStatus = false;
                     }
                 }
             }
         });
 
+        regGndrFemale.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (newUser.gender == null) {
+                        regGndrMale.setError("Selecteer een optie!");
+                        regGndrFemale.setError("Selecteer een optie!");
+
+                        genderStatus = false;
+                    } else {
+                        regGndrMale.setError(null);
+                        regGndrFemale.setError(null);
+                        genderStatus = true;
+                    }
+                }
+            }
+        });
+
+        regPw1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateNotNull(regPw1);
+                }
+            }
+        });
+
+        regPw2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateNotNull(regPw2);
+                }
+            }
+        });
     }
 
+    public void validateRegistration(final View view) {
 
-    public void validateRegistration(View view) {
+//            createUser(view);
 
-        //TO-DO check validator statusses
 
-        createUser(view);
+        dummyDB.runInTransaction(new Runnable() {
+            @Override
+            public void run() {
+                createUser(view);
+            }
+        });
     }
 
-    public void createUser(View view) {
+    private void createUser(View view) {
+
+
 
 
         newUser.setM_email(regEmail.getText().toString());

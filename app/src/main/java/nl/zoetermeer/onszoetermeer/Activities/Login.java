@@ -2,6 +2,7 @@ package nl.zoetermeer.onszoetermeer.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +23,7 @@ public class Login extends AppCompatActivity
     private InputValidator inputValidator;
     private boolean validationStatus;
     EditText loginEmail, loginPassword;
+//    TextInputLayout loginPasswordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,14 @@ public class Login extends AppCompatActivity
         validationStatus = false;
 
         loginEmail = findViewById(R.id.login_email);
-        loginPassword = findViewById(R.id.login_email);
+        loginPassword = findViewById(R.id.login_password);
+//        loginPasswordLayout = findViewById(R.id.login_password_layout);
 
         addListeners();
 
     }
 
-    public void sendMessage(View view)
+    public void onClick(View view)
     {
         switch (view.getId())
         {
@@ -73,23 +76,22 @@ public class Login extends AppCompatActivity
 
     public void addListeners() {
 
-        loginEmail.addTextChangedListener(new TextWatcher()
-        {
+        loginEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                inputValidator.validateEmail(loginEmail);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateEmail(loginEmail);
+                }
             }
         });
 
+        loginPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    inputValidator.validateNotNull(loginPassword);
+                }
+            }
+        });
     }
 }

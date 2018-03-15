@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/GridLayout2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:columnCount="8"
-    android:useDefaultMargins="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
 
-    <TextView
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:layout_row="0"
-        android:text="Registratie"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+    <FrameLayout
+        android:id="@+id/basic_frame"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:background="@color/colorPrimary">
 
-    <TextView
-        android:layout_column="1"
-        android:layout_gravity="center"
-        android:layout_row="1"
-        android:text="Vul uw gegevens in"
-        android:textSize="20sp" />
+    </FrameLayout>
+
+    <GridLayout
+        android:id="@+id/registration_input_grid"
+        android:layout_marginTop="225dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <EditText
         android:id="@+id/reg_input_mail"
@@ -29,7 +30,10 @@
         android:layout_gravity="center"
         android:layout_row="2"
         android:ems="12"
-        android:hint="E-mail" />
+        android:inputType="textEmailAddress"
+        android:hint="E-mail"
+        android:layout_margin="5dp"
+        android:background="@drawable/edittext_rounded"/>
 
     <EditText
         android:id="@+id/reg_input_fname"
@@ -37,7 +41,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_row="3"
         android:ems="12"
-        android:hint="Voornaam" />
+        android:inputType="textPersonName"
+        android:hint="Voornaam"
+        android:layout_margin="5dp"
+        android:background="@drawable/edittext_rounded"/>
 
     <EditText
         android:id="@+id/reg_input_lname"
@@ -45,13 +52,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_row="4"
         android:ems="12"
-        android:hint="Achternaam (Optioneel)" />
+        android:inputType="textPersonName"
+        android:hint="Achternaam (Optioneel)"
+        android:layout_margin="5dp"
+        android:background="@drawable/edittext_rounded"/>
 
     <RadioGroup
         android:id="@+id/gender"
         android:layout_gravity="center_horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_column="1"
         android:layout_row="5"
         android:orientation="horizontal"
@@ -59,19 +70,22 @@
 
         <RadioButton
             android:id="@+id/male"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Man"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:buttonTint="@color/colorPrimaryLight">
         </RadioButton>
 
         <RadioButton
             android:id="@+id/female"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vrouw"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:buttonTint="@color/colorPrimaryLight">
         </RadioButton>
 
     </RadioGroup>
@@ -83,7 +97,9 @@
         android:layout_row="6"
         android:ems="12"
         android:hint="Wachtwoord"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:layout_margin="5dp"
+        android:background="@drawable/edittext_rounded"/>
 
     <EditText
         android:id="@+id/reg_input_pw2"
@@ -92,16 +108,29 @@
         android:layout_row="7"
         android:ems="12"
         android:hint="Wachtwoord (controle)"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:layout_margin="5dp"
+        android:background="@drawable/edittext_rounded"/>
 
     <Button
         android:id="@+id/registration_button"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_column="1"
         android:layout_gravity="center"
         android:layout_row="8"
         android:onClick="validateRegistration"
-        android:text="Registreren" />
+        android:text="Account aanmaken"
+        android:textAllCaps="false"
+        android:background="@drawable/button_rounded"
+        android:letterSpacing="0.1" />
+    </GridLayout>
 
-</GridLayout>
+    <ImageView
+        android:id="@+id/ons_zoetermeer_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="25dp"
+        android:src="@drawable/ic_logoscreen_logo_medium" />
+
+</RelativeLayout>
