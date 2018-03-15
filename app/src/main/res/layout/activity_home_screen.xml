@@ -33,8 +33,8 @@
 
                 <ImageButton
                     android:id="@+id/contact_button"
-                    android:layout_width="169dp"
-                    android:layout_height="169dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_contact_logo"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
@@ -43,14 +43,12 @@
                     android:layout_marginEnd="1dp"
                     android:layout_marginBottom="1dp"
                     android:background="@color/colorWhite"
-                    android:onClick="sendMessage"
-                    android:text="@string/contact_title"
-                    android:textColor="@color/colorBlack" />
+                    android:onClick="sendMessage" />
 
                 <ImageButton
                     android:id="@+id/vitaliteit_button"
-                    android:layout_width="169dp"
-                    android:layout_height="169dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_vitaliteit_logo"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
@@ -79,8 +77,8 @@
 
                 <ImageButton
                     android:id="@+id/hulp_button"
-                    android:layout_width="169dp"
-                    android:layout_height="169dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_hulp_logo"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
@@ -94,8 +92,8 @@
 
                 <ImageButton
                     android:id="@+id/achievement_button"
-                    android:layout_width="169dp"
-                    android:layout_height="169dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_achievement_logo"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
