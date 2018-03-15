@@ -23,8 +23,6 @@ public class Registration extends AppCompatActivity
     private DummyDatabase dummyDB;
     private InputValidator inputValidator;
     private User newUser;
-    private boolean genderStatus;
-    private boolean validationStatus;
     private EditText regEmail, regFname, regLname, regPw1, regPw2;
     private RadioGroup regGndr;
     private RadioButton regGndrMale, regGndrFemale;
@@ -39,8 +37,6 @@ public class Registration extends AppCompatActivity
         dummyDB = DummyDatabase.getDatabase(getApplicationContext());
         inputValidator = new InputValidator();
         newUser = new User();
-        genderStatus = false;
-        validationStatus = false;
 
         regEmail = findViewById(R.id.reg_input_mail);
         regFname = findViewById(R.id.reg_input_fname);
@@ -107,11 +103,9 @@ public class Registration extends AppCompatActivity
                         regGndrMale.setError("Selecteer een optie!");
                         regGndrFemale.setError("Selecteer een optie!");
 
-                        genderStatus = false;
                     } else {
                         regGndrMale.setError(null);
                         regGndrFemale.setError(null);
-                        genderStatus = true;
                     }
                 }
             }
