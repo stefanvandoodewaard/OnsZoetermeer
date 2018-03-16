@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
+import android.support.annotation.NonNull;
 
 import java.sql.Date;
 
@@ -19,9 +20,14 @@ import java.sql.Date;
                         childColumns = "ACHIEVEMENT_ID")})
 public class UserAchievements
 {
-    @ColumnInfo(name = "USER_ID") public int mUserId;
-    @ColumnInfo(name = "ACHIEVEMENT_ID") public int mAchievementId;
-    @ColumnInfo(name = "ACHIEVEMENT_DATE") public Date mAchievementDate;
+    @ColumnInfo(name = "USER_ID")
+    @NonNull
+    public int mUserId;
+    @ColumnInfo(name = "ACHIEVEMENT_ID")
+    @NonNull
+    public int mAchievementId;
+    @ColumnInfo(name = "ACHIEVEMENT_DATE")
+    public Date mAchievementDate;
 
     public UserAchievements(int mUserId, int mAchievementId, Date mAchievementDate) {
         this.mUserId = mUserId;
