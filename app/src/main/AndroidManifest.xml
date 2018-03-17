@@ -27,6 +27,7 @@
         <activity android:name=".Activities.Home" />
         <activity android:name=".Activities.Contact" />
         <activity android:name=".Activities.Vitaliteit" />
+        <activity android:name=".Activities.Challenges" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

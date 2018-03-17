@@ -3,9 +3,12 @@ package nl.zoetermeer.onszoetermeer.Models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
+
+import nl.zoetermeer.onszoetermeer.Helpers.GenderConverter;
 
 @Entity(tableName = "USERS")
 public class User
@@ -20,6 +23,7 @@ public class User
     @NonNull
     private String m_password;
     @ColumnInfo(name = "GENDER")
+    @TypeConverters(GenderConverter.class)
     public Gender gender;
     @ColumnInfo(name = "FIRST_NAME")
     private String m_first_name;

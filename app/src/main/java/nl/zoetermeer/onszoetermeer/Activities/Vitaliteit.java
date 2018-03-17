@@ -24,6 +24,7 @@ public class Vitaliteit extends AppCompatActivity
         setContentView(R.layout.activity_vitaliteit);
         Log.i("ACTIVITY:", "Vitaliteit created.");
 
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,8 +67,9 @@ public class Vitaliteit extends AppCompatActivity
         switch (view.getId()) {
             case R.id.vitaliteit_mentaal_button: {
                 Log.i("BUTTON:", "Vitaliteit > Mentaal.");
-//                Intent messageContact = new Intent(this, Contact.class);
-//                startActivity(messageContact);
+
+                Intent intentChallengesList=new Intent(getApplicationContext(),Challenges.class);
+                startActivity(intentChallengesList);
             }
             break;
             case R.id.vitaliteit_fysiek_button: {
