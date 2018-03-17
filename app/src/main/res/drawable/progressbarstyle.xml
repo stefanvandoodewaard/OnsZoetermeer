@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="ring"
+            android:useLevel="false"
+            android:innerRadius="20dp"
+            android:thicknessRatio="10">
+            <solid android:color="@color/colorPrimaryLight"> </solid>
+        </shape>
+    </item>
+</layer-list>
