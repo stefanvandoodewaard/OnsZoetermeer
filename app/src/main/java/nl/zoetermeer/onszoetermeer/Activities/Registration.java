@@ -17,10 +17,12 @@ import nl.zoetermeer.onszoetermeer.Data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.Helpers.InputValidator;
 import nl.zoetermeer.onszoetermeer.Models.User;
 import nl.zoetermeer.onszoetermeer.R;
+import nl.zoetermeer.onszoetermeer.Repositories.UserRepository;
 
 public class Registration extends AppCompatActivity
 {
     private DummyDatabase dummyDB;
+    private UserRepository userRepository;
     private InputValidator inputValidator;
     private User newUser;
     private EditText regEmail, regFname, regLname, regPw1, regPw2;
@@ -34,7 +36,8 @@ public class Registration extends AppCompatActivity
         setContentView(R.layout.activity_registration);
         Log.i("ACTIVITY:", "Registration created.");
 
-        dummyDB = DummyDatabase.getDatabase(getApplicationContext());
+//        dummyDB = DummyDatabase.getDatabase(getApplicationContext());
+        userRepository = new UserRepository(getApplication());
         inputValidator = new InputValidator();
         newUser = new User();
 
@@ -134,13 +137,8 @@ public class Registration extends AppCompatActivity
 
 //            createUser(view);
 
-
-        dummyDB.runInTransaction(new Runnable() {
-            @Override
-            public void run() {
                 createUser(view);
-            }
-        });
+
     }
 
     private void createUser(View view) {
@@ -153,17 +151,17 @@ public class Registration extends AppCompatActivity
         newUser.setM_last_name(regLname.getText().toString());
 
         // TO-DO get password from validator
-//        newUser.setM_password(regPw1.getText().toString());
+        newUser.setM_password(regPw1.getText().toString());
 
         Date date = new Date();
         newUser.setM_last_active(date);
 
-        dummyDB.userDAO().insert(newUser);
+        userRepository.insert(newUser);
 
-        Log.i("DATABASE:", "New User created");
+//        Log.i("DATABASE:", "New User created");
 
         //check of gebruiker is aangemaakt
-        User user = dummyDB.userDAO().getByName(regFname.getText().toString()).get(0);
-        Toast.makeText(this, String.valueOf("Gebruiker " + user.getM_first_name() + " aangemaakt"), Toast.LENGTH_LONG).show();
+//        User user = dummyDB.userDAO().getByName(regFname.getText().toString()).get(0);
+//        Toast.makeText(this, String.valueOf("Gebruiker " + user.getM_first_name() + " aangemaakt"), Toast.LENGTH_LONG).show();
     }
 }
