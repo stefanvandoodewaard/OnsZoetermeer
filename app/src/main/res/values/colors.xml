@@ -6,7 +6,8 @@
     <color name="colorWhite">#FFFF</color>
     <color name="colorYelow">#FDDA10</color>
     <color name="colorBlack">#000000</color>
-    <color name="ColorButtonTint">#0a6599cc</color>
-    <color name="ColorButtonTintPressed">#646599cc</color>
+    <color name="colorGreyLight">#9c9c9c</color>
+    <color name="ColorButtonTint">#F9FBFD</color>
+    <color name="ColorButtonTintPressed">#C3D7EB</color>
 </resources>
 
