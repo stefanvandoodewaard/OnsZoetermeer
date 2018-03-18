@@ -21,13 +21,14 @@
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="@color/colorPrimary">
 
             <GridLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
                 android:background="@color/colorPrimaryLight"
                 android:columnCount="2">
 
@@ -35,28 +36,28 @@
                     android:id="@+id/contact_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_contact_logo"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:layout_column="0"
-                    android:layout_row="0"
-                    android:layout_marginEnd="1dp"
                     android:layout_marginBottom="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_row="0"
+                    android:adjustViewBounds="true"
                     android:background="@color/colorWhite"
-                    android:onClick="sendMessage" />
+                    android:onClick="sendMessage"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_contact_logo" />
 
                 <ImageButton
                     android:id="@+id/vitaliteit_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_vitaliteit_logo"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:layout_column="1"
-                    android:layout_row="0"
                     android:layout_marginBottom="1dp"
+                    android:layout_row="0"
+                    android:adjustViewBounds="true"
                     android:background="@color/colorWhite"
                     android:onClick="sendMessage"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_vitaliteit_logo"
                     android:text="@string/vitaliteit_title"
                     android:textColor="@color/colorBlack" />
             </GridLayout>
@@ -71,22 +72,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
                 android:background="@color/colorPrimaryLight"
-                android:columnCount="4">
+                android:columnCount="2">
 
                 <ImageButton
                     android:id="@+id/hulp_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_hulp_logo"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:layout_column="0"
-                    android:layout_row="1"
                     android:layout_marginEnd="1dp"
+                    android:layout_row="1"
+                    android:adjustViewBounds="true"
                     android:background="@color/colorWhite"
                     android:onClick="sendMessage"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_hulp_logo"
                     android:text="@string/hulp_title"
                     android:textColor="@color/colorBlack" />
 
@@ -94,49 +94,115 @@
                     android:id="@+id/achievement_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_achievement_logo"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:layout_column="1"
                     android:layout_row="1"
+                    android:adjustViewBounds="true"
                     android:background="@color/colorWhite"
                     android:onClick="sendMessage"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_achievement_logo"
                     android:text="@string/achievement_title"
                     android:textColor="@color/colorBlack" />
             </GridLayout>
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/progressBarMentaal"
-                android:progressDrawable="@drawable/progressbarstyle"
-                android:max="100"
-                android:progress="35"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="320dp"
-                android:layout_marginLeft="-80dp"/>
-
-            <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/progressBarFysiek"
-            android:progressDrawable="@drawable/progressbarstyle"
-            android:max="100"
-            android:progress="35"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="320dp"
-            android:layout_marginLeft="80dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/main_question"
                 android:textAlignment="center"
-                android:textSize="30sp" />
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp" />
+
+            <GridLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="230dp"
+                android:columnCount="3">
+
+                <ImageView
+                    android:id="@+id/mentaal_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginStart="50dp"
+                    android:layout_row="0"
+                    android:adjustViewBounds="true"
+                    android:background="@color/colorWhite"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_home_mentaal" />
+
+                <ProgressBar
+                    android:id="@+id/circularProgressbarMental"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_column="0"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_row="1"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progressDrawable="@drawable/progressbarstyle"
+                    android:secondaryProgress="100" />
+
+                <TextView
+                    android:id="@+id/percentageMentaal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="53dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_row="1"
+                    android:gravity="center"
+                    android:text="@string/percentageMentaal"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/fysiek_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginStart="101dp"
+                    android:layout_row="0"
+                    android:adjustViewBounds="true"
+                    android:background="@color/colorWhite"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_home_fysiek" />
+
+                <ProgressBar
+                    android:id="@+id/circularProgressbarPhysical"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_column="1"
+                    android:layout_marginStart="101dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_row="1"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progressDrawable="@drawable/progressbarstyle"
+                    android:secondaryProgress="100" />
+
+                <TextView
+                    android:id="@+id/percentageFysiek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="103dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_row="1"
+                    android:gravity="center"
+                    android:text="@string/percentageFysiek"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12sp" />
+
+            </GridLayout>
 
         </FrameLayout>
 
@@ -150,6 +216,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_view">
+
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
