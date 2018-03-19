@@ -23,7 +23,7 @@ public interface UserDAO
     List<User> getByName(String name);
 
     @Query("SELECT * FROM USERS ORDER BY FIRST_NAME ASC")
-    LiveData<List<User>> getAll();
+    List<User> getAll();
 
     @Query("DELETE FROM USERS") // TBV opschonen/testen
     void deleteAll();

@@ -26,13 +26,10 @@ public class Challenges extends Activity
         super.onCreate(saveInstanceState);
         setContentView(R.layout.list_challenges);
 
-        ListView challengeListView = (ListView) findViewById(R.id.challenges_list);
-
+//        ListView challengeListView = (ListView) findViewById(R.id.challenges_list);
+//
 //        ChallengeRepository repository = new ChallengeRepository(getApplication());
-//        Challenge test = new Challenge();
-//        test.setName("test");
-//        test.vitalityType = Challenge.VitalityType.Mentaal;
-//        repository.insert(test);
+//
 //
 //        ListView challengesListView = (ListView)findViewById(R.id.challenges_list);
 //        List<Challenge> challengeList = repository.getMentalChallenges();

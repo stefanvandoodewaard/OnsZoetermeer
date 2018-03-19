@@ -2,6 +2,8 @@ package nl.zoetermeer.onszoetermeer.Repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.Data.DummyDatabase;
@@ -42,6 +44,8 @@ public class ChallengeRepository
             mAsyncTaskDao.insert(params[0]);
             return null;
         }
+
+
     }
 
 
@@ -55,8 +59,7 @@ public class ChallengeRepository
         return result;
     }
 
-    private class mentalChallengesAsync extends
-            AsyncTask<Void, String, List<Challenge>>
+    private class mentalChallengesAsync extends AsyncTask<Void, String, List<Challenge>>
     {
 
         private ChallengeDAO mAsyncTaskDao;
@@ -124,6 +127,12 @@ public class ChallengeRepository
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.i("REPOSITORY:", "Test data (re)created.");
         }
     }
 }
