@@ -158,6 +158,7 @@ public class Registration extends AppCompatActivity
 
         userRepository.insert(newUser);
 
+
 //        Log.i("DATABASE:", "New User created");
 
         //check of gebruiker is aangemaakt
