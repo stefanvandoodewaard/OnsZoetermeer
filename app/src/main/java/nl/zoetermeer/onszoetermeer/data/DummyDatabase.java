@@ -46,11 +46,12 @@ public abstract class DummyDatabase extends RoomDatabase
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void>
     {
 
-        private final UserDAO userDao;
-
+        private UserDAO userDao;
+        private ChallengeDAO challengeDAO;
 
         PopulateDbAsync(DummyDatabase db) {
             userDao = db.userDAO();
+            challengeDAO = db.challengeDAO();
         }
 
         @Override
@@ -65,8 +66,17 @@ public abstract class DummyDatabase extends RoomDatabase
             user.setM_first_name("Test1");
             user.setM_last_name("Test123");
             user.gender = User.Gender.Man;
-
             userDao.insert(user);
+
+            challengeDAO.deleteAll();
+            Challenge challenge1 = new Challenge();
+            challenge1.setName("Fysieke Uitdaging 1");
+            challenge1.vitalityType = Challenge.VitalityType.Fysiek;
+            challengeDAO.insert(challenge1);
+            Challenge challenge2 = new Challenge();
+            challenge2.setName("Mentale Uitdaging 1");
+            challenge2.vitalityType = Challenge.VitalityType.Mentaal;
+            challengeDAO.insert(challenge2);
 
             return null;
         }

@@ -7,6 +7,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.models.Challenge;
@@ -15,7 +16,7 @@ import nl.zoetermeer.onszoetermeer.models.Challenge;
 public interface ChallengeDAO
 {
 
-    @Query("SELECT * FROM CHALLENGES ORDER BY NAME")
+    @Query("SELECT * FROM CHALLENGES WHERE VITALITY_TYPE = 1 ORDER BY NAME")
     List<Challenge> getMentalChallenges();
 
     @Query("SELECT * FROM CHALLENGES WHERE VITALITY_TYPE = 2 ORDER BY NAME")

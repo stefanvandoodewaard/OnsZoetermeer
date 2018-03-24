@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,9 +9,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.InputValidator;
 import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.R;
@@ -19,7 +23,7 @@ import nl.zoetermeer.onszoetermeer.repositories.UserRepository;
 public class Registration extends AppCompatActivity
 {
     private DummyDatabase dummyDB;
-    private UserRepository userRepository;
+    private UserDAO userDAO;
     private InputValidator inputValidator;
     private User newUser;
     private EditText regEmail, regFname, regLname, regPw1, regPw2;
@@ -33,8 +37,9 @@ public class Registration extends AppCompatActivity
         setContentView(R.layout.activity_registration);
         Log.i("ACTIVITY:", "Registration created.");
 
-//        dummyDB = DummyDatabase.getDatabase(getApplicationContext());
-        userRepository = new UserRepository(getApplication());
+        dummyDB = DummyDatabase.getDatabase(getApplication());
+        userDAO = dummyDB.userDAO();
+
         inputValidator = new InputValidator();
         newUser = new User();
 
@@ -50,6 +55,60 @@ public class Registration extends AppCompatActivity
         addListeners();
     }
 
+
+    public void validateRegistration(final View view) {
+
+
+                createUser(view);
+
+    }
+
+    private void createUser(View view) {
+
+        newUser.setM_email(regEmail.getText().toString());
+        newUser.setM_first_name(regFname.getText().toString());
+        newUser.setM_last_name(regLname.getText().toString());
+        // User.Gender is set bij radioGroup listener
+
+        // TO-DO get password from validator
+        newUser.setM_password(regPw1.getText().toString());
+
+        Date date = new Date();
+        newUser.setM_last_active(date);
+
+        new insertAsyncTask(dummyDB).execute(newUser);
+    }
+
+
+    private class insertAsyncTask extends AsyncTask<User, Void, Void>
+    {
+        private UserDAO userDao;
+        private List<User> users;
+
+        insertAsyncTask(DummyDatabase db) {
+            userDao = db.userDAO();
+        }
+
+        @Override
+        protected Void doInBackground(final User... params) {
+            userDao.insert(params[0]);
+            users = dummyDB.userDAO().getAll();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.i("insertAsyncTask:", "User row inserted.");
+            Log.i("Select:",users.size()+" User row(s) found");
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Log.e("insertAsyncTask:", " onCancelled() called");
+        }
+    }
 
     private void addListeners() {
         regEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -128,38 +187,5 @@ public class Registration extends AppCompatActivity
                 }
             }
         });
-    }
-
-    public void validateRegistration(final View view) {
-
-//            createUser(view);
-
-                createUser(view);
-
-    }
-
-    private void createUser(View view) {
-
-
-
-
-        newUser.setM_email(regEmail.getText().toString());
-        newUser.setM_first_name(regFname.getText().toString());
-        newUser.setM_last_name(regLname.getText().toString());
-
-        // TO-DO get password from validator
-        newUser.setM_password(regPw1.getText().toString());
-
-        Date date = new Date();
-        newUser.setM_last_active(date);
-
-        userRepository.insert(newUser);
-
-
-//        Log.i("DATABASE:", "New User created");
-
-        //check of gebruiker is aangemaakt
-//        User user = dummyDB.userDAO().getByName(regFname.getText().toString()).get(0);
-//        Toast.makeText(this, String.valueOf("Gebruiker " + user.getM_first_name() + " aangemaakt"), Toast.LENGTH_LONG).show();
     }
 }
