@@ -73,6 +73,9 @@ public class Registration extends AppCompatActivity
         successfulValidationPassword1 = inputValidator.validatePassword(regPw1);
         successfulValidationPassword2 = inputValidator.validatePassword(regPw2);
 
+        String passwordOne = regPw1.getText().toString();
+        String passwordTwo = regPw2.getText().toString();
+
         if (!successfulValidationEmail)
         {
             Log.d("validateRegistration() ", "Invalid email");
@@ -115,7 +118,7 @@ public class Registration extends AppCompatActivity
             return;
         }
 
-        if (!regPw1.toString().equals(regPw2.toString()))
+        if (!passwordOne.equals(passwordTwo))
         {
             Log.d("validateRegistration() ", "Password #1 & #2 don't match");
             regPw1.requestFocus();
@@ -181,8 +184,7 @@ public class Registration extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
+            mAuthTask = null;
         }
 
         @Override
