@@ -33,22 +33,25 @@ public class InputValidator
             passwordView.setError("Veld mag niet leeg zijn!");
             return false;
         }
-
+        //TODO create password pattern validator
         return true;
     }
 
-    public void validateName(EditText editText)
+    public boolean validateName(EditText editText)
     {
         String input = editText.getText().toString();
 
         if (input.length() == 0)
         {
             editText.setError("Veld mag niet leeg zijn!");
+            return false;
         }
         else if (!input.matches("[a-zA-Z ]+"))
         {
             editText.setError("Cijfers&tekens niet toegestaan!");
+            return false;
         }
+        return true;
     }
 
     public void validateNotNull(EditText editText) {
@@ -58,13 +61,5 @@ public class InputValidator
             editText.setError("Veld mag niet leeg zijn!");
         }
     }
-
-//    public void validateNotNullPassword(EditText editText) {
-//        String input = editText.getText().toString();
-//
-//        if (input.length() == 0) {
-//            EditText.setError("Veld mag niet leeg zijn!");
-//        }
-//    }
 
 }

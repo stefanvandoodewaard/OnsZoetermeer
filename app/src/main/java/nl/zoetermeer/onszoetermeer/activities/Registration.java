@@ -20,13 +20,18 @@ import nl.zoetermeer.onszoetermeer.R;
 
 public class Registration extends AppCompatActivity
 {
-    private DummyDatabase dummyDB;
-    private UserDAO userDAO;
     private InputValidator inputValidator;
     private User newUser;
     private EditText regEmail, regFname, regLname, regPw1, regPw2;
     private RadioGroup regGndr;
     private RadioButton regGndrMale, regGndrFemale;
+    private registerUserAsync mAuthTask = null;
+    boolean successfulValidationEmail = false;
+    boolean successfulValidationFname = false;
+    boolean successfulValidationLname = false;
+    boolean successfulValidationGender = false;
+    boolean successfulValidationPassword1 = false;
+    boolean successfulValidationPassword2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,8 +40,8 @@ public class Registration extends AppCompatActivity
         setContentView(R.layout.activity_registration);
         Log.i("ACTIVITY:", "Registration created.");
 
-        dummyDB = DummyDatabase.getDatabase(getApplication());
-        userDAO = dummyDB.userDAO();
+//        dummyDB = DummyDatabase.getDatabase(getApplication());
+//        userDAO = dummyDB.userDAO();
 
         inputValidator = new InputValidator();
         newUser = new User();
@@ -56,55 +61,134 @@ public class Registration extends AppCompatActivity
 
     public void validateRegistration(final View view) {
 
+        if (mAuthTask != null)
+        {
+            Log.d("validateRegistration() ", "mAuthTask != null");
+            return;
+        }
 
-                createUser(view);
+        successfulValidationEmail = inputValidator.validateEmail(regEmail);
+        successfulValidationFname = inputValidator.validateName(regFname);
+        successfulValidationLname = inputValidator.validateName(regFname);
+        successfulValidationPassword1 = inputValidator.validatePassword(regPw1);
+        successfulValidationPassword2 = inputValidator.validatePassword(regPw2);
 
-    }
+        if (!successfulValidationEmail)
+        {
+            Log.d("validateRegistration() ", "Invalid email");
+            regEmail.requestFocus();
+            return;
+        }
 
-    private void createUser(View view) {
+        if (!successfulValidationFname)
+        {
+            Log.d("validateRegistration() ", "Invalid first name");
+            regFname.requestFocus();
+            return;
+        }
+
+        if (!successfulValidationLname)
+        {
+            Log.d("validateRegistration() ", "Invalid last name");
+            regLname.requestFocus();
+            return;
+        }
+
+        if (!successfulValidationGender)
+        {
+            Log.d("validateRegistration() ", "No gender selected");
+            regGndr.requestFocus();
+            return;
+        }
+
+        if (!successfulValidationPassword1)
+        {
+            Log.d("validateRegistration() ", "Invalid password #1");
+            regPw1.requestFocus();
+            return;
+        }
+
+        if (!successfulValidationPassword2)
+        {
+            Log.d("validateRegistration() ", "Invalid password #2");
+            regPw2.requestFocus();
+            return;
+        }
+
+        if (!regPw1.toString().equals(regPw2.toString()))
+        {
+            Log.d("validateRegistration() ", "Password #1 & #2 don't match");
+            regPw1.requestFocus();
+            regPw1.setError("Wachtwoorden niet gelijk!");
+            regPw2.setError("Wachtwoorden niet gelijk!");
+            return;
+        }
+
+
+        // Reset errors.
+        regEmail.setError(null);
+        regFname.setError(null);
+        regLname.setError(null);
+        regGndrMale.setError(null);
+        regGndrFemale.setError(null);
+        regFname.setError(null);
+        regPw1.setError(null);
+        regPw2.setError(null);
 
         newUser.setM_email(regEmail.getText().toString());
         newUser.setM_first_name(regFname.getText().toString());
         newUser.setM_last_name(regLname.getText().toString());
-        // User.Gender is set by radioGroup listener
+        // newUser.Gender is set by radioGroup listener
+        newUser.setM_password(regPw2.getText().toString());
+//        Date date = new Date();
+        newUser.setM_last_active(new Date());
 
-        // TO-DO get password from validator
-        newUser.setM_password(regPw1.getText().toString());
+        String email = regEmail.getText().toString();
+        mAuthTask = new registerUserAsync(email);
+        mAuthTask.execute(newUser);
 
-        Date date = new Date();
-        newUser.setM_last_active(date);
-
-        new insertAsyncTask(dummyDB).execute(newUser);
     }
 
-
-    private class insertAsyncTask extends AsyncTask<User, Void, Void>
+    private class registerUserAsync extends AsyncTask<User, Void, Void>
     {
+        private DummyDatabase dummyDB;
         private UserDAO userDao;
-        private List<User> users;
+        private String email;
 
-        insertAsyncTask(DummyDatabase db) {
-            userDao = db.userDAO();
+
+        registerUserAsync(String email) {
+            dummyDB = DummyDatabase.getDatabase(getApplication());
+            userDao = dummyDB.userDAO();
+            this.email = email;
         }
 
         @Override
         protected Void doInBackground(final User... params) {
+
+            User verifyUser = dummyDB.userDAO().getByEmail(email);
+
+            if (verifyUser == null) {
+                Log.d("registerUserAsync ", "Email already exists!");
+                return null;
+            }
+
             userDao.insert(params[0]);
-            users = dummyDB.userDAO().getAll();
+            Log.d("registerUserAsync ", "User row inserted.");
+            Log.i("Select:",userDao.getAll().size()+" User row(s) found"); //TODO remove after testing!
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Log.i("insertAsyncTask:", "User row inserted.");
-            Log.i("Select:",users.size()+" User row(s) found");
+
         }
 
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            Log.e("insertAsyncTask:", " onCancelled() called");
+            Log.e("registerUserAsync:", " onCancelled() called");
         }
     }
 
@@ -142,10 +226,16 @@ public class Registration extends AppCompatActivity
                 switch (checkedId) {
                     case R.id.male: {
                         newUser.gender = User.Gender.Man;
+                        regGndrMale.setError(null);
+                        regGndrFemale.setError(null);
+                        successfulValidationGender = true;
                         break;
                     }
                     case R.id.female: {
                         newUser.gender = User.Gender.Vrouw;
+                        regGndrMale.setError(null);
+                        regGndrFemale.setError(null);
+                        successfulValidationGender = true;
                         break;
                     }
                 }
@@ -172,7 +262,7 @@ public class Registration extends AppCompatActivity
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    inputValidator.validateNotNull(regPw1);
+                    inputValidator.validatePassword(regPw1);
                 }
             }
         });
@@ -181,7 +271,7 @@ public class Registration extends AppCompatActivity
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    inputValidator.validateNotNull(regPw2);
+                    inputValidator.validatePassword(regPw2);
                 }
             }
         });

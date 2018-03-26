@@ -29,8 +29,6 @@ public class Vitaliteit extends AppCompatActivity
         bundle = new Bundle();
         challengesIntent = new Intent(this, Challenges.class);
 
-//        dummyDB = DummyDatabase.getDatabase(getApplication());
-
         drawToolbar();
     }
 
@@ -67,7 +65,6 @@ public class Vitaliteit extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

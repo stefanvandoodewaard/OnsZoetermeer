@@ -95,8 +95,10 @@ public class Login extends AppCompatActivity
 
         // Check for a valid email address.
         successfulValidationEmail = inputValidator.validateEmail(mEmailView);
+
         if (!successfulValidationEmail)
         {
+            Log.d("TEST", "!successfulValidationEmail");
             focusView = mEmailView;
             focusView.requestFocus();
             return;
@@ -113,22 +115,38 @@ public class Login extends AppCompatActivity
 
         // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
-        mProgress.show();
-        mAuthTask = new UserLoginTask(this, email, password);
+        showProgress(true);
+        mAuthTask = new UserLoginTask(email, password);
         mAuthTask.execute((Void) null);
     }
 
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    private void showProgress(final boolean show)
+    {
+        if(show)
+        {
+            mProgress.show();
+        }
+    }
+
+
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean>
     {
-        private Login login;
+
         private String mEmail;
         private String mPassword;
 
         private DummyDatabase dummyDB;
         private UserDAO userDAO;
-        public UserLoginTask(Login login, String email, String password)
+        public UserLoginTask(String email, String password)
         {
-            this.login = login;
             mEmail = email;
             mPassword = password;
             dummyDB = DummyDatabase.getDatabase(getApplication());
@@ -138,9 +156,12 @@ public class Login extends AppCompatActivity
         @Override
         protected Boolean doInBackground(Void... params)
         {
+            // TODO: attempt authentication against a network service.
+
             try
             {
-                // TO DO
+                // Simulate network access.
+                Thread.sleep(2000);
             }
             catch (InterruptedException e)
             {
@@ -164,7 +185,7 @@ public class Login extends AppCompatActivity
         protected void onPostExecute(final Boolean success)
         {
             mAuthTask = null;
-            mProgress.dismiss();
+            showProgress(false);
 
             if (success)
             {
