@@ -31,6 +31,9 @@ public interface ChallengeDAO
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Challenge challenge);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Challenge> challenges);
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Challenge challenge);
 
