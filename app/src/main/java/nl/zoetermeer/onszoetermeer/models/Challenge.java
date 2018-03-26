@@ -60,6 +60,11 @@ public class Challenge
         }
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     @NonNull
     public int getId() {
         return id;

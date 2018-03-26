@@ -1,22 +1,34 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
+import nl.zoetermeer.onszoetermeer.data.ChallengeDAO;
+import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.models.Challenge;
 
 public class Vitaliteit extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
+    private DummyDatabase dummyDB;
+    private List<Challenge> challengeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +36,15 @@ public class Vitaliteit extends AppCompatActivity
         setContentView(R.layout.activity_vitaliteit);
         Log.i("ACTIVITY:", "Vitaliteit created.");
 
+        dummyDB = DummyDatabase.getDatabase(getApplication());
+
+
+
+//
+//        ArrayAdapter<Challenge> arrayAdapter =
+//                new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, challengesList);
+//
+//        challengesListView.setAdapter(arrayAdapter);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -67,17 +88,55 @@ public class Vitaliteit extends AppCompatActivity
         switch (view.getId()) {
             case R.id.vitaliteit_mentaal_button: {
                 Log.i("BUTTON:", "Vitaliteit > Mentaal.");
+                setContentView(R.layout.list_challenges);
+                new SelectMentalAsyncTask(dummyDB).execute();
 
-                Intent intentChallengesList=new Intent(getApplicationContext(),Challenges.class);
-                startActivity(intentChallengesList);
             }
             break;
             case R.id.vitaliteit_fysiek_button: {
                 Log.i("BUTTON:", "Vitaliteit > Fysiek.");
-//                Intent messageVitaliteit = new Intent(this, Vitaliteit.class);
-//                startActivity(messageVitaliteit);
+
             }
         }
     }
+
+    private void setListAdapter() {
+
+        ListView challengesListView = findViewById(R.id.challenges_list);
+
+        ArrayAdapter<Challenge> adapter = new ArrayAdapter<Challenge>(this,
+                android.R.layout.simple_list_item_1, challengeList);
+
+        challengesListView.setAdapter(adapter);
+    }
+
+    private class SelectMentalAsyncTask extends AsyncTask<Void,Integer,List<Challenge>>
+    {
+        private ChallengeDAO challengeDAO;
+        private List<Challenge> selectList;
+
+        SelectMentalAsyncTask(DummyDatabase db) {
+            challengeDAO = db.challengeDAO();
+        }
+
+        @Override
+        protected List<Challenge> doInBackground(Void... voids) {
+//            selectList = challengeDAO.getMentalChallenges();
+            return challengeDAO.getMentalChallenges();
+        }
+
+        @Override
+        protected void onPostExecute(List<Challenge> challenges) {
+            super.onPostExecute(challenges);
+            challengeList = challenges;
+            setListAdapter();
+            Log.d("ASYNC-SELECT: ",challenges.size()+" row(s) found.");
+
+
+
+
+        }
+    }
+
 
 }
