@@ -83,7 +83,8 @@ public class Home extends AppCompatActivity
                     try
                     {
                         Thread.sleep(25);
-                    } catch (InterruptedException e)
+                    }
+                    catch (InterruptedException e)
                     {
                         e.printStackTrace();
                     }
@@ -132,7 +133,8 @@ public class Home extends AppCompatActivity
                     try
                     {
                         Thread.sleep(25);
-                    } catch (InterruptedException e)
+                    }
+                    catch (InterruptedException e)
                     {
                         e.printStackTrace();
                     }

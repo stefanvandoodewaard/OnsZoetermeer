@@ -1,6 +1,5 @@
 package nl.zoetermeer.onszoetermeer.helpers;
 
-import android.view.View;
 import android.widget.EditText;
 import android.util.Patterns;
 

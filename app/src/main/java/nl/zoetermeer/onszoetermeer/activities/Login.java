@@ -8,9 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import nl.zoetermeer.onszoetermeer.R;
+import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.InputValidator;
+import nl.zoetermeer.onszoetermeer.models.User;
 
 
 public class Login extends AppCompatActivity
@@ -18,18 +22,9 @@ public class Login extends AppCompatActivity
     private InputValidator inputValidator;
     private EditText mEmailView, mPasswordView;
     private ProgressDialog mProgress;
-    private View mLoginScreenView;
 
     boolean successfulValidationPassword = false;
     boolean successfulValidationEmail = false;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "doodewaard@hotmail.com:1234"
-    };
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -47,11 +42,10 @@ public class Login extends AppCompatActivity
 
         mEmailView = findViewById(R.id.login_email);
         mPasswordView = findViewById(R.id.login_password);
-        mLoginScreenView = findViewById(R.id.login_screen);
 
         mProgress = new ProgressDialog(this);
-        mProgress.setTitle("Processing...");
-        mProgress.setMessage("Please wait...");
+        mProgress.setTitle("Even geduld aub...");
+        mProgress.setMessage("Even geduld aub...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
     }
@@ -62,14 +56,8 @@ public class Login extends AppCompatActivity
         {
             case R.id.login_button:
             {
+                Log.i("BUTTON:", "Login Activity > Login.");
                 attemptLogin();
-
-                if (successfulValidationPassword && successfulValidationEmail)
-                {
-                    Log.i("BUTTON:", "Login Activity > Login.");
-                    Intent mainHomeScreenBinder = new Intent(this, Home.class);
-                    startActivity(mainHomeScreenBinder);
-                }
             }
             break;
             case R.id.recovery_button:
@@ -125,49 +113,34 @@ public class Login extends AppCompatActivity
 
         // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
-        showProgress(true);
-        mAuthTask = new UserLoginTask(email, password);
+        mProgress.show();
+        mAuthTask = new UserLoginTask(this, email, password);
         mAuthTask.execute((Void) null);
     }
 
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    private void showProgress(final boolean show)
-    {
-        if(show)
-        {
-            mProgress.show();
-        }
-    }
-
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean>
     {
+        private Login login;
+        private String mEmail;
+        private String mPassword;
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password)
+        private DummyDatabase dummyDB;
+        private UserDAO userDAO;
+        public UserLoginTask(Login login, String email, String password)
         {
+            this.login = login;
             mEmail = email;
             mPassword = password;
+            dummyDB = DummyDatabase.getDatabase(getApplication());
+            userDAO = dummyDB.userDAO();
         }
 
         @Override
         protected Boolean doInBackground(Void... params)
         {
-            // TODO: attempt authentication against a network service.
-
             try
             {
-                // Simulate network access.
-                Thread.sleep(2000);
+                // TO DO
             }
             catch (InterruptedException e)
             {
@@ -184,24 +157,29 @@ public class Login extends AppCompatActivity
                 }
             }
 
-            // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override
         protected void onPostExecute(final Boolean success)
         {
             mAuthTask = null;
-            showProgress(false);
+            mProgress.dismiss();
 
             if (success)
             {
                 finish();
+
+                Intent mainHomeScreenBinder = new Intent(Login.this, Home.class);
+                startActivity(mainHomeScreenBinder);
             }
             else
             {
-                inputValidator.validatePassword(mPasswordView);
+
                 mPasswordView.requestFocus();
+                mProgress.dismiss();
+                Toast.makeText(Login.this, "De ingevoerde gegevens kloppen niet",
+                        Toast.LENGTH_LONG).show();
             }
         }
 
@@ -210,6 +188,17 @@ public class Login extends AppCompatActivity
         {
             mAuthTask = null;
             showProgress(false);
+        }
+
+        /**
+         * Shows the progress UI.
+         */
+        private void showProgress(final boolean show)
+        {
+            if (show)
+            {
+                mProgress.show();
+            }
         }
     }
 }
