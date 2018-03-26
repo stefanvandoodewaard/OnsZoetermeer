@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.InputValidator;
 import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.R;
-import nl.zoetermeer.onszoetermeer.repositories.UserRepository;
 
 public class Registration extends AppCompatActivity
 {
@@ -68,7 +66,7 @@ public class Registration extends AppCompatActivity
         newUser.setM_email(regEmail.getText().toString());
         newUser.setM_first_name(regFname.getText().toString());
         newUser.setM_last_name(regLname.getText().toString());
-        // User.Gender is set bij radioGroup listener
+        // User.Gender is set by radioGroup listener
 
         // TO-DO get password from validator
         newUser.setM_password(regPw1.getText().toString());

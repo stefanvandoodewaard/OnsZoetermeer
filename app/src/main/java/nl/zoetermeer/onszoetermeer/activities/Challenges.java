@@ -14,11 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.adapters.ChallengesAdapter;
@@ -32,18 +28,26 @@ public class Challenges extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Challenge> challengesList;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenges);
 
-        new SelectMentalAsyncTask().execute();
+        Bundle bundle = getIntent().getExtras();
+        type = 0; // or other values
+        if(bundle != null)
+            type = bundle.getInt("type");
+
+        new selectChallengesAsync().execute();
 
 
 
         drawToolbar();
     }
+
+
     private void setRecyclerView() {
         recyclerView = findViewById(R.id.challenges_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,19 +55,30 @@ public class Challenges extends AppCompatActivity
         recyclerView.setAdapter(adapter);
     }
 
-    private class SelectMentalAsyncTask extends AsyncTask<Void,Integer,List<Challenge>>
+    private class selectChallengesAsync extends AsyncTask<Void,Integer,List<Challenge>>
     {
         private ChallengeDAO challengeDAO;
         private DummyDatabase dummyDB;
 
-        SelectMentalAsyncTask() {
+        selectChallengesAsync() {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             challengeDAO = dummyDB.challengeDAO();
         }
 
         @Override
         protected List<Challenge> doInBackground(Void... voids) {
-            return challengeDAO.getAllChallenges();
+            List<Challenge> temp = null;
+            if (type == 0) {
+                Log.d("selectChallengesAsync", "type = 0");
+            } else if (type == 1) {
+                temp = challengeDAO.getMentalChallenges();
+                Log.d("selectChallengesAsync", "type = 1");
+            } else if (type == 2) {
+                temp =  challengeDAO.getPhysicalChallenges();
+                Log.d("selectChallengesAsync", "type = 2");
+            }
+
+            return temp;
         }
 
         @Override
