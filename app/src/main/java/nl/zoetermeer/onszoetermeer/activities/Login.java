@@ -126,7 +126,7 @@ public class Login extends AppCompatActivity
      */
     private void showProgress(final boolean show)
     {
-        if(show)
+        if (show)
         {
             mProgress.show();
         }
@@ -145,6 +145,7 @@ public class Login extends AppCompatActivity
 
         private DummyDatabase dummyDB;
         private UserDAO userDAO;
+
         public UserLoginTask(String email, String password)
         {
             mEmail = email;
@@ -160,22 +161,23 @@ public class Login extends AppCompatActivity
 
             try
             {
-                // Simulate network access.
-                Thread.sleep(2000);
+                User user = dummyDB.userDAO().getByEmail(mEmail);
+                if (user != null)
+                {
+                    if (user.getM_password().equals(mPassword))
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    throw new InterruptedException();
+                }
             }
             catch (InterruptedException e)
             {
+                Log.e("UserLoginTask", e.toString());
                 return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS)
-            {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail))
-                {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
             }
 
             return false;
