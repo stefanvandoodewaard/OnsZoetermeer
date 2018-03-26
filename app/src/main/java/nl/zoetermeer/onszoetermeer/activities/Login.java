@@ -22,7 +22,6 @@ public class Login extends AppCompatActivity
 
     boolean successfulValidationPassword = false;
     boolean successfulValidationEmail = false;
-    boolean successfulVerificationEmail = false;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -166,6 +165,7 @@ public class Login extends AppCompatActivity
         protected Boolean doInBackground(Void... params)
         {
             // TODO: attempt authentication against a network service.
+//            successfulVerificationEmail = inputValidator.verifyExistingEmail(mEmailView, getApplication());
             try
             {
                 // Simulate network access.
