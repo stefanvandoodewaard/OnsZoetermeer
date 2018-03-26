@@ -11,8 +11,8 @@ import nl.zoetermeer.onszoetermeer.R;
 public class LogoScreen extends AppCompatActivity
 {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logoscreen);
         Log.i("ACTIVITY:", "Logoscreen created.");
@@ -20,21 +20,11 @@ public class LogoScreen extends AppCompatActivity
         new Handler().postDelayed(new Runnable()
         {
             @Override
-            public void run() {
-                Intent intent;
-                intent = new Intent(getApplicationContext(), Login.class);
+            public void run()
+            {
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         }, 5000);
     }
 }
-
-
-
-
-
-
-
-
-
-

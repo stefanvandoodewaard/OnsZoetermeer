@@ -7,7 +7,6 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Update;
 import android.arch.persistence.room.Delete;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.models.User;
@@ -20,7 +19,7 @@ public interface UserDAO
     User getByID(int ID);
 
     @Query("SELECT * FROM USERS WHERE EMAIL = :email")
-    List<User> getByEmail(String email);
+    User getByEmail(String email);
 
     @Query("SELECT * FROM USERS WHERE FIRST_NAME LIKE :name OR LAST_NAME LIKE :name")
     List<User> getByName(String name);

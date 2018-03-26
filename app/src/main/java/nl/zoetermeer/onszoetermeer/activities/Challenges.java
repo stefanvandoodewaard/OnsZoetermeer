@@ -39,9 +39,10 @@ public class Challenges extends AppCompatActivity
         type = 0; // or other values
         if(bundle != null)
             type = bundle.getInt("type");
+        Log.d("ACTIVITY:", "Challenges + type " + type + " created.");
+
 
         new selectChallengesAsync().execute();
-
 
 
         drawToolbar();
@@ -69,13 +70,12 @@ public class Challenges extends AppCompatActivity
         protected List<Challenge> doInBackground(Void... voids) {
             List<Challenge> temp = null;
             if (type == 0) {
-                Log.d("selectChallengesAsync", "type = 0");
+                Log.d("selectChallengesAsync", "doInBackground() return null");
+                return null;
             } else if (type == 1) {
                 temp = challengeDAO.getMentalChallenges();
-                Log.d("selectChallengesAsync", "type = 1");
             } else if (type == 2) {
                 temp =  challengeDAO.getPhysicalChallenges();
-                Log.d("selectChallengesAsync", "type = 2");
             }
 
             return temp;
