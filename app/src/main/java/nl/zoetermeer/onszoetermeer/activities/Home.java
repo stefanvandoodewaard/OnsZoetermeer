@@ -37,7 +37,7 @@ public class Home extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
+        Log.i("ACTIVITY:", "Home created.");
         drawMentalProgress();
         drawPhysicalProgress();
         drawToolbar();
@@ -186,7 +186,7 @@ public class Home extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-        Log.i("ACTIVITY:", "Home created.");
+
 
         return super.onOptionsItemSelected(item);
     }

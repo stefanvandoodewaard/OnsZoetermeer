@@ -16,6 +16,9 @@ import nl.zoetermeer.onszoetermeer.models.Challenge;
 public interface ChallengeDAO
 {
 
+    @Query("SELECT * FROM CHALLENGES")
+    List<Challenge> getAllChallenges();
+
     @Query("SELECT * FROM CHALLENGES WHERE VITALITY_TYPE = 1 ORDER BY NAME")
     List<Challenge> getMentalChallenges();
 
@@ -27,6 +30,9 @@ public interface ChallengeDAO
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Challenge challenge);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Challenge> challenges);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Challenge challenge);

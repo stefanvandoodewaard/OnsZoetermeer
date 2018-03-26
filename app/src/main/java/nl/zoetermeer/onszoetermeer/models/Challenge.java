@@ -22,11 +22,11 @@ public class Challenge
     @ColumnInfo(name = "VITALITY_TYPE")
     @TypeConverters(VitalityTypeConverter.class)
     public VitalityType vitalityType;
-    @ColumnInfo(name = "VITALITY_WEIGHT")
-    private int VitalityWeight;
 
-    public Challenge(){
-
+    public Challenge(String name, String details, VitalityType vitalityType) {
+        this.name = name;
+        this.details = details;
+        this.vitalityType = vitalityType;
     }
 
     public enum VitalityType
@@ -88,13 +88,5 @@ public class Challenge
 
     public void setDetails(String details) {
         this.details = details;
-    }
-
-    public int getVitalityWeight() {
-        return VitalityWeight;
-    }
-
-    public void setVitalityWeight(int vitalityWeight) {
-        VitalityWeight = vitalityWeight;
     }
 }

@@ -6,14 +6,21 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import nl.zoetermeer.onszoetermeer.helpers.DateConverter;
 import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.User;
 
-@Database(entities = {User.class, Challenge.class}, version = 3)
+@Database(entities = {User.class, Challenge.class}, version = 4)
 @TypeConverters({DateConverter.class, GenderConverter.class, Challenge.VitalityType.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
@@ -26,7 +33,7 @@ public abstract class DummyDatabase extends RoomDatabase
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context, DummyDatabase.class, "DUMMY_DATABASE")
 //                            .allowMainThreadQueries()
-//                            .fallbackToDestructiveMigration()
+                            .fallbackToDestructiveMigration()
                             .build();
             Log.i("DATABASE:", "New instance created.");
 
@@ -56,27 +63,45 @@ public abstract class DummyDatabase extends RoomDatabase
 
         @Override
         protected Void doInBackground(final Void... params) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
+
             userDao.deleteAll();
 
-            User user = new User();
-            user.setM_email("test@test.nl");
-            user.setM_password("wachtwoord");
-            user.setM_first_name("Test1");
-            user.setM_last_name("Test123");
-            user.gender = User.Gender.Man;
-            userDao.insert(user);
+            User stefan = new User();
+            stefan.setM_email("doodewaard@hotmail.com");
+            stefan.setM_password("wachtwoord");
+            stefan.setM_first_name("Stefan");
+            stefan.setM_last_name("van Doodewaard");
+            stefan.gender = User.Gender.Man;
+            userDao.insert(stefan);
+
+            User kenny = new User();
+            kenny.setM_email("k.dillewaard@hotmail.com");
+            kenny.setM_password("wachtwoord");
+            kenny.setM_first_name("Kenny");
+            kenny.setM_last_name("Dillewaard");
+            kenny.gender = User.Gender.Man;
+            userDao.insert(kenny);
 
             challengeDAO.deleteAll();
-            Challenge challenge1 = new Challenge();
-            challenge1.setName("Fysieke Uitdaging 1");
-            challenge1.vitalityType = Challenge.VitalityType.Fysiek;
-            challengeDAO.insert(challenge1);
-            Challenge challenge2 = new Challenge();
-            challenge2.setName("Mentale Uitdaging 1");
-            challenge2.vitalityType = Challenge.VitalityType.Mentaal;
-            challengeDAO.insert(challenge2);
+
+            List<Challenge> challenges = new ArrayList<Challenge>();
+
+            challenges.add(new Challenge("Turbo lopen", "details", Challenge.VitalityType.Fysiek));
+            challenges.add(new Challenge("Kloppen", "details", Challenge.VitalityType.Fysiek));
+            challenges.add(new Challenge("Boksen", "details", Challenge.VitalityType.Fysiek));
+            challenges.add(new Challenge("Aanspannen & loslaten", "details", Challenge.VitalityType.Fysiek));
+            challenges.add(new Challenge("Houthakken", "details", Challenge.VitalityType.Fysiek));
+
+            challenges.add(new Challenge("Sudoku", "details", Challenge.VitalityType.Mentaal));
+            challenges.add(new Challenge("Kruiswoordpuzzel", "details", Challenge.VitalityType.Mentaal));
+            challenges.add(new Challenge("Zoek de verschillen", "details", Challenge.VitalityType.Mentaal));
+            challenges.add(new Challenge("Memocoly", "details", Challenge.VitalityType.Mentaal));
+            challenges.add(new Challenge("Tik de juiste volgorde", "details", Challenge.VitalityType.Mentaal));
+
+            challengeDAO.insertAll(challenges);
+
+
+
 
             return null;
         }
