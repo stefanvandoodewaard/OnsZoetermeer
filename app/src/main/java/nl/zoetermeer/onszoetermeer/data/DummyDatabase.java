@@ -69,14 +69,20 @@ public abstract class DummyDatabase extends RoomDatabase
             userDao.insert(user);
 
             challengeDAO.deleteAll();
-            Challenge challenge1 = new Challenge();
-            challenge1.setName("Fysieke Uitdaging 1");
-            challenge1.vitalityType = Challenge.VitalityType.Fysiek;
-            challengeDAO.insert(challenge1);
-            Challenge challenge2 = new Challenge();
-            challenge2.setName("Mentale Uitdaging 1");
-            challenge2.vitalityType = Challenge.VitalityType.Mentaal;
-            challengeDAO.insert(challenge2);
+
+            for (int i = 0; i <= 10; i++) {
+                Challenge challenge = new Challenge();
+                challenge.setName("Fysieke Uitdaging #" + i);
+                challenge.vitalityType = Challenge.VitalityType.Fysiek;
+                challengeDAO.insert(challenge);
+            }
+
+            for (int i = 0; i <= 10; i++) {
+                Challenge challenge = new Challenge();
+                challenge.setName("Mentale Uitdaging #" + i);
+                challenge.vitalityType = Challenge.VitalityType.Mentaal;
+                challengeDAO.insert(challenge);
+            }
 
             return null;
         }
