@@ -87,10 +87,6 @@ public class Challenges extends AppCompatActivity
             challengesList = challenges;
             setRecyclerView();
             Log.d("ASYNC-SELECT: ",challenges.size()+" row(s) found.");
-
-
-
-
         }
     }
 
