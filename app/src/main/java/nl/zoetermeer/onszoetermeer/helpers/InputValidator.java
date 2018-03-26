@@ -1,29 +1,53 @@
 package nl.zoetermeer.onszoetermeer.helpers;
 
+import android.view.View;
 import android.widget.EditText;
 import android.util.Patterns;
 
 public class InputValidator
 {
 
-    public void validateEmail(EditText editText) {
-        String input = editText.getText().toString();
+    public boolean validateEmail(EditText emailView)
+    {
+        String input = emailView.getText().toString();
 
-        if (input.length() == 0) {
-            editText.setError("Veld mag niet leeg zijn!");
-
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
-            editText.setError("Geen geldig email adres!");
+        if (input.length() == 0)
+        {
+            emailView.setError("Veld mag niet leeg zijn!");
+            return false;
         }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(input).matches())
+        {
+            emailView.setError("Geen geldig email adres!");
+            return false;
+        }
+
+        return true;
     }
 
-    public void validateName(EditText editText) {
+    public boolean validatePassword(EditText passwordView)
+    {
+        String input = passwordView.getText().toString();
+
+        if (input.length() == 0)
+        {
+            passwordView.setError("Veld mag niet leeg zijn!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void validateName(EditText editText)
+    {
         String input = editText.getText().toString();
 
-        if (input.length() == 0) {
+        if (input.length() == 0)
+        {
             editText.setError("Veld mag niet leeg zijn!");
-
-        } else if (!input.matches("[a-zA-Z ]+")) {
+        }
+        else if (!input.matches("[a-zA-Z ]+"))
+        {
             editText.setError("Cijfers&tekens niet toegestaan!");
         }
     }
@@ -43,15 +67,5 @@ public class InputValidator
 //            EditText.setError("Veld mag niet leeg zijn!");
 //        }
 //    }
-
-    public void validatePassword(EditText editText1, EditText editText2) {
-        String input1 = editText1.getText().toString();
-        String input2 = editText2.getText().toString();
-
-        if (!input1.equals(input2)) {
-            editText1.setError("Wachtwoorden niet gelijk!");
-            editText2.setError("Wachtwoorden niet gelijk!");
-        }
-    }
 
 }

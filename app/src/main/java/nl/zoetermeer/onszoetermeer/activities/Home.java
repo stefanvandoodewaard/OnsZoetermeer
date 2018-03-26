@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home_screen);
 
         drawMentalProgress();
-        drawPhysical();
+        drawPhysicalProgress();
         drawToolbar();
     }
 
@@ -92,7 +92,7 @@ public class Home extends AppCompatActivity
         }).start();
     }
 
-    private void drawPhysical()
+    private void drawPhysicalProgress()
     {
         Drawable drawablePhysical = ResourcesCompat.getDrawable(getResources(),
                 R.drawable.progressbarstyle, null);
