@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +67,7 @@ public class Registration extends AppCompatActivity
             Log.d("validateRegistration() ", "mAuthTask != null");
             return;
         }
-
+        
         successfulValidationEmail = inputValidator.validateEmail(regEmail);
         successfulValidationFname = inputValidator.validateName(regFname);
         successfulValidationLname = inputValidator.validateName(regFname);
@@ -127,8 +128,6 @@ public class Registration extends AppCompatActivity
             return;
         }
 
-
-        // Reset errors.
         regEmail.setError(null);
         regFname.setError(null);
         regLname.setError(null);
@@ -172,13 +171,15 @@ public class Registration extends AppCompatActivity
 
             if (verifyUser == null) {
                 Log.d("registerUserAsync ", "Email already exists!");
+                regEmail.setError("Email is al bekend");
                 return null;
             }
 
             userDao.insert(params[0]);
             Log.d("registerUserAsync ", "User row inserted.");
-            Log.i("Select:",userDao.getAll().size()+" User row(s) found"); //TODO remove after testing!
 
+            Intent mainHomeScreenBinder = new Intent(Registration.this, Login.class);
+            startActivity(mainHomeScreenBinder);
             return null;
         }
 
@@ -195,32 +196,6 @@ public class Registration extends AppCompatActivity
     }
 
     private void addListeners() {
-        regEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    inputValidator.validateEmail(regEmail);
-                }
-            }
-        });
-
-        regFname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    inputValidator.validateName(regFname);
-                }
-            }
-        });
-
-        regLname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    inputValidator.validateName(regLname);
-                }
-            }
-        });
 
         regGndr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -244,38 +219,65 @@ public class Registration extends AppCompatActivity
             }
         });
 
-        regGndrFemale.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (newUser.gender == null) {
-                        regGndrMale.setError("Selecteer een optie!");
-                        regGndrFemale.setError("Selecteer een optie!");
-
-                    } else {
-                        regGndrMale.setError(null);
-                        regGndrFemale.setError(null);
-                    }
-                }
-            }
-        });
-
-        regPw1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    inputValidator.validatePassword(regPw1);
-                }
-            }
-        });
-
-        regPw2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    inputValidator.validatePassword(regPw2);
-                }
-            }
-        });
+//        regEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    inputValidator.validateEmail(regEmail);
+//                }
+//            }
+//        });
+//
+//        regFname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    inputValidator.validateName(regFname);
+//                }
+//            }
+//        });
+//
+//        regLname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    inputValidator.validateName(regLname);
+//                }
+//            }
+//        });
+//
+//        regGndrFemale.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    if (newUser.gender == null) {
+//                        regGndrMale.setError("Selecteer een optie!");
+//                        regGndrFemale.setError("Selecteer een optie!");
+//
+//                    } else {
+//                        regGndrMale.setError(null);
+//                        regGndrFemale.setError(null);
+//                    }
+//                }
+//            }
+//        });
+//
+//        regPw1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    inputValidator.validatePassword(regPw1);
+//                }
+//            }
+//        });
+//
+//        regPw2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    inputValidator.validatePassword(regPw2);
+//                }
+//            }
+//        });
     }
 }
