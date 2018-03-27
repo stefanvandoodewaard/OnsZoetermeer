@@ -71,7 +71,8 @@
             android:background="@drawable/button_rounded"
             android:letterSpacing="0.1"
             android:text="@string/login_button_login"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="@color/ColorText"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +90,8 @@
                 android:text="@string/login_button_register"
                 android:textAllCaps="false"
                 android:background="@drawable/button_rounded"
-                android:letterSpacing="0.1"/>
+                android:letterSpacing="0.1"
+                android:textColor="@color/ColorText"/>
 
             <Button
                 android:id="@+id/recovery_button"
@@ -101,7 +103,8 @@
                 android:text="@string/login_button_password"
                 android:textAllCaps="false"
                 android:background="@drawable/button_rounded"
-                android:letterSpacing="0.1"/>
+                android:letterSpacing="0.1"
+                android:textColor="@color/ColorText"/>
 
         </LinearLayout>
 

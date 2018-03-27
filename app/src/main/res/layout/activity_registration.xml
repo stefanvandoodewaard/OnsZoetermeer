@@ -75,7 +75,8 @@
             android:layout_height="wrap_content"
             android:text="Man"
             android:textSize="20sp"
-            android:buttonTint="@color/colorPrimaryLight">
+            android:buttonTint="@color/colorPrimaryLight"
+            android:textColor="@color/ColorText">
         </RadioButton>
 
         <RadioButton
@@ -85,7 +86,8 @@
             android:layout_height="wrap_content"
             android:text="Vrouw"
             android:textSize="20sp"
-            android:buttonTint="@color/colorPrimaryLight">
+            android:buttonTint="@color/colorPrimaryLight"
+            android:textColor="@color/ColorText">
         </RadioButton>
 
     </RadioGroup>
@@ -123,7 +125,8 @@
         android:text="Account aanmaken"
         android:textAllCaps="false"
         android:background="@drawable/button_rounded"
-        android:letterSpacing="0.1" />
+        android:letterSpacing="0.1"
+        android:textColor="@color/ColorText"/>
     </GridLayout>
 
     <ImageView

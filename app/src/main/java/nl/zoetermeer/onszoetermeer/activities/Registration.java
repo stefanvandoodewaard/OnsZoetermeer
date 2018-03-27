@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.Date;
 import java.util.List;
@@ -156,36 +157,43 @@ public class Registration extends AppCompatActivity
         private DummyDatabase dummyDB;
         private UserDAO userDao;
         private String email;
+        private boolean succes;
 
-
-        registerUserAsync(String email) {
+        registerUserAsync(String verifyEmail) {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             userDao = dummyDB.userDAO();
-            this.email = email;
+            email = verifyEmail;
+            succes = false;
         }
 
         @Override
         protected Void doInBackground(final User... params) {
 
             User verifyUser = dummyDB.userDAO().getByEmail(email);
-
-            if (verifyUser == null) {
+            if (verifyUser != null) {
                 Log.d("registerUserAsync ", "Email already exists!");
-                regEmail.setError("Email is al bekend");
                 return null;
             }
 
             userDao.insert(params[0]);
             Log.d("registerUserAsync ", "User row inserted.");
+            succes = true;
 
-            Intent mainHomeScreenBinder = new Intent(Registration.this, Login.class);
-            startActivity(mainHomeScreenBinder);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             mAuthTask = null;
+            if (!succes) {
+                regEmail.setError("Email is al eerder gebruikt!");
+                regEmail.requestFocus();
+            } else {
+                Toast.makeText(Registration.this, "Registratie voltooid.", Toast.LENGTH_LONG).show();
+
+                Intent mainHomeScreenBinder = new Intent(Registration.this, Login.class);
+                startActivity(mainHomeScreenBinder);
+            }
         }
 
         @Override
@@ -218,66 +226,5 @@ public class Registration extends AppCompatActivity
                 }
             }
         });
-
-//        regEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    inputValidator.validateEmail(regEmail);
-//                }
-//            }
-//        });
-//
-//        regFname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    inputValidator.validateName(regFname);
-//                }
-//            }
-//        });
-//
-//        regLname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    inputValidator.validateName(regLname);
-//                }
-//            }
-//        });
-//
-//        regGndrFemale.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    if (newUser.gender == null) {
-//                        regGndrMale.setError("Selecteer een optie!");
-//                        regGndrFemale.setError("Selecteer een optie!");
-//
-//                    } else {
-//                        regGndrMale.setError(null);
-//                        regGndrFemale.setError(null);
-//                    }
-//                }
-//            }
-//        });
-//
-//        regPw1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    inputValidator.validatePassword(regPw1);
-//                }
-//            }
-//        });
-//
-//        regPw2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus) {
-//                    inputValidator.validatePassword(regPw2);
-//                }
-//            }
-//        });
     }
 }
