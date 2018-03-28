@@ -63,6 +63,8 @@ public class Login extends AppCompatActivity
             case R.id.recovery_button:
             {
                 Log.i("BUTTON:", "Login Activity > Password Recovery.");
+                Intent messageRegistration = new Intent(this, PasswordRecovery.class);
+                startActivity(messageRegistration);
             }
             break;
             case R.id.register_button:
