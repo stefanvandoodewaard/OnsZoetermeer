@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,13 +8,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
+import nl.zoetermeer.onszoetermeer.adapters.AchievementsAdapter;
+import nl.zoetermeer.onszoetermeer.data.AchievementDAO;
+import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 
 public class Achievements extends AppCompatActivity
@@ -28,7 +35,44 @@ public class Achievements extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
+//        achievementsList = new ArrayList<Achievement>();
+//        achievementsList.add(new Achievement("Test"));
+
         drawToolbar();
+
+        new selectAchievementsAsync().execute();
+    }
+
+    private void setRecyclerView() {
+        recyclerView = findViewById(R.id.achievements_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AchievementsAdapter(achievementsList);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private class selectAchievementsAsync extends AsyncTask<Void,Integer,List<Achievement>>
+    {
+        private AchievementDAO achievementDAO;
+        private DummyDatabase dummyDB;
+
+        selectAchievementsAsync() {
+            dummyDB = DummyDatabase.getDatabase(getApplication());
+            achievementDAO = dummyDB.achievementDAO();
+        }
+
+        @Override
+        protected List<Achievement> doInBackground(Void... voids) {
+
+            return achievementDAO.getAllAchievements();
+        }
+
+        @Override
+        protected void onPostExecute(List<Achievement> achievements) {
+            super.onPostExecute(achievements);
+            achievementsList = achievements;
+            setRecyclerView();
+            Log.d("ASYNC-SELECT: ",achievements.size()+" row(s) found.");
+        }
     }
 
     private void drawToolbar()

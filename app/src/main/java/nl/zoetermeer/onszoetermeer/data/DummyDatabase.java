@@ -17,15 +17,17 @@ import java.util.ListIterator;
 
 import nl.zoetermeer.onszoetermeer.helpers.DateConverter;
 import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
+import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.User;
 
-@Database(entities = {User.class, Challenge.class}, version = 4)
+@Database(entities = {User.class, Challenge.class, Achievement.class}, version = 7)
 @TypeConverters({DateConverter.class, GenderConverter.class, Challenge.VitalityType.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
     public abstract ChallengeDAO challengeDAO();
+    public abstract AchievementDAO achievementDAO();
 
     private static DummyDatabase INSTANCE;
 
@@ -55,10 +57,12 @@ public abstract class DummyDatabase extends RoomDatabase
 
         private UserDAO userDao;
         private ChallengeDAO challengeDAO;
+        private AchievementDAO achievementDAO;
 
         PopulateDbAsync(DummyDatabase db) {
             userDao = db.userDAO();
             challengeDAO = db.challengeDAO();
+            achievementDAO = db.achievementDAO();
         }
 
         @Override
@@ -100,7 +104,13 @@ public abstract class DummyDatabase extends RoomDatabase
 
             challengeDAO.insertAll(challenges);
 
+            achievementDAO.deleteAll();
 
+            List<Achievement> achievements = new ArrayList<Achievement>();
+
+            achievements.add(new Achievement("Test", 1));
+
+            achievementDAO.insertAll(achievements);
 
 
             return null;

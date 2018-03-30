@@ -14,13 +14,10 @@ import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
 public class User
 {
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     private int id;
     @ColumnInfo(name = "EMAIL")
-    @NonNull
     private String m_email;
     @ColumnInfo(name = "PASSWORD")
-    @NonNull
     private String m_password;
     @ColumnInfo(name = "GENDER")
     @TypeConverters(GenderConverter.class)
@@ -42,6 +39,8 @@ public class User
     @ColumnInfo(name = "LAST_ACTIVE")
     private Date m_last_active;
 
+
+
     public User() {
     }
 
@@ -61,20 +60,20 @@ public class User
             return code;
         }
     }
-
+    @NonNull
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NonNull int id) {
         this.id = id;
     }
-
+    @NonNull
     public String getM_email() {
         return m_email;
     }
 
-    public void setM_email(String m_email) {
+    public void setM_email(@NonNull String m_email) {
         this.m_email = m_email;
     }
 
