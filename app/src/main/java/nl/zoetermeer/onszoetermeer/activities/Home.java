@@ -210,17 +210,17 @@ public class Home extends AppCompatActivity
                 Intent messageVitaliteit = new Intent(this, Vitaliteit.class);
                 startActivity(messageVitaliteit);
             }
-//            case R.id.hulp_button:
-//            {
+            case R.id.hulp_button:
+            {
 //                Intent messageContact = new Intent(this, Hulp.class);
 //                startActivity(messageContact);
-//            }
-//            break;
-//            case R.id.achievement_button:
-//            {
-//                Intent messageVitaliteit = new Intent(this, Achievement.class);
-//                startActivity(messageVitaliteit);
-//            }
+            }
+            break;
+            case R.id.achievement_button:
+            {
+                Intent messageAchievements = new Intent(this, Achievements.class);
+                startActivity(messageAchievements);
+            }
             break;
             default:
             {

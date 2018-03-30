@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".activities.Login" />
         <activity android:name=".activities.Registration" />
-        <activity android:name=".activities.Home"></activity>
+        <activity android:name=".activities.Home" />
         <activity
             android:name=".activities.Contact"
             android:label="@string/title_activity_contact" />
@@ -47,8 +47,9 @@
             android:name=".activities.Chat"
             android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.Challenges"></activity>
-        <activity android:name=".activities.PasswordRecovery"></activity>
+        <activity android:name=".activities.Challenges" />
+        <activity android:name=".activities.PasswordRecovery" />
+        <activity android:name=".activities.Achievements"></activity>
     </application>
 
 </manifest>
