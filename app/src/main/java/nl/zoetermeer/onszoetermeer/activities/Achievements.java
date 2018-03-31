@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,18 +30,20 @@ public class Achievements extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Achievement> achievementsList;
+    private SharedPreferences pref;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
-//        achievementsList = new ArrayList<Achievement>();
-//        achievementsList.add(new Achievement("Test"));
+        pref = getSharedPreferences("user_details",MODE_PRIVATE);
+        userId = pref.getInt("id", 0);
 
         drawToolbar();
 
-        new selectAchievementsAsync().execute();
+        new selectAchievementsAsync(userId).execute();
     }
 
     private void setRecyclerView() {
@@ -54,16 +57,18 @@ public class Achievements extends AppCompatActivity
     {
         private AchievementDAO achievementDAO;
         private DummyDatabase dummyDB;
+        private int userId;
 
-        selectAchievementsAsync() {
+        selectAchievementsAsync(int userId) {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             achievementDAO = dummyDB.achievementDAO();
+            this.userId = userId;
         }
 
         @Override
         protected List<Achievement> doInBackground(Void... voids) {
 
-            return achievementDAO.getAllAchievements();
+            return achievementDAO.getUsersAchievements(userId);
         }
 
         @Override

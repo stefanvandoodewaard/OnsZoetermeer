@@ -2,6 +2,7 @@ package nl.zoetermeer.onszoetermeer.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class Login extends AppCompatActivity
     private InputValidator inputValidator;
     private EditText mEmailView, mPasswordView;
     private ProgressDialog mProgress;
+    private SharedPreferences pref;
 
     boolean successfulValidationPassword = false;
     boolean successfulValidationEmail = false;
@@ -38,7 +40,10 @@ public class Login extends AppCompatActivity
         setContentView(R.layout.activity_login_screen);
         Log.i("ACTIVITY:", "Login created.");
 
+
         inputValidator = new InputValidator();
+
+        pref = getSharedPreferences("user_details",MODE_PRIVATE);
 
         mEmailView = findViewById(R.id.login_email);
         mPasswordView = findViewById(R.id.login_password);
@@ -147,6 +152,7 @@ public class Login extends AppCompatActivity
 
         private DummyDatabase dummyDB;
         private UserDAO userDAO;
+        private User user;
 
         public UserLoginTask(String email, String password)
         {
@@ -163,7 +169,7 @@ public class Login extends AppCompatActivity
 
             try
             {
-                User user = dummyDB.userDAO().getByEmail(mEmail);
+                user = dummyDB.userDAO().getByEmail(mEmail);
                 if (user != null)
                 {
                     if (user.getM_password().equals(mPassword))
@@ -194,6 +200,12 @@ public class Login extends AppCompatActivity
             if (success)
             {
                 finish();
+
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putInt("id", user.getId());
+                editor.putString("username",mEmail);
+                editor.putString("password",mPassword);
+                editor.commit();
 
                 Intent mainHomeScreenBinder = new Intent(Login.this, Home.class);
                 startActivity(mainHomeScreenBinder);
