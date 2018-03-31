@@ -33,15 +33,19 @@ public class User
     @ColumnInfo(name = "GPS")
     private String m_GPS;
     @ColumnInfo(name = "VITALITY_MENTAL")
-    private String m_vit_ment;
+    private int m_vit_ment;
     @ColumnInfo(name = "VITALITY_PHYSICAL")
-    private String m_vit_phys;
-    @ColumnInfo(name = "LAST_ACTIVE")
-    private Date m_last_active;
+    private int m_vit_phys;
+//    @ColumnInfo(name = "LAST_ACTIVE")
+//    private Date m_last_active;
 
 
 
     public User() {
+
+        //default values
+        m_vit_ment = 50;
+        m_vit_phys = 50;
     }
 
     public enum Gender
@@ -125,27 +129,27 @@ public class User
         this.m_GPS = m_GPS;
     }
 
-    public String getM_vit_ment() {
+    public int getM_vit_ment() {
         return m_vit_ment;
     }
 
-    public void setM_vit_ment(String m_vit_ment) {
+    public void setM_vit_ment(int m_vit_ment) {
         this.m_vit_ment = m_vit_ment;
     }
 
-    public String getM_vit_phys() {
+    public int getM_vit_phys() {
         return m_vit_phys;
     }
 
-    public void setM_vit_phys(String m_vit_phys) {
+    public void setM_vit_phys(int m_vit_phys) {
         this.m_vit_phys = m_vit_phys;
     }
 
-    public Date getM_last_active() {
-        return m_last_active;
-    }
-
-    public void setM_last_active(Date m_last_active) {
-        this.m_last_active = m_last_active;
-    }
+//    public Date getM_last_active() {
+//        return m_last_active;
+//    }
+//
+//    public void setM_last_active(Date m_last_active) {
+//        this.m_last_active = m_last_active;
+//    }
 }

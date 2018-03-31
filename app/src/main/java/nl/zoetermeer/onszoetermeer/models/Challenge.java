@@ -32,7 +32,7 @@ public class Challenge
     public enum VitalityType
     {
         Mentaal(1),
-        Fysiek(2),;
+        Fysiek(2);
 
         public int code;
 
@@ -42,21 +42,6 @@ public class Challenge
 
         public int getCode() {
             return code;
-        }
-
-        @TypeConverter
-        public static Challenge.VitalityType getType(int code){
-            for(Challenge.VitalityType type : VitalityType.values()){
-                if(type.code == code){
-                    return type;
-                }
-            }
-            return null;
-        }
-
-        @TypeConverter
-        public static int getTypeInt(Challenge.VitalityType type){
-            return type.code;
         }
     }
 

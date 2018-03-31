@@ -1,7 +1,9 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -19,15 +21,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
+import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.data.UserDAO;
+import nl.zoetermeer.onszoetermeer.models.User;
 
 public class Home extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
-
     int pStatusMentaal = 0;
     int pStatusFysiek = 0;
+    private double progressUserMental;
+    private double progressUserPhysical;
     TextView percentageMentaal;
     TextView percentageFysiek;
     private Handler handler = new Handler();
@@ -38,23 +45,52 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Log.i("ACTIVITY:", "Home created.");
-        drawMentalProgress();
-        drawPhysicalProgress();
+
+        SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        int userId = pref.getInt("user_id", 0);
+
         drawToolbar();
+
+        new selectUserVitalitysAsync(userId).execute();
+    }
+
+    private class selectUserVitalitysAsync extends AsyncTask<Void,Integer,User>
+    {
+        private UserDAO userDAO;
+        private DummyDatabase dummyDB;
+        private int userId;
+
+        selectUserVitalitysAsync(int userId) {
+            dummyDB = DummyDatabase.getDatabase(getApplication());
+            userDAO = dummyDB.userDAO();
+            this.userId = userId;
+        }
+
+        @Override
+        protected User doInBackground(Void... voids) {
+
+            return userDAO.getByID(userId);
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            super.onPostExecute(user);
+            progressUserMental = user.getM_vit_ment();
+            progressUserPhysical = user.getM_vit_phys();
+            drawMentalProgress();
+            drawPhysicalProgress();
+            Log.d("ASYNC-SELECT: ","User vitality stats successfully loaded.");
+        }
     }
 
     private void drawMentalProgress()
     {
-        Drawable drawableMental = ResourcesCompat.getDrawable(getResources(),
-                R.drawable.progressbarstyle, null);
-
+        Drawable drawableMental = ResourcesCompat.getDrawable(getResources(), R.drawable.progressbarstyle, null);
         final ProgressBar mProgressMentaal = findViewById(R.id.circularProgressbarMental);
-
         mProgressMentaal.setProgress(100);
         mProgressMentaal.setSecondaryProgress(100);
         mProgressMentaal.setMax(100);
         mProgressMentaal.setProgressDrawable(drawableMental);
-
         percentageMentaal = findViewById(R.id.percentageMentaal);
 
         new Thread(new Runnable()
@@ -62,12 +98,9 @@ public class Home extends AppCompatActivity
             @Override
             public void run()
             {
-                double progressUserMental = 75;
-
                 while (pStatusMentaal < progressUserMental)
                 {
                     pStatusMentaal += 1;
-
                     handler.post(new Runnable()
                     {
 
@@ -79,7 +112,6 @@ public class Home extends AppCompatActivity
                                     pStatusMentaal));
                         }
                     });
-
                     try
                     {
                         Thread.sleep(25);
@@ -95,16 +127,12 @@ public class Home extends AppCompatActivity
 
     private void drawPhysicalProgress()
     {
-        Drawable drawablePhysical = ResourcesCompat.getDrawable(getResources(),
-                R.drawable.progressbarstyle, null);
-
+        Drawable drawablePhysical = ResourcesCompat.getDrawable(getResources(), R.drawable.progressbarstyle, null);
         final ProgressBar progressFysiek = findViewById(R.id.circularProgressbarPhysical);
-
         progressFysiek.setProgress(100);
         progressFysiek.setSecondaryProgress(100);
         progressFysiek.setMax(100);
         progressFysiek.setProgressDrawable(drawablePhysical);
-
         percentageFysiek = findViewById(R.id.percentageFysiek);
 
         new Thread(new Runnable()
@@ -112,12 +140,9 @@ public class Home extends AppCompatActivity
             @Override
             public void run()
             {
-                double progressUserPhysical = 50;
-
                 while (pStatusFysiek < progressUserPhysical)
                 {
                     pStatusFysiek += 1;
-
                     handler.post(new Runnable()
                     {
 
@@ -129,7 +154,6 @@ public class Home extends AppCompatActivity
                                     pStatusFysiek));
                         }
                     });
-
                     try
                     {
                         Thread.sleep(25);
@@ -146,18 +170,13 @@ public class Home extends AppCompatActivity
     private void drawToolbar()
     {
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-
         ActionBar actionbar = getSupportActionBar();
-
         assert actionbar != null;
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionbar.setDisplayShowTitleEnabled(false);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener()

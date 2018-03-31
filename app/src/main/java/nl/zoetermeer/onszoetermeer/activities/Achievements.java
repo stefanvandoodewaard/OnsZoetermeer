@@ -30,16 +30,14 @@ public class Achievements extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Achievement> achievementsList;
-    private SharedPreferences pref;
-    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
 
-        pref = getSharedPreferences("user_details",MODE_PRIVATE);
-        userId = pref.getInt("id", 0);
+        SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        int userId = pref.getInt("user_id", 0);
 
         drawToolbar();
 
@@ -83,18 +81,13 @@ public class Achievements extends AppCompatActivity
     private void drawToolbar()
     {
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-
         ActionBar actionbar = getSupportActionBar();
-
         assert actionbar != null;
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionbar.setDisplayShowTitleEnabled(false);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener()

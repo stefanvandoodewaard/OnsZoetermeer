@@ -144,7 +144,7 @@ public class Registration extends AppCompatActivity
         // newUser.Gender is set by radioGroup listener
         newUser.setM_password(regPw2.getText().toString());
 //        Date date = new Date();
-        newUser.setM_last_active(new Date());
+//        newUser.setM_last_active(new Date());
 
         String email = regEmail.getText().toString();
         mAuthTask = new registerUserAsync(email);

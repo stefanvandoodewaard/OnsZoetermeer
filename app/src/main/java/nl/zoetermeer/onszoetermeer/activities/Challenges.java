@@ -77,7 +77,6 @@ public class Challenges extends AppCompatActivity
             } else if (type == 2) {
                 temp =  challengeDAO.getPhysicalChallenges();
             }
-
             return temp;
         }
 
@@ -94,18 +93,13 @@ public class Challenges extends AppCompatActivity
     private void drawToolbar()
     {
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-
         ActionBar actionbar = getSupportActionBar();
-
         assert actionbar != null;
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionbar.setDisplayShowTitleEnabled(false);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener()

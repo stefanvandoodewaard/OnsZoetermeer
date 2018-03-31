@@ -169,7 +169,7 @@ public class Login extends AppCompatActivity
 
             try
             {
-                user = dummyDB.userDAO().getByEmail(mEmail);
+                user = userDAO.getByEmail(mEmail);
                 if (user != null)
                 {
                     if (user.getM_password().equals(mPassword))
@@ -202,9 +202,9 @@ public class Login extends AppCompatActivity
                 finish();
 
                 SharedPreferences.Editor editor = pref.edit();
-                editor.putInt("id", user.getId());
-                editor.putString("username",mEmail);
-                editor.putString("password",mPassword);
+                editor.putInt("user_id", user.getId());
+                editor.putString("first_name", user.getM_first_name());
+                editor.putString("last_name", user.getM_last_name());
                 editor.commit();
 
                 Intent mainHomeScreenBinder = new Intent(Login.this, Home.class);

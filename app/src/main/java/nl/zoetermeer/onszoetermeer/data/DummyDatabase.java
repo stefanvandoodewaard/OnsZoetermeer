@@ -13,12 +13,13 @@ import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.helpers.DateConverter;
 import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
+import nl.zoetermeer.onszoetermeer.helpers.VitalityTypeConverter;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.User;
 
-@Database(entities = {User.class, Challenge.class, Achievement.class}, version = 1)
-@TypeConverters({DateConverter.class, GenderConverter.class, Challenge.VitalityType.class})
+@Database(entities = {User.class, Challenge.class, Achievement.class}, version = 2)
+@TypeConverters({DateConverter.class, GenderConverter.class, VitalityTypeConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
