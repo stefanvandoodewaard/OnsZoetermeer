@@ -35,6 +35,11 @@
     <string name="permission_required_toast">Location permission is required for this demo.</string>
     <string name="title_activity_chat">Chat</string>
     <string name="action_settings">Settings</string>
+    <string name="user">Jolanda</string>
+    <string name="chat_bericht">Chat bericht</string>
+    <string name="sample_text">Sample text</string>
+    <string name="standard_time">00:00</string>
+    <string name="verstuur">Verstuur</string>
 
 
 </resources>
