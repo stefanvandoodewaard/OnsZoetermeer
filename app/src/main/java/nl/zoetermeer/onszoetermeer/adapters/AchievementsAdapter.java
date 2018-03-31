@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
 
     @Override
     public void onBindViewHolder(AchievementsAdapter.ViewHolder holder, int position) {
-        holder.name.setText(achievements.get(position).getName());
+        holder.button.setText(achievements.get(position).getName());
 
     }
 
@@ -37,10 +38,10 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder {
-        public TextView name;
+        public Button button;
         public ViewHolder (View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.achievement_row_name);
+            button = itemView.findViewById(R.id.badge_button_1);
         }
     }
 }

@@ -14,7 +14,7 @@ import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
 public class User
 {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int ID;
     @ColumnInfo(name = "EMAIL")
     private String m_email;
     @ColumnInfo(name = "PASSWORD")
@@ -64,15 +64,16 @@ public class User
             return code;
         }
     }
+
     @NonNull
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(@NonNull int id) {
-        this.id = id;
+    public void setID(@NonNull int ID) {
+        this.ID = ID;
     }
-    @NonNull
+
     public String getM_email() {
         return m_email;
     }

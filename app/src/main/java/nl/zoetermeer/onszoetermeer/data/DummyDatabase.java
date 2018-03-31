@@ -18,7 +18,7 @@ import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.User;
 
-@Database(entities = {User.class, Challenge.class, Achievement.class}, version = 2)
+@Database(entities = {User.class, Challenge.class, Achievement.class}, version = 3)
 @TypeConverters({DateConverter.class, GenderConverter.class, VitalityTypeConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
@@ -93,15 +93,17 @@ public abstract class DummyDatabase extends RoomDatabase
 
             User testKenny = userDAO.getByEmail("k.dillewaard@hotmail.com");
             User testStefan = userDAO.getByEmail("doodewaard@hotmail.com");
-            int testIdKenny = testKenny.getId();
-            int testIdStefan = testStefan.getId();
+            int testIdKenny = testKenny.getID();
+            int testIdStefan = testStefan.getID();
 
             achievementDAO.deleteAll();
             List<Achievement> achievements = new ArrayList<Achievement>();
             achievements.add(new Achievement("Test achievement Kenny #1", testIdKenny));
             achievements.add(new Achievement("Test achievement Kenny #2", testIdKenny));
+            achievements.add(new Achievement("Test achievement Kenny #3", testIdKenny));
             achievements.add(new Achievement("Test achievement Stefan #1", testIdStefan));
             achievements.add(new Achievement("Test achievement Stefan #2", testIdStefan));
+            achievements.add(new Achievement("Test achievement Stefan #3", testIdStefan));
             achievementDAO.insertAll(achievements);
 
             return null;
