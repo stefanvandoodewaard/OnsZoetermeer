@@ -12,6 +12,7 @@ import nl.zoetermeer.onszoetermeer.helpers.BadgeTypeConverter;
 public class Achievement
 {
 
+    @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = true)
     private int ID;
 

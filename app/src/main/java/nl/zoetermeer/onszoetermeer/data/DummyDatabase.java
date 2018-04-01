@@ -20,13 +20,15 @@ import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.models.UserAchievements;
+import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 
-@Database(entities = {User.class, Challenge.class, Achievement.class, UserAchievements.class}, version = 2)
+@Database(entities = {User.class, Challenge.class, UserChallenges.class, Achievement.class, UserAchievements.class}, version = 3)
 @TypeConverters({DateConverter.class, GenderTypeConverter.class, VitalityTypeConverter.class, BadgeTypeConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
     public abstract ChallengeDAO challengeDAO();
+    public abstract UserChallengesDAO userChallengesDAO();
     public abstract AchievementDAO achievementDAO();
     public abstract UserAchievementsDAO userAchievementsDAO();
 
@@ -56,12 +58,14 @@ public abstract class DummyDatabase extends RoomDatabase
         private ChallengeDAO challengeDAO;
         private AchievementDAO achievementDAO;
         private UserAchievementsDAO userAchievementsDAO;
+        private UserChallengesDAO userChallengesDAO;
 
         PopulateDbAsync(DummyDatabase db) {
             userDAO = db.userDAO();
             challengeDAO = db.challengeDAO();
             achievementDAO = db.achievementDAO();
             userAchievementsDAO = db.userAchievementsDAO();
+            userChallengesDAO = db.userChallengesDAO();
         }
 
         @Override
@@ -85,6 +89,7 @@ public abstract class DummyDatabase extends RoomDatabase
 
             challengeDAO.deleteAll();
             List<Challenge> challenges = new ArrayList<Challenge>();
+            List<UserChallenges> userChallenges = new ArrayList<UserChallenges>();
             challenges.add(new Challenge("Turbo lopen", "details", Challenge.VitalityType.Fysiek));
             challenges.add(new Challenge("Kloppen", "details", Challenge.VitalityType.Fysiek));
             challenges.add(new Challenge("Boksen", "details", Challenge.VitalityType.Fysiek));
@@ -105,7 +110,6 @@ public abstract class DummyDatabase extends RoomDatabase
             achievementDAO.deleteAll();
             List<Achievement> achievements = new ArrayList<Achievement>();
             List<UserAchievements> userAchievements = new ArrayList<UserAchievements>();
-
             achievements.add(new Achievement("Test #1", Achievement.BadgeType.Goud));
             achievements.add(new Achievement("Test #2", Achievement.BadgeType.Zilver));
             achievements.add(new Achievement("Test #3", Achievement.BadgeType.Brons));
@@ -115,8 +119,6 @@ public abstract class DummyDatabase extends RoomDatabase
             achievementDAO.insertAll(achievements);
 
             achievements = achievementDAO.getAllAchievements();
-
-
             for(int i = 0; i < 3; i++) {
                 int achievementId = achievements.get(i).getID();
                 userAchievements.add(new UserAchievements(testIdKenny, achievementId, new Date()));

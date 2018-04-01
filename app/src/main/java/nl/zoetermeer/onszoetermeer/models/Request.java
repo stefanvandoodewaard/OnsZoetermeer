@@ -9,12 +9,13 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "REQUESTS", foreignKeys = {
         @ForeignKey(
                 entity = User.class,
-                parentColumns = "id",
+                parentColumns = "ID",
                 childColumns = "USER_ID",
                 onDelete = ForeignKey.CASCADE
         )})
 public class Request
 {
+    @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int ID;

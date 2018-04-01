@@ -11,6 +11,7 @@ import nl.zoetermeer.onszoetermeer.helpers.VitalityTypeConverter;
 @Entity(tableName = "CHALLENGES")
 public class Challenge
 {
+    @ColumnInfo(name = "ID")
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;

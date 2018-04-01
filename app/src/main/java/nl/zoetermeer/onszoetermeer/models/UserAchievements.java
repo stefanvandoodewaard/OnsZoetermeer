@@ -28,7 +28,7 @@ public class UserAchievements
     @ColumnInfo(name = "ACHIEVEMENT_DATE")
     public Date mAchievementDate;
 
-    public UserAchievements(int mUserId, int mAchievementId, Date mAchievementDate) {
+    public UserAchievements(@NonNull int mUserId, @NonNull int mAchievementId, Date mAchievementDate) {
         this.mUserId = mUserId;
         this.mAchievementId = mAchievementId;
         this.mAchievementDate = mAchievementDate;
