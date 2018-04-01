@@ -23,7 +23,8 @@ public interface UserAchievementsDAO
 
     @Query("SELECT * FROM ACHIEVEMENTS INNER JOIN USER_ACHIEVEMENTS " +
             "ON ACHIEVEMENTS.id = USER_ACHIEVEMENTS.ACHIEVEMENT_ID " +
-            "WHERE USER_ACHIEVEMENTS.USER_ID = :userId")
+            "WHERE USER_ACHIEVEMENTS.USER_ID = :userId " +
+            "AND USER_ACHIEVEMENTS.ACHIEVEMENT_DATE IS NOT NULL")
     List<Achievement> getAchievementsForUser(final int userId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

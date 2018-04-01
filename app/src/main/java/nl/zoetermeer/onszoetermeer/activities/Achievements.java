@@ -37,6 +37,7 @@ public class Achievements extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievements);
+        Log.d("ACTIVITY:", "Achievements created.");
 
         SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
         int userId = pref.getInt("user_id", 0);
@@ -49,7 +50,7 @@ public class Achievements extends AppCompatActivity
     private void setRecyclerView() {
         recyclerView = findViewById(R.id.achievements_recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        adapter = new AchievementsAdapter(achievementsList);
+        adapter = new AchievementsAdapter(achievementsList, getApplicationContext());
         recyclerView.setAdapter(adapter);
     }
 
