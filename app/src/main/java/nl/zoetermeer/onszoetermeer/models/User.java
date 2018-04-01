@@ -6,9 +6,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
-
-import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
+import nl.zoetermeer.onszoetermeer.helpers.GenderTypeConverter;
 
 @Entity(tableName = "USERS")
 public class User
@@ -21,7 +19,7 @@ public class User
     @ColumnInfo(name = "PASSWORD")
     private String m_password;
     @ColumnInfo(name = "GENDER")
-    @TypeConverters(GenderConverter.class)
+    @TypeConverters(GenderTypeConverter.class)
     public Gender gender;
     @ColumnInfo(name = "FIRST_NAME")
     private String m_first_name;

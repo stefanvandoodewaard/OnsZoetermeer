@@ -6,7 +6,7 @@ import android.arch.persistence.room.TypeConverter;
 import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.models.User.Gender;
 
-public class GenderConverter
+public class GenderTypeConverter
 {
     @TypeConverter
     public static User.Gender getGender(int code){

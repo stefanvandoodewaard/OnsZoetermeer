@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import nl.zoetermeer.onszoetermeer.helpers.BadgeTypeConverter;
 import nl.zoetermeer.onszoetermeer.helpers.DateConverter;
-import nl.zoetermeer.onszoetermeer.helpers.GenderConverter;
+import nl.zoetermeer.onszoetermeer.helpers.GenderTypeConverter;
 import nl.zoetermeer.onszoetermeer.helpers.VitalityTypeConverter;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
@@ -21,7 +22,7 @@ import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.models.UserAchievements;
 
 @Database(entities = {User.class, Challenge.class, Achievement.class, UserAchievements.class}, version = 2)
-@TypeConverters({DateConverter.class, GenderConverter.class, VitalityTypeConverter.class})
+@TypeConverters({DateConverter.class, GenderTypeConverter.class, VitalityTypeConverter.class, BadgeTypeConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
