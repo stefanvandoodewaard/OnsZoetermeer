@@ -12,12 +12,13 @@
         android:layout_width="190dp"
         android:layout_weight=".50"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/badge_gold_opac"
+        android:drawableTop="@drawable/badge_gold"
         android:backgroundTint="@color/colorWhite"
-        android:text="Badge Title #1"
+        android:text="text"
         android:textSize="20sp"
         android:textColor="@color/ColorText"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 </LinearLayout>

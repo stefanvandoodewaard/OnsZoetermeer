@@ -22,9 +22,9 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
 
     public AchievementsAdapter(List<Achievement> achievements, Context context) {
         this.achievements = achievements;
-        drawableGold = context.getResources().getDrawable( R.drawable.badge_gold_normal );
-        drawableSilver = context.getResources().getDrawable( R.drawable.badge_silver_normal);
-        drawableBronze = context.getResources().getDrawable( R.drawable.badge_bronze_normal);
+        drawableGold = context.getResources().getDrawable( R.drawable.badge_gold);
+        drawableSilver = context.getResources().getDrawable( R.drawable.badge_silver);
+        drawableBronze = context.getResources().getDrawable( R.drawable.badge_bronze);
     }
 
     @Override
