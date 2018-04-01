@@ -17,9 +17,6 @@ public interface AchievementDAO
     @Query("SELECT * FROM ACHIEVEMENTS")
     List<Achievement> getAllAchievements();
 
-    @Query("SELECT * FROM ACHIEVEMENTS WHERE USER_ID = :userId")
-    List<Achievement> getUsersAchievements(int userId);
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Achievement achievement);
 

@@ -5,7 +5,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.ColumnInfo;
 import android.support.annotation.NonNull;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity(tableName = "USER_ACHIEVEMENTS",
         primaryKeys = { "USER_ID", "ACHIEVEMENT_ID" },

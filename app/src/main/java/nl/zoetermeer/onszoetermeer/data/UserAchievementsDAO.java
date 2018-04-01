@@ -10,6 +10,7 @@ import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.User;
+import nl.zoetermeer.onszoetermeer.models.UserAchievements;
 
 @Dao
 public interface UserAchievementsDAO
@@ -26,11 +27,14 @@ public interface UserAchievementsDAO
     List<Achievement> getAchievementsForUser(final int userId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(UserAchievementsDAO userAchievementsDAO);
+    void insertAll(List<UserAchievements> userAchievements);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(UserAchievements userAchievements);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void update(UserAchievementsDAO userAchievementsDAO);
+    void update(UserAchievements userAchievements);
 
     @Delete
-    void delete(UserAchievementsDAO userAchievementsDAO);
+    void delete(UserAchievements userAchievements);
 }

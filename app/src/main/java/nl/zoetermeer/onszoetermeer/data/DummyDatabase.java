@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.helpers.DateConverter;
@@ -17,14 +18,16 @@ import nl.zoetermeer.onszoetermeer.helpers.VitalityTypeConverter;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.User;
+import nl.zoetermeer.onszoetermeer.models.UserAchievements;
 
-@Database(entities = {User.class, Challenge.class, Achievement.class}, version = 3)
+@Database(entities = {User.class, Challenge.class, Achievement.class, UserAchievements.class}, version = 2)
 @TypeConverters({DateConverter.class, GenderConverter.class, VitalityTypeConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
     public abstract ChallengeDAO challengeDAO();
     public abstract AchievementDAO achievementDAO();
+    public abstract UserAchievementsDAO userAchievementsDAO();
 
     private static DummyDatabase INSTANCE;
 
@@ -51,11 +54,13 @@ public abstract class DummyDatabase extends RoomDatabase
         private UserDAO userDAO;
         private ChallengeDAO challengeDAO;
         private AchievementDAO achievementDAO;
+        private UserAchievementsDAO userAchievementsDAO;
 
         PopulateDbAsync(DummyDatabase db) {
             userDAO = db.userDAO();
             challengeDAO = db.challengeDAO();
             achievementDAO = db.achievementDAO();
+            userAchievementsDAO = db.userAchievementsDAO();
         }
 
         @Override
@@ -93,18 +98,33 @@ public abstract class DummyDatabase extends RoomDatabase
 
             User testKenny = userDAO.getByEmail("k.dillewaard@hotmail.com");
             User testStefan = userDAO.getByEmail("doodewaard@hotmail.com");
-            int testIdKenny = testKenny.getID();
-            int testIdStefan = testStefan.getID();
+            int testIdKenny = testKenny.getId();
+            int testIdStefan = testStefan.getId();
 
             achievementDAO.deleteAll();
             List<Achievement> achievements = new ArrayList<Achievement>();
-            achievements.add(new Achievement("Test achievement Kenny #1", testIdKenny));
-            achievements.add(new Achievement("Test achievement Kenny #2", testIdKenny));
-            achievements.add(new Achievement("Test achievement Kenny #3", testIdKenny));
-            achievements.add(new Achievement("Test achievement Stefan #1", testIdStefan));
-            achievements.add(new Achievement("Test achievement Stefan #2", testIdStefan));
-            achievements.add(new Achievement("Test achievement Stefan #3", testIdStefan));
+            List<UserAchievements> userAchievements = new ArrayList<UserAchievements>();
+
+            achievements.add(new Achievement("Test #1", Achievement.BadgeType.Goud));
+            achievements.add(new Achievement("Test #2", Achievement.BadgeType.Zilver));
+            achievements.add(new Achievement("Test #3", Achievement.BadgeType.Brons));
+            achievements.add(new Achievement("Test #4", Achievement.BadgeType.Goud));
+            achievements.add(new Achievement("Test #5", Achievement.BadgeType.Zilver));
+            achievements.add(new Achievement("Test #6", Achievement.BadgeType.Brons));
             achievementDAO.insertAll(achievements);
+
+            achievements = achievementDAO.getAllAchievements();
+
+
+            for(int i = 0; i < 3; i++) {
+                int achievementId = achievements.get(i).getID();
+                userAchievements.add(new UserAchievements(testIdKenny, achievementId, new Date()));
+            }
+            for(int i = 3; i < 6; i++) {
+                int achievementId = achievements.get(i).getID();
+                userAchievements.add(new UserAchievements(testIdKenny, achievementId, null));
+            }
+            userAchievementsDAO.insertAll(userAchievements);
 
             return null;
         }

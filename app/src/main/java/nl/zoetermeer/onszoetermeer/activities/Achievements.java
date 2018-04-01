@@ -23,6 +23,7 @@ import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.adapters.AchievementsAdapter;
 import nl.zoetermeer.onszoetermeer.data.AchievementDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.data.UserAchievementsDAO;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 
 public class Achievements extends AppCompatActivity
@@ -54,20 +55,22 @@ public class Achievements extends AppCompatActivity
 
     private class selectAchievementsAsync extends AsyncTask<Void,Integer,List<Achievement>>
     {
-        private AchievementDAO achievementDAO;
+//        private AchievementDAO achievementDAO;
+        private UserAchievementsDAO userAchievementsDAO;
         private DummyDatabase dummyDB;
         private int userId;
 
         selectAchievementsAsync(int userId) {
             dummyDB = DummyDatabase.getDatabase(getApplication());
-            achievementDAO = dummyDB.achievementDAO();
+//            achievementDAO = dummyDB.achievementDAO();
+            userAchievementsDAO = dummyDB.userAchievementsDAO();
             this.userId = userId;
         }
 
         @Override
         protected List<Achievement> doInBackground(Void... voids) {
 
-            return achievementDAO.getUsersAchievements(userId);
+            return userAchievementsDAO.getAchievementsForUser(userId);
         }
 
         @Override
