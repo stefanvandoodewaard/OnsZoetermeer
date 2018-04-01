@@ -119,10 +119,12 @@ public abstract class DummyDatabase extends RoomDatabase
             for(int i = 0; i < 3; i++) {
                 int achievementId = achievements.get(i).getID();
                 userAchievements.add(new UserAchievements(testIdKenny, achievementId, new Date()));
+                userAchievements.add(new UserAchievements(testIdStefan, achievementId, new Date()));
             }
             for(int i = 3; i < 6; i++) {
                 int achievementId = achievements.get(i).getID();
                 userAchievements.add(new UserAchievements(testIdKenny, achievementId, null));
+                userAchievements.add(new UserAchievements(testIdStefan, achievementId, null));
             }
             userAchievementsDAO.insertAll(userAchievements);
 
