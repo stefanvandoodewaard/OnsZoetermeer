@@ -19,25 +19,70 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/AppTheme" />
 
-
-        <TextView
-            android:id="@+id/challenge_details_name"
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Challenge naam"
-            android:textAlignment="center"
-            android:textColor="@color/ColorText"
-            android:textSize="25sp" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/challenge_details_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Challenge details"
-            android:textAlignment="center"
-            android:textColor="@color/ColorText"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/challenge_details_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:text="Challenge naam"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="35sp" />
 
+            <TextView
+                android:id="@+id/challenge_details_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_row="2"
+                android:textAlignment="center"
+                android:textColor="@color/ColorText"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/switch_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/switch_details"/>
+
+            <Switch
+                android:id="@+id/switch_challenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_row="5"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/switch_text"/>
+
+            <Button
+                android:id="@+id/challenge_back_button"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_row="6"
+                android:onClick="onClick"
+                android:background="@drawable/button_rounded"
+                android:layout_gravity="center_horizontal"
+                android:letterSpacing="0.1"
+                android:text="@string/challenge_details_back_button"
+                android:textAllCaps="false"
+                android:textColor="@color/ColorText"/>
+
+        </GridLayout>
 
     </LinearLayout>
 
@@ -48,6 +93,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_view"></android.support.design.widget.NavigationView>
+        app:menu="@menu/drawer_view">
+    </android.support.design.widget.NavigationView>
+
 
 </android.support.v4.widget.DrawerLayout>

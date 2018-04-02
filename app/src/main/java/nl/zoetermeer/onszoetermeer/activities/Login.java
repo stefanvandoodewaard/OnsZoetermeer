@@ -207,6 +207,7 @@ public class Login extends AppCompatActivity
                 editor.putString("last_name", user.getM_last_name());
                 editor.commit();
 
+                showProgress(false);
                 Intent mainHomeScreenBinder = new Intent(Login.this, Home.class);
                 startActivity(mainHomeScreenBinder);
             }

@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,21 +12,29 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
+import java.util.Date;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.ChallengeDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.data.UserChallengesDAO;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
+import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 
 public class ChallengeDetails extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
-    private int id;
+    private int challengeId;
+    private int userId;
     private TextView challengeName, challengeDetails;
+    private Switch challengeSwitch;
+    private boolean challengeCompleted;
+    private UserChallenges userChallenge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +44,72 @@ public class ChallengeDetails extends AppCompatActivity
 
         Bundle bundleDetails = getIntent().getExtras();
         if(bundleDetails != null) {
-            id = bundleDetails.getInt("id");
-            Toast.makeText(getApplicationContext(), "ChallengeDetails started with id: " + id, Toast.LENGTH_SHORT).show();
+            challengeId = bundleDetails.getInt("challenge_id");
+            bundleDetails.clear();
+            Log.i("ACTIVITY: ", "ChallengeDetails succesfully created, challengeId = " + challengeId);
         } else {
             Log.e("Challengedetails", "Oncreate() no challenge ID passed");
+            bundleDetails.clear();
+            finish();
         }
+
+
+        SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        userId = pref.getInt("user_id", 0);
 
         challengeName = findViewById(R.id.challenge_details_name);
         challengeDetails = findViewById(R.id.challenge_details_details);
+        challengeSwitch = findViewById(R.id.switch_challenge);
+        challengeCompleted = false;
+
 
         drawToolbar();
 
-        new selectChallengeDetailsAsync(id).execute();
+        new selectChallengeDetailsAsync(challengeId).execute();
+
+        challengeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    challengeCompleted = true;
+                    Log.i("challengeSwitch", "true");
+                } else {
+                    challengeCompleted = false;
+                    Log.i("challengeSwitch", "false");
+                }
+            }
+        });
+    }
+
+    public void onClick(View view) {
+        if (challengeCompleted) {
+            userChallenge = new UserChallenges(userId, challengeId, new Date());
+            new insertUserChallengeAsync().execute(userChallenge);
+            return;
+        }
+        finish();
+    }
+
+    private class insertUserChallengeAsync extends AsyncTask<UserChallenges, Void, Void>
+    {
+        private DummyDatabase dummyDB;
+        private UserChallengesDAO userChallengesDAO;
+
+        insertUserChallengeAsync() {
+            dummyDB = DummyDatabase.getDatabase(getApplication());
+            userChallengesDAO = dummyDB.userChallengesDAO();
+        }
+
+        @Override
+        protected Void doInBackground(final UserChallenges... params) {
+            userChallengesDAO.insert(params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.d("insertUserChalengeAsync", "UserChallenges row inserted.");
+            finish();
+        }
     }
 
     private class selectChallengeDetailsAsync extends AsyncTask<Void,Integer,Challenge>
@@ -71,7 +134,10 @@ public class ChallengeDetails extends AppCompatActivity
         protected void onPostExecute(Challenge challenge) {
             super.onPostExecute(challenge);
             challengeName.setText(challenge.getName());
-            challengeDetails.setText(challenge.getDetails());
+
+            if (challenge.vitalityType == Challenge.VitalityType.Fysiek) {
+                challengeDetails.setText(challenge.getDetails());
+            }
 
             Log.d("ASYNC-SELECT: ","Challenge: " + challenge.getName()+" found.");
         }

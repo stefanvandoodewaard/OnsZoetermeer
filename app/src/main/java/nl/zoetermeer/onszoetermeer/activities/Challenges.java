@@ -68,7 +68,7 @@ public class Challenges extends AppCompatActivity
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView, new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                bundleDetails.putInt("id", challengesList.get(position).getId());
+                bundleDetails.putInt("challenge_id", challengesList.get(position).getId());
                 challengeDetailsIntent.putExtras(bundleDetails);
                 startActivity(challengeDetailsIntent);
             }
