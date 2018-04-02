@@ -20,17 +20,20 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Login" />
-        <activity android:name=".activities.Registration" />
-        <activity android:name=".activities.Home" />
+        <activity
+            android:name=".activities.Login" />
+        <activity
+            android:name=".activities.Registration" />
+        <activity
+            android:name=".activities.Home" />
         <activity
             android:name=".activities.Contact"
             android:label="@string/title_activity_contact" />
-        <activity android:name=".activities.Vitaliteit" />
+        <activity
+            android:name=".activities.Vitaliteit" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -47,9 +50,15 @@
             android:name=".activities.Chat"
             android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.Challenges" />
-        <activity android:name=".activities.PasswordRecovery" />
-        <activity android:name=".activities.Achievements"></activity>
+        <activity
+            android:name=".activities.Challenges" />
+        <activity
+            android:name=".activities.PasswordRecovery" />
+        <activity
+            android:name=".activities.Achievements" />
+        <activity
+            android:name=".activities.ChallengeDetails"
+            android:noHistory="true"/>
     </application>
 
 </manifest>
