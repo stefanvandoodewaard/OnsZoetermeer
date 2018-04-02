@@ -10,18 +10,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.adapters.AchievementsAdapter;
-import nl.zoetermeer.onszoetermeer.data.AchievementDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserAchievementsDAO;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
@@ -56,14 +52,12 @@ public class Achievements extends AppCompatActivity
 
     private class selectAchievementsAsync extends AsyncTask<Void,Integer,List<Achievement>>
     {
-//        private AchievementDAO achievementDAO;
         private UserAchievementsDAO userAchievementsDAO;
         private DummyDatabase dummyDB;
         private int userId;
 
         selectAchievementsAsync(int userId) {
             dummyDB = DummyDatabase.getDatabase(getApplication());
-//            achievementDAO = dummyDB.achievementDAO();
             userAchievementsDAO = dummyDB.userAchievementsDAO();
             this.userId = userId;
         }

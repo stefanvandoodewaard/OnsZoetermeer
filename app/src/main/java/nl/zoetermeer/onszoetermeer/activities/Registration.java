@@ -11,9 +11,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.util.Date;
-import java.util.List;
-
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.InputValidator;
@@ -42,9 +39,6 @@ public class Registration extends AppCompatActivity
         setContentView(R.layout.activity_registration);
         Log.i("ACTIVITY:", "Registration created.");
 
-//        dummyDB = DummyDatabase.getDatabase(getApplication());
-//        userDAO = dummyDB.userDAO();
-
         inputValidator = new InputValidator();
         newUser = new User();
 
@@ -68,58 +62,55 @@ public class Registration extends AppCompatActivity
             Log.d("validateRegistration() ", "mAuthTask != null");
             return;
         }
-        
+
+        //Assign validators to input fields.
         successfulValidationEmail = inputValidator.validateEmail(regEmail);
         successfulValidationFname = inputValidator.validateName(regFname);
         successfulValidationLname = inputValidator.validateName(regFname);
         successfulValidationPassword1 = inputValidator.validatePassword(regPw1);
         successfulValidationPassword2 = inputValidator.validatePassword(regPw2);
 
+        //Get passwords to verify
         String passwordOne = regPw1.getText().toString();
         String passwordTwo = regPw2.getText().toString();
 
+        //Set validation feedback
         if (!successfulValidationEmail)
         {
             Log.d("validateRegistration() ", "Invalid email");
             regEmail.requestFocus();
             return;
         }
-
         if (!successfulValidationFname)
         {
             Log.d("validateRegistration() ", "Invalid first name");
             regFname.requestFocus();
             return;
         }
-
         if (!successfulValidationLname)
         {
             Log.d("validateRegistration() ", "Invalid last name");
             regLname.requestFocus();
             return;
         }
-
         if (!successfulValidationGender)
         {
             Log.d("validateRegistration() ", "No gender selected");
             regGndr.requestFocus();
             return;
         }
-
         if (!successfulValidationPassword1)
         {
             Log.d("validateRegistration() ", "Invalid password #1");
             regPw1.requestFocus();
             return;
         }
-
         if (!successfulValidationPassword2)
         {
             Log.d("validateRegistration() ", "Invalid password #2");
             regPw2.requestFocus();
             return;
         }
-
         if (!passwordOne.equals(passwordTwo))
         {
             Log.d("validateRegistration() ", "Password #1 & #2 don't match");
@@ -129,6 +120,7 @@ public class Registration extends AppCompatActivity
             return;
         }
 
+        //After all validations passed, reset error hints.
         regEmail.setError(null);
         regFname.setError(null);
         regLname.setError(null);
@@ -138,14 +130,14 @@ public class Registration extends AppCompatActivity
         regPw1.setError(null);
         regPw2.setError(null);
 
+        //Get all data from registration input fields.
         newUser.setM_email(regEmail.getText().toString());
         newUser.setM_first_name(regFname.getText().toString());
         newUser.setM_last_name(regLname.getText().toString());
         // newUser.Gender is set by radioGroup listener
         newUser.setM_password(regPw2.getText().toString());
-//        Date date = new Date();
-//        newUser.setM_last_active(new Date());
 
+        //Execute AsyncTask to insert new user.
         String email = regEmail.getText().toString();
         mAuthTask = new registerUserAsync(email);
         mAuthTask.execute(newUser);

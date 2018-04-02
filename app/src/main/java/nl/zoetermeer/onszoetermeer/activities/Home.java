@@ -19,9 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.text.MessageFormat;
-import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
@@ -33,10 +31,8 @@ public class Home extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     int pStatusMentaal = 0;
     int pStatusFysiek = 0;
-    private double progressUserMental;
-    private double progressUserPhysical;
-    TextView percentageMentaal;
-    TextView percentageFysiek;
+    private double progressUserMental, progressUserPhysical;
+    TextView percentageMentaal, percentageFysiek;
     private Handler handler = new Handler();
 
     @Override
@@ -207,8 +203,6 @@ public class Home extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -237,6 +231,7 @@ public class Home extends AppCompatActivity
             break;
             case R.id.achievement_button:
             {
+                Log.i("BUTTON:", "Home > Achievements.");
                 Intent messageAchievements = new Intent(this, Achievements.class);
                 startActivity(messageAchievements);
             }

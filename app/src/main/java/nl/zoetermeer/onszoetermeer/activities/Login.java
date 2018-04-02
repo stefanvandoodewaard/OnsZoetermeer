@@ -17,20 +17,14 @@ import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.InputValidator;
 import nl.zoetermeer.onszoetermeer.models.User;
 
-
 public class Login extends AppCompatActivity
 {
     private InputValidator inputValidator;
     private EditText mEmailView, mPasswordView;
     private ProgressDialog mProgress;
     private SharedPreferences pref;
-
     boolean successfulValidationPassword = false;
     boolean successfulValidationEmail = false;
-
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
     private UserLoginTask mAuthTask = null;
 
     @Override
@@ -127,10 +121,6 @@ public class Login extends AppCompatActivity
         mAuthTask.execute((Void) null);
     }
 
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
     private void showProgress(final boolean show)
     {
         if (show)
@@ -139,22 +129,14 @@ public class Login extends AppCompatActivity
         }
     }
 
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean>
+    private class UserLoginTask extends AsyncTask<Void, Void, Boolean>
     {
-
-        private String mEmail;
-        private String mPassword;
-
+        private String mEmail, mPassword;
         private DummyDatabase dummyDB;
         private UserDAO userDAO;
         private User user;
 
-        public UserLoginTask(String email, String password)
+        private UserLoginTask(String email, String password)
         {
             mEmail = email;
             mPassword = password;
@@ -165,8 +147,6 @@ public class Login extends AppCompatActivity
         @Override
         protected Boolean doInBackground(Void... params)
         {
-            // TODO: attempt authentication against a network service.
-
             try
             {
                 user = userDAO.getByEmail(mEmail);
@@ -187,7 +167,6 @@ public class Login extends AppCompatActivity
                 Log.e("UserLoginTask", e.toString());
                 return false;
             }
-
             return false;
         }
 
@@ -205,7 +184,7 @@ public class Login extends AppCompatActivity
                 editor.putInt("user_id", user.getId());
                 editor.putString("first_name", user.getM_first_name());
                 editor.putString("last_name", user.getM_last_name());
-                editor.commit();
+                editor.apply();
 
                 showProgress(false);
                 Intent mainHomeScreenBinder = new Intent(Login.this, Home.class);
@@ -213,11 +192,9 @@ public class Login extends AppCompatActivity
             }
             else
             {
-
                 mPasswordView.requestFocus();
                 mProgress.dismiss();
-                Toast.makeText(Login.this, "De ingevoerde gegevens kloppen niet",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, "De ingevoerde gegevens kloppen niet", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -228,9 +205,6 @@ public class Login extends AppCompatActivity
             showProgress(false);
         }
 
-        /**
-         * Shows the progress UI.
-         */
         private void showProgress(final boolean show)
         {
             if (show)

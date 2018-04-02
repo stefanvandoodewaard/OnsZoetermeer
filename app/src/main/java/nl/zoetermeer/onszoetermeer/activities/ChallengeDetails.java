@@ -29,12 +29,9 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 public class ChallengeDetails extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
-    private int challengeId;
-    private int userId;
+    private int challengeId, userId;
     private TextView challengeName, challengeDetails;
-    private Switch challengeSwitch;
     private boolean challengeCompleted;
-    private UserChallenges userChallenge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +42,9 @@ public class ChallengeDetails extends AppCompatActivity
         Bundle bundleDetails = getIntent().getExtras();
         if(bundleDetails != null) {
             challengeId = bundleDetails.getInt("challenge_id");
-            bundleDetails.clear();
             Log.i("ACTIVITY: ", "ChallengeDetails succesfully created, challengeId = " + challengeId);
         } else {
             Log.e("Challengedetails", "Oncreate() no challenge ID passed");
-            bundleDetails.clear();
             finish();
         }
 
@@ -59,7 +54,7 @@ public class ChallengeDetails extends AppCompatActivity
 
         challengeName = findViewById(R.id.challenge_details_name);
         challengeDetails = findViewById(R.id.challenge_details_details);
-        challengeSwitch = findViewById(R.id.switch_challenge);
+        Switch challengeSwitch = findViewById(R.id.switch_challenge);
         challengeCompleted = false;
 
 
@@ -82,7 +77,7 @@ public class ChallengeDetails extends AppCompatActivity
 
     public void onClick(View view) {
         if (challengeCompleted) {
-            userChallenge = new UserChallenges(userId, challengeId, new Date());
+            UserChallenges userChallenge = new UserChallenges(userId, challengeId, new Date());
             new insertUserChallengeAsync().execute(userChallenge);
             return;
         }

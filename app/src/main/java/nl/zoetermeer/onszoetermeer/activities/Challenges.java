@@ -15,8 +15,6 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
@@ -43,7 +41,7 @@ public class Challenges extends AppCompatActivity
         setContentView(R.layout.activity_challenges);
 
         Bundle bundle = getIntent().getExtras();
-        type = 0; // or other values
+        type = 0;
         if(bundle != null) {
             type = bundle.getInt("type");
         }
@@ -52,9 +50,7 @@ public class Challenges extends AppCompatActivity
         bundleDetails = new Bundle();
         challengeDetailsIntent = new Intent(this, ChallengeDetails.class);
 
-
         new selectChallengesAsync().execute();
-
 
         drawToolbar();
     }
@@ -149,7 +145,6 @@ public class Challenges extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
