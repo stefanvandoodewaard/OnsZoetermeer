@@ -18,11 +18,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Date;
+import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.ChallengeDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserChallengesDAO;
+import nl.zoetermeer.onszoetermeer.helpers.AchievementTriggers;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 
@@ -78,7 +80,7 @@ public class ChallengeDetails extends AppCompatActivity
     public void onClick(View view) {
         if (challengeCompleted) {
             UserChallenges userChallenge = new UserChallenges(userId, challengeId, new Date());
-            new insertUserChallengeAsync().execute(userChallenge);
+            new insertUserChallengeAsync(userId).execute(userChallenge);
             return;
         }
         finish();
@@ -88,15 +90,22 @@ public class ChallengeDetails extends AppCompatActivity
     {
         private DummyDatabase dummyDB;
         private UserChallengesDAO userChallengesDAO;
+        private int userId;
 
-        insertUserChallengeAsync() {
+        insertUserChallengeAsync(int userId) {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             userChallengesDAO = dummyDB.userChallengesDAO();
+            this.userId = userId;
         }
 
         @Override
         protected Void doInBackground(final UserChallenges... params) {
             userChallengesDAO.insert(params[0]);
+
+            //Pass all completed challenges to achievement trigger class.
+//            List<Challenge> challenges = userChallengesDAO.getChallengesForUser(userId);
+            new AchievementTriggers(getApplication(), userId);
+
             return null;
         }
 
