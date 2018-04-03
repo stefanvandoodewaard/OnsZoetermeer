@@ -17,7 +17,7 @@ public interface UserAchievementsDAO
 {
 
     @Query("SELECT * FROM USERS INNER JOIN USER_ACHIEVEMENTS " +
-            "ON USERS.ID = USER_ACHIEVEMENTS.USER_ID " +
+            "ON USERS.id = USER_ACHIEVEMENTS.USER_ID " +
             "WHERE USER_ACHIEVEMENTS.ACHIEVEMENT_ID = :achievID")
     List<User> getUsersWithAchievement(final int achievID);
 

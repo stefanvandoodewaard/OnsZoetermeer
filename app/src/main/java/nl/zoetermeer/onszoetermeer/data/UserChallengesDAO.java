@@ -17,7 +17,7 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 public interface UserChallengesDAO
 {
     @Query("SELECT * FROM USERS INNER JOIN USER_CHALLENGES " +
-            "ON USERS.ID = USER_CHALLENGES.USER_ID " +
+            "ON USERS.id = USER_CHALLENGES.USER_ID " +
             "WHERE USER_CHALLENGES.CHALLENGE_ID = :challengeId")
     List<User> getUsersWithChallenge(final int challengeId);
 

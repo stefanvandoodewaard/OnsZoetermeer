@@ -12,9 +12,9 @@ import nl.zoetermeer.onszoetermeer.helpers.BadgeTypeConverter;
 public class Achievement
 {
 
+    @PrimaryKey
     @ColumnInfo(name = "ID")
-    @PrimaryKey(autoGenerate = true)
-    private int ID;
+    private int id;
 
     @ColumnInfo(name = "NAME")
     private String name;
@@ -23,7 +23,8 @@ public class Achievement
     @TypeConverters(BadgeTypeConverter.class)
     public BadgeType badgeType;
 
-    public Achievement(String name, BadgeType badgeType){
+    public Achievement(int id, String name, BadgeType badgeType){
+        this.id = id;
         this.name = name;
         this.badgeType = badgeType;
 }
@@ -46,12 +47,12 @@ public class Achievement
     }
 
     @NonNull
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(@NonNull int ID) {
-        this.ID = ID;
+    public void setId(@NonNull int id) {
+        this.id = id;
     }
 
     public String getName() {

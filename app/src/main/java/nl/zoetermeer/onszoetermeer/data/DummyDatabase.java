@@ -28,7 +28,7 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
         UserChallenges.class,
         Achievement.class,
         UserAchievements.class},
-        version = 4)
+        version = 5)
 @TypeConverters({
         DateConverter.class,
         GenderTypeConverter.class,
@@ -47,7 +47,6 @@ public abstract class DummyDatabase extends RoomDatabase
     public static DummyDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context, DummyDatabase.class, "DUMMY_DATABASE")
-//                            .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .build();
             Log.i("DATABASE:", "New instance created.");
@@ -99,7 +98,6 @@ public abstract class DummyDatabase extends RoomDatabase
 
             challengeDAO.deleteAll();
             List<Challenge> challenges = new ArrayList<Challenge>();
-            List<UserChallenges> userChallenges = new ArrayList<UserChallenges>();
             String turbo_lopen_details = "Maak gedurende 3x10 tellen snelle pasjes op de plaats" +
                     "zodat je uit je hoofd gaat. Je gronding versterkt en de energie lekker door" +
                     " je lichaam stroomt. Dribbel op je tenen. Voer zo mogelijk de intensiteit op" +
@@ -139,34 +137,29 @@ public abstract class DummyDatabase extends RoomDatabase
             challenges.add(new Challenge("Tik de juiste volgorde", null, Challenge.VitalityType.Mentaal));
             challengeDAO.insertAll(challenges);
 
+            achievementDAO.deleteAll();
+            List<Achievement> achievements = new ArrayList<Achievement>();
+            achievements.add(new Achievement(1,"50 Mentale Uitdagingen", Achievement.BadgeType.Goud));
+            achievements.add(new Achievement(2,"25 Mentale Uitdagingen", Achievement.BadgeType.Zilver));
+            achievements.add(new Achievement(3,"10 Mentale Uitdagingen", Achievement.BadgeType.Brons));
+            achievements.add(new Achievement(4,"50 Fysieke Uitdagingen", Achievement.BadgeType.Goud));
+            achievements.add(new Achievement(5,"25 Fysieke Uitdagingen", Achievement.BadgeType.Zilver));
+            achievements.add(new Achievement(6,"10 Fysieke Uitdagingen", Achievement.BadgeType.Brons));
+            achievementDAO.insertAll(achievements);
+
             User testKenny = userDAO.getByEmail("k.dillewaard@hotmail.com");
             User testStefan = userDAO.getByEmail("doodewaard@hotmail.com");
             int testIdKenny = testKenny.getId();
             int testIdStefan = testStefan.getId();
 
-            achievementDAO.deleteAll();
-            List<Achievement> achievements = new ArrayList<Achievement>();
-            List<UserAchievements> userAchievements = new ArrayList<UserAchievements>();
-            achievements.add(new Achievement("Test #1", Achievement.BadgeType.Goud));
-            achievements.add(new Achievement("Test #2", Achievement.BadgeType.Zilver));
-            achievements.add(new Achievement("Test #3", Achievement.BadgeType.Brons));
-            achievements.add(new Achievement("Test #4", Achievement.BadgeType.Goud));
-            achievements.add(new Achievement("Test #5", Achievement.BadgeType.Zilver));
-            achievements.add(new Achievement("Test #6", Achievement.BadgeType.Brons));
-            achievementDAO.insertAll(achievements);
-
-            achievements = achievementDAO.getAllAchievements();
-            for(int i = 0; i < 3; i++) {
-                int achievementId = achievements.get(i).getID();
-                userAchievements.add(new UserAchievements(testIdKenny, achievementId, new Date()));
-                userAchievements.add(new UserAchievements(testIdStefan, achievementId, new Date()));
+            challenges = challengeDAO.getAllChallenges();
+            List<UserChallenges> userChallenges = new ArrayList<UserChallenges>();
+            for(int i = 0; i < 10; i++) {
+                int challengeId = challenges.get(i).getId();
+                userChallenges.add(new UserChallenges(testIdKenny, challengeId, new Date()));
+                userChallenges.add(new UserChallenges(testIdStefan, challengeId, new Date()));
             }
-            for(int i = 3; i < 6; i++) {
-                int achievementId = achievements.get(i).getID();
-                userAchievements.add(new UserAchievements(testIdKenny, achievementId, null));
-                userAchievements.add(new UserAchievements(testIdStefan, achievementId, null));
-            }
-            userAchievementsDAO.insertAll(userAchievements);
+            userChallengesDAO.insertAll(userChallenges);
 
             return null;
         }

@@ -18,7 +18,7 @@ public interface ChallengeDAO
     @Query("SELECT * FROM CHALLENGES")
     List<Challenge> getAllChallenges();
 
-    @Query("SELECT * FROM CHALLENGES WHERE ID = :ID")
+    @Query("SELECT * FROM CHALLENGES WHERE id = :ID")
     Challenge getByID(int ID);
 
     @Query("SELECT * FROM CHALLENGES WHERE VITALITY_TYPE = 1 ORDER BY NAME")

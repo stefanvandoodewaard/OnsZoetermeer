@@ -15,7 +15,7 @@ import nl.zoetermeer.onszoetermeer.models.User;
 public interface UserDAO
 {
 
-    @Query("SELECT * FROM USERS WHERE ID = :ID")
+    @Query("SELECT * FROM USERS WHERE id = :ID")
     User getByID(int ID);
 
     @Query("SELECT * FROM USERS WHERE EMAIL = :email")

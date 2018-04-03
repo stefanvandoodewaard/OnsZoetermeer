@@ -18,13 +18,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Date;
-import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.ChallengeDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserChallengesDAO;
-import nl.zoetermeer.onszoetermeer.helpers.AchievementTriggers;
+import nl.zoetermeer.onszoetermeer.helpers.AchievementTrigger;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 
@@ -104,7 +103,7 @@ public class ChallengeDetails extends AppCompatActivity
 
             //Pass all completed challenges to achievement trigger class.
 //            List<Challenge> challenges = userChallengesDAO.getChallengesForUser(userId);
-            new AchievementTriggers(getApplication(), userId);
+            new AchievementTrigger(getApplication(), userId).execute();
 
             return null;
         }
