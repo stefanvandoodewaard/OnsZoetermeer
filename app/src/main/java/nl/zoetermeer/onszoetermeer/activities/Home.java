@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -54,32 +55,35 @@ public class Home extends AppCompatActivity
         new selectUserVitalitysAsync(userId).execute();
     }
 
-    private class selectUserVitalitysAsync extends AsyncTask<Void,Integer,User>
+    private class selectUserVitalitysAsync extends AsyncTask<Void, Integer, User>
     {
         private UserDAO userDAO;
         private DummyDatabase dummyDB;
         private int userId;
 
-        selectUserVitalitysAsync(int userId) {
+        selectUserVitalitysAsync(int userId)
+        {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             userDAO = dummyDB.userDAO();
             this.userId = userId;
         }
 
         @Override
-        protected User doInBackground(Void... voids) {
+        protected User doInBackground(Void... voids)
+        {
 
             return userDAO.getByID(userId);
         }
 
         @Override
-        protected void onPostExecute(User user) {
+        protected void onPostExecute(User user)
+        {
             super.onPostExecute(user);
             progressUserMental = user.getM_vit_ment();
             progressUserPhysical = user.getM_vit_phys();
             drawMentalProgress();
             drawPhysicalProgress();
-            Log.d("ASYNC-SELECT: ","User vitality stats successfully loaded.");
+            Log.d("ASYNC-SELECT: ", "User vitality stats successfully loaded.");
         }
     }
 
@@ -192,8 +196,14 @@ public class Home extends AppCompatActivity
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
-
-                        return true;
+                        switch (menuItem.getItemId())
+                        {
+                            case R.id.nav_home:
+                                NavUtils.navigateUpFromSameTask(this);
+                                Log.i("MENU ITEM:", "Home > Home.");
+                                return true;
+                        }
+                        return Home.super.onOptionsItemSelected(menuItem);
                     }
                 });
     }
