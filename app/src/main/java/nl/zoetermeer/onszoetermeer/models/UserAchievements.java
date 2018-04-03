@@ -34,4 +34,29 @@ public class UserAchievements
         this.mAchievementDate = mAchievementDate;
     }
 
+    @NonNull
+    public int getmUserId() {
+        return mUserId;
+    }
+
+    public void setmUserId(@NonNull int mUserId) {
+        this.mUserId = mUserId;
+    }
+
+    @NonNull
+    public int getmAchievementId() {
+        return mAchievementId;
+    }
+
+    public void setmAchievementId(@NonNull int mAchievementId) {
+        this.mAchievementId = mAchievementId;
+    }
+
+    public Date getmAchievementDate() {
+        return mAchievementDate;
+    }
+
+    public void setmAchievementDate(Date mAchievementDate) {
+        this.mAchievementDate = mAchievementDate;
+    }
 }

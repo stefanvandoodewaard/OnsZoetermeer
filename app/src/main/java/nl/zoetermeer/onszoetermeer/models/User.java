@@ -35,10 +35,6 @@ public class User
     private int m_vit_ment;
     @ColumnInfo(name = "VITALITY_PHYSICAL")
     private int m_vit_phys;
-//    @ColumnInfo(name = "LAST_ACTIVE")
-//    private Date m_last_active;
-
-
 
     public User() {
 
@@ -145,11 +141,4 @@ public class User
         this.m_vit_phys = m_vit_phys;
     }
 
-//    public Date getM_last_active() {
-//        return m_last_active;
-//    }
-//
-//    public void setM_last_active(Date m_last_active) {
-//        this.m_last_active = m_last_active;
-//    }
 }

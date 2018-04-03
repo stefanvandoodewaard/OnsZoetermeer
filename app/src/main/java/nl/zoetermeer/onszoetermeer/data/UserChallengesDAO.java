@@ -26,6 +26,16 @@ public interface UserChallengesDAO
             "WHERE USER_CHALLENGES.USER_ID = :userId")
     List<Challenge> getChallengesForUser(final int userId);
 
+    @Query("SELECT * FROM CHALLENGES INNER JOIN USER_CHALLENGES " +
+            "ON CHALLENGES.id = USER_CHALLENGES.CHALLENGE_ID " +
+            "WHERE USER_CHALLENGES.USER_ID = :userId AND CHALLENGES.VITALITY_TYPE = 1")
+    List<Challenge> getMentalChallengesForUser(final int userId);
+
+    @Query("SELECT * FROM CHALLENGES INNER JOIN USER_CHALLENGES " +
+            "ON CHALLENGES.id = USER_CHALLENGES.CHALLENGE_ID " +
+            "WHERE USER_CHALLENGES.USER_ID = :userId AND CHALLENGES.VITALITY_TYPE = 2")
+    List<Challenge> getPhysicalChallengesForUser(final int userId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<UserChallenges> userchallenges);
 

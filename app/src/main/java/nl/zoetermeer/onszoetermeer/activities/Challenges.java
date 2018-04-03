@@ -1,5 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,13 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
-
+import android.view.View;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.adapters.ChallengesAdapter;
 import nl.zoetermeer.onszoetermeer.data.ChallengeDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
+import nl.zoetermeer.onszoetermeer.helpers.RecyclerViewClickListener;
+import nl.zoetermeer.onszoetermeer.helpers.RecyclerViewTouchListener;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 
 public class Challenges extends AppCompatActivity
@@ -29,6 +32,8 @@ public class Challenges extends AppCompatActivity
     private RecyclerView.Adapter adapter;
     private List<Challenge> challengesList;
     private int type;
+    private Bundle bundleDetails;
+    private Intent challengeDetailsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +41,16 @@ public class Challenges extends AppCompatActivity
         setContentView(R.layout.activity_challenges);
 
         Bundle bundle = getIntent().getExtras();
-        type = 0; // or other values
-        if(bundle != null)
+        type = 0;
+        if(bundle != null) {
             type = bundle.getInt("type");
-        Log.d("ACTIVITY:", "Challenges + type " + type + " created.");
+        }
+        Log.d("ACTIVITY:", "Challenges type " + type + " created.");
 
+        bundleDetails = new Bundle();
+        challengeDetailsIntent = new Intent(this, ChallengeDetails.class);
 
         new selectChallengesAsync().execute();
-
 
         drawToolbar();
     }
@@ -54,6 +61,14 @@ public class Challenges extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChallengesAdapter(challengesList);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView, new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                bundleDetails.putInt("challenge_id", challengesList.get(position).getId());
+                challengeDetailsIntent.putExtras(bundleDetails);
+                startActivity(challengeDetailsIntent);
+            }
+        }));
     }
 
     private class selectChallengesAsync extends AsyncTask<Void,Integer,List<Challenge>>
@@ -130,7 +145,6 @@ public class Challenges extends AppCompatActivity
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

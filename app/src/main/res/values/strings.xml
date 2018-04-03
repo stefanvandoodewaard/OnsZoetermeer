@@ -41,6 +41,9 @@
     <string name="sample_text">Sample text</string>
     <string name="standard_time">00:00</string>
     <string name="verstuur">Verstuur</string>
+    <string name="switch_details">Vink de uitdaging af als u de uitdaging (of een soortgelijke uitdaging in bijvoorbeeld de krant of een website) heeft voltooid .</string>
+    <string name="challenge_details_back_button">Terug naar uitdagingen</string>
+    <string name="switch_text">De uitdaging is voltooid.  </string>
 
 
 </resources>

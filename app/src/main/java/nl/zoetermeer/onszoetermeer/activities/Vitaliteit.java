@@ -18,16 +18,12 @@ import nl.zoetermeer.onszoetermeer.R;
 public class Vitaliteit extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
-    private Intent challengesIntent;
-    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vitaliteit);
         Log.i("ACTIVITY:", "Vitaliteit created.");
-        bundle = new Bundle();
-        challengesIntent = new Intent(this, Challenges.class);
 
         drawToolbar();
     }
@@ -69,6 +65,8 @@ public class Vitaliteit extends AppCompatActivity
     }
 
     public void sendMessage(View view) {
+        Bundle bundle = new Bundle();
+        Intent challengesIntent = new Intent(this, Challenges.class);
         switch (view.getId()) {
             case R.id.vitaliteit_mentaal_button: {
                 Log.i("BUTTON:", "Vitaliteit > Mentaal.");
