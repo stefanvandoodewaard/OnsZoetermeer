@@ -5,7 +5,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation's functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -18,29 +18,34 @@
 
         <activity
             android:name=".activities.LogoScreen"
+            android:launchMode="singleInstance"
             android:noHistory="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <activity android:name=".activities.Login" />
-        <activity android:name=".activities.Registration" />
-        <activity android:name=".activities.Home" />
         <activity
-            android:name=".activities.Login" />
+            android:name=".activities.Home"
+            android:launchMode="singleInstance" />
         <activity
-            android:name=".activities.Registration" />
+            android:name=".activities.Vitaliteit"
+            android:launchMode="singleInstance" />
         <activity
-            android:name=".activities.Home" />
+            android:name=".activities.Login"
+            android:launchMode="singleInstance" />
         <activity
+            android:name=".activities.Registration"
+            android:launchMode="singleInstance" />
+        <activity
+
             android:name=".activities.Contact"
-            android:label="@string/contact_title_bar" />
-        <activity android:name=".activities.Vitaliteit" />
-            android:label="@string/title_activity_contact" />
-        <activity
-            android:name=".activities.Vitaliteit" />
+            android:label="@string/contact_title_bar"
+            android:launchMode="singleInstance" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,20 +57,31 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".activities.Chat"
-            android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.Challenges" />
-        <activity
-            android:name=".activities.PasswordRecovery" />
-        <activity
-            android:name=".activities.Achievements" />
+            android:label="@string/title_activity_chat" />
+        <activity android:name=".activities.Challenges" />
+        <activity android:name=".activities.PasswordRecovery" />
+        <activity android:name=".activities.Achievements" />
         <activity
             android:name=".activities.ChallengeDetails"
-            android:noHistory="true"/>
+            android:noHistory="true" />
+
+        <activity
+            android:name=".activities.Hulp"
+            android:label="@string/title_activity_hulp"
+            android:launchMode="singleInstance">
+
+        </activity>
+
+        <activity android:name=".activities.Base">
+
+        </activity>
+
     </application>
 
 </manifest>

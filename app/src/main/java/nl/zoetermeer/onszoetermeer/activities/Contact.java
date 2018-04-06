@@ -8,11 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,10 +23,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import nl.zoetermeer.onszoetermeer.helpers.PermissionUtils;
 import nl.zoetermeer.onszoetermeer.R;
+import nl.zoetermeer.onszoetermeer.helpers.PermissionUtils;
 
-public class Contact extends AppCompatActivity
+public class Contact extends Base
         implements
         OnMyLocationButtonClickListener,
         OnMyLocationClickListener,
@@ -50,11 +47,15 @@ public class Contact extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        drawToolbar();
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public boolean useToolbar()
+    {
+        return false;
     }
 
     @Override
@@ -173,36 +174,5 @@ public class Contact extends AppCompatActivity
     {
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
-    }
-
-    private void drawToolbar()
-    {
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        ActionBar actionbar = getSupportActionBar();
-
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_back);
-        actionbar.setDisplayShowTitleEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                Log.i("BUTTON:", "Home > Contact.");
-                Intent messageContact = new Intent(this, Home.class);
-                startActivity(messageContact);
-                return true;
-        }
-        Log.i("ACTIVITY:", "Home created.");
-
-        return super.onOptionsItemSelected(item);
     }
 }

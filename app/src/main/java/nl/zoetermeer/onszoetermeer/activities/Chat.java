@@ -1,27 +1,19 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.adapters.ChatAdapter;
 
-public class Chat extends AppCompatActivity
+public class Chat extends Base
 {
     private List<ChatMessage> chatMessageList;
     private RecyclerView recyclerView;
@@ -45,8 +37,6 @@ public class Chat extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        drawToolbar();
-
         // Get RecyclerView object.
         recyclerView = findViewById(R.id.chat_recycler_messageview);
 
@@ -64,6 +54,12 @@ public class Chat extends AppCompatActivity
 
         // Set data adapter to RecyclerView.
         recyclerView.setAdapter(chatArrayAdapter);
+    }
+
+    @Override
+    public boolean useToolbar()
+    {
+        return false;
     }
 
     public void SendChatMessage(View view)
@@ -96,36 +92,5 @@ public class Chat extends AppCompatActivity
             // Empty the input edit text box.
             chatText.setText("");
         }
-
-    }
-
-    private void drawToolbar()
-    {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        ActionBar actionbar = getSupportActionBar();
-
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_back);
-        actionbar.setDisplayShowTitleEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                Log.i("BUTTON:", "Home > Contact.");
-                Intent messageContact = new Intent(this, Contact.class);
-                startActivity(messageContact);
-                return true;
-        }
-        Log.i("ACTIVITY:", "Contact created.");
-
-        return super.onOptionsItemSelected(item);
     }
 }
