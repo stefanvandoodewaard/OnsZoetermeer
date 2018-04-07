@@ -2,16 +2,9 @@ package nl.zoetermeer.onszoetermeer.activities;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -27,7 +20,7 @@ import nl.zoetermeer.onszoetermeer.helpers.AchievementTrigger;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 
-public class ChallengeDetails extends AppCompatActivity
+public class ChallengeDetails extends Base
 {
     private DrawerLayout mDrawerLayout;
     private int challengeId, userId;
@@ -58,8 +51,7 @@ public class ChallengeDetails extends AppCompatActivity
         Switch challengeSwitch = findViewById(R.id.switch_challenge);
         challengeCompleted = false;
 
-
-        drawToolbar();
+        useToolbar();
 
         new selectChallengeDetailsAsync(challengeId).execute();
 
@@ -144,49 +136,5 @@ public class ChallengeDetails extends AppCompatActivity
 
             Log.d("ASYNC-SELECT: ","Challenge: " + challenge.getName()+" found.");
         }
-    }
-
-    private void drawToolbar()
-    {
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        actionbar.setDisplayShowTitleEnabled(false);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener()
-
-                {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-                    {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -2,19 +2,12 @@ package nl.zoetermeer.onszoetermeer.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
+
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
@@ -25,11 +18,8 @@ import nl.zoetermeer.onszoetermeer.helpers.RecyclerViewClickListener;
 import nl.zoetermeer.onszoetermeer.helpers.RecyclerViewTouchListener;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
 
-public class Challenges extends AppCompatActivity
+public class Challenges extends Base
 {
-    private DrawerLayout mDrawerLayout;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
     private List<Challenge> challengesList;
     private int type;
     private Bundle bundleDetails;
@@ -52,14 +42,14 @@ public class Challenges extends AppCompatActivity
 
         new selectChallengesAsync().execute();
 
-        drawToolbar();
+        useToolbar();
     }
 
 
     private void setRecyclerView() {
-        recyclerView = findViewById(R.id.challenges_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.challenges_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ChallengesAdapter(challengesList);
+        RecyclerView.Adapter adapter = new ChallengesAdapter(challengesList);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView, new RecyclerViewClickListener() {
             @Override
@@ -102,49 +92,5 @@ public class Challenges extends AppCompatActivity
             setRecyclerView();
             Log.d("ASYNC-SELECT: ",challenges.size()+" row(s) found.");
         }
-    }
-
-
-    private void drawToolbar()
-    {
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        actionbar.setDisplayShowTitleEnabled(false);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener()
-
-                {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-                    {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

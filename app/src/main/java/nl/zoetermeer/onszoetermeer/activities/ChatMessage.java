@@ -1,10 +1,6 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
-import android.text.format.DateUtils;
-import android.text.format.Time;
-
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -25,8 +21,7 @@ public class ChatMessage
     {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+1:00"));
         Date currentLocalTime = cal.getTime();
-        DateFormat date = new SimpleDateFormat("HH:mm");
-        date.setTimeZone(TimeZone.getTimeZone("GMT+2:00"));
+        DateFormat date = DateFormat.getDateTimeInstance();
 
         return date.format(currentLocalTime);
     }

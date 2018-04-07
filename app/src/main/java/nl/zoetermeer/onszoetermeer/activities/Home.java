@@ -6,19 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import java.text.MessageFormat;
 
 import nl.zoetermeer.onszoetermeer.R;
@@ -26,9 +19,8 @@ import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.models.User;
 
-public class Home extends AppCompatActivity
+public class Home extends Base
 {
-    private DrawerLayout mDrawerLayout;
     int pStatusMentaal = 0;
     int pStatusFysiek = 0;
     private double progressUserMental, progressUserPhysical;
@@ -42,40 +34,44 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home_screen);
         Log.i("ACTIVITY:", "Home created.");
 
-        SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
-        int userId = pref.getInt("user_id", 0);
+        SharedPreferences mUserPreferences = getSharedPreferences("user_details",
+                MODE_PRIVATE);
+        int userId = mUserPreferences.getInt("user_id", 0);
 
-        drawToolbar();
+        useToolbar();
 
         new selectUserVitalitysAsync(userId).execute();
     }
 
-    private class selectUserVitalitysAsync extends AsyncTask<Void,Integer,User>
+    private class selectUserVitalitysAsync extends AsyncTask<Void, Integer, User>
     {
         private UserDAO userDAO;
         private DummyDatabase dummyDB;
         private int userId;
 
-        selectUserVitalitysAsync(int userId) {
+        selectUserVitalitysAsync(int userId)
+        {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             userDAO = dummyDB.userDAO();
             this.userId = userId;
         }
 
         @Override
-        protected User doInBackground(Void... voids) {
+        protected User doInBackground(Void... voids)
+        {
 
             return userDAO.getByID(userId);
         }
 
         @Override
-        protected void onPostExecute(User user) {
+        protected void onPostExecute(User user)
+        {
             super.onPostExecute(user);
             progressUserMental = user.getM_vit_ment();
             progressUserPhysical = user.getM_vit_phys();
             drawMentalProgress();
             drawPhysicalProgress();
-            Log.d("ASYNC-SELECT: ","User vitality stats successfully loaded.");
+            Log.d("ASYNC-SELECT: ", "User vitality stats successfully loaded.");
         }
     }
 
@@ -161,49 +157,6 @@ public class Home extends AppCompatActivity
                 }
             }
         }).start();
-    }
-
-    private void drawToolbar()
-    {
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        actionbar.setDisplayShowTitleEnabled(false);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener()
-
-                {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-                    {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void sendMessage(View view)
