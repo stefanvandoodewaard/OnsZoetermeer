@@ -50,6 +50,7 @@
     <string name="vitality_header">Vitaliteit</string>
     <string name="help_header">Hulp</string>
     <string name="image_button">image button</string>
+    <string name="title_activity_profile">Profile</string>
 
 
 </resources>

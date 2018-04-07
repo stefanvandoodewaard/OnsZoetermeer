@@ -32,7 +32,7 @@ public class Home extends Base
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_home);
         Log.i("ACTIVITY:", "Home created.");
 
         SharedPreferences mUserPreferences = getSharedPreferences("user_details",
@@ -194,7 +194,7 @@ public class Home extends Base
             break;
             default:
             {
-                setContentView(R.layout.activity_home_screen);
+                setContentView(R.layout.activity_home);
             }
         }
     }
