@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,7 +37,6 @@
 
         </FrameLayout>
 
-
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +55,8 @@
                 android:background="@drawable/button_rounded"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_help_meal" />
+                android:src="@drawable/ic_help_meal"
+                android:contentDescription="@string/image_button" />
 
             <ImageButton
                 android:id="@+id/help_shop_button"
@@ -68,7 +67,8 @@
                 android:background="@drawable/button_rounded"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_help_shop" />
+                android:src="@drawable/ic_help_shop"
+                android:contentDescription="@string/image_button"/>
 
             <ImageButton
                 android:id="@+id/help_chore_button"
@@ -79,22 +79,22 @@
                 android:background="@drawable/button_rounded"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_help_chore" />
+                android:src="@drawable/ic_help_chore"
+                android:contentDescription="@string/image_button"/>
 
             <ImageButton
-                android:id="@+id/help_shop_transport"
+                android:id="@+id/help_transport_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:background="@drawable/button_rounded"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_help_transport" />
-
-
-
+                android:src="@drawable/ic_help_transport"
+                android:contentDescription="@string/image_button"/>
 
         </GridLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

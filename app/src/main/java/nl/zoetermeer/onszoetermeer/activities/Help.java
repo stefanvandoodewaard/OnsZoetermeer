@@ -64,12 +64,6 @@ public class Help extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-//    //Types
-//    Maaltijd(0),
-//    Boodschappen(1),
-//    Klusjes(2),
-//    Vervoer(3);
-
     public void sendMessage(View view) {
         Bundle bundle = new Bundle();
         Intent requestDetailsIntent = new Intent(this, RequestDetails.class);
@@ -78,6 +72,30 @@ public class Help extends AppCompatActivity
                 Log.i("BUTTON:", "Help > Meal.");
 
                 bundle.putInt("request_type", 0);
+                requestDetailsIntent.putExtras(bundle);
+                startActivity(requestDetailsIntent);
+            }
+            break;
+            case R.id.help_shop_button: {
+                Log.i("BUTTON:", "Help > Shop.");
+
+                bundle.putInt("request_type", 1);
+                requestDetailsIntent.putExtras(bundle);
+                startActivity(requestDetailsIntent);
+            }
+            break;
+            case R.id.help_chore_button: {
+                Log.i("BUTTON:", "Help > Chore.");
+
+                bundle.putInt("request_type", 2);
+                requestDetailsIntent.putExtras(bundle);
+                startActivity(requestDetailsIntent);
+            }
+            break;
+            case R.id.help_transport_button: {
+                Log.i("BUTTON:", "Help > Transport.");
+
+                bundle.putInt("request_type", 3);
                 requestDetailsIntent.putExtras(bundle);
                 startActivity(requestDetailsIntent);
             }

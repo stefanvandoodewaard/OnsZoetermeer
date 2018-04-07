@@ -54,7 +54,9 @@
             android:name=".activities.ChallengeDetails"
             android:noHistory="true" />
         <activity android:name=".activities.Help" />
-        <activity android:name=".activities.RequestDetails"></activity>
+        <activity
+            android:name=".activities.RequestDetails"
+            android:noHistory="true"/>
     </application>
 
 </manifest>
