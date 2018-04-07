@@ -1,4 +1,4 @@
-package nl.zoetermeer.onszoetermeer.activities;
+package nl.zoetermeer.onszoetermeer.helpers;
 
 import java.text.DateFormat;
 import java.util.Calendar;

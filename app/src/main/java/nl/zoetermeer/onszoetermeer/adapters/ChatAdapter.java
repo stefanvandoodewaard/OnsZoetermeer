@@ -1,11 +1,9 @@
 package nl.zoetermeer.onszoetermeer.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
-import nl.zoetermeer.onszoetermeer.activities.ChatMessage;
+import nl.zoetermeer.onszoetermeer.helpers.ChatMessage;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder>
 {

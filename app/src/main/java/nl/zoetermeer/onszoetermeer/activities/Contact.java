@@ -88,9 +88,9 @@ public class Contact extends Base
             @Override
             public boolean onMarkerClick(Marker m)
             {
-                Log.i("BUTTON:", "Home > Contact.");
+                Log.i("BUTTON:", "Contact > Profile.");
                 Intent messageContact = new Intent(
-                        Contact.this, Chat.class);
+                        Contact.this, Profile.class);
                 startActivity(messageContact);
 
                 return true;

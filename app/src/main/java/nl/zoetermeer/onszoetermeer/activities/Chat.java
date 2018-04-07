@@ -12,6 +12,7 @@ import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.adapters.ChatAdapter;
+import nl.zoetermeer.onszoetermeer.helpers.ChatMessage;
 
 public class Chat extends Base
 {
