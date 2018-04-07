@@ -61,12 +61,9 @@ public class Base extends AppCompatActivity
             actionbar.setDisplayShowTitleEnabled(false);
             NavigationView navigationView = findViewById(R.id.nav_view);
 
-            View view = (View) getLayoutInflater().inflate(R.layout.nav_header,
-                    null);
-
-            hamburgerName = (TextView) view.findViewById(R.id.hamburger_name);
-            hamburgerEmail = (TextView) view.findViewById(R.id.hamburger_email);
-
+            View headerView = navigationView.getHeaderView(0);
+            hamburgerName = headerView.findViewById(R.id.hamburger_name);
+            hamburgerEmail = headerView.findViewById(R.id.hamburger_email);
             hamburgerName.setText(fullName);
             hamburgerEmail.setText(eMail);
 
@@ -92,7 +89,6 @@ public class Base extends AppCompatActivity
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_back);
             actionbar.setDisplayShowTitleEnabled(true);
         }
-
 
     }
 

@@ -177,6 +177,7 @@ public class Home extends Base
                 Intent messageVitaliteit = new Intent(this, Vitaliteit.class);
                 startActivity(messageVitaliteit);
             }
+            break;
             case R.id.hulp_button:
             {
                 Log.i("BUTTON:", "Home > Help.");
