@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/basic_frame"
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="200dp"
         android:background="@color/colorPrimary">
 
     </FrameLayout>
@@ -18,7 +18,7 @@
         android:id="@+id/ons_zoetermeer_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="103dp"
+        android:paddingTop="78dp"
         android:src="@drawable/ic_logoscreen_logo"
         android:contentDescription="TODO" />
 
@@ -26,14 +26,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/src_logo_onszoetermeer"
-        android:paddingTop="390dp"
+        android:paddingTop="365dp"
         android:contentDescription="TODO" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/src_logo_gemeente_zoetermeer"
-        android:paddingTop="520dp"
+        android:paddingTop="495dp"
         android:contentDescription="TODO" />
 
 </android.support.constraint.ConstraintLayout>

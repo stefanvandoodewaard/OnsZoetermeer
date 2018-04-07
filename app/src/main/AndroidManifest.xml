@@ -75,13 +75,6 @@
             android:name=".activities.RequestDetails"
             android:noHistory="true"/>
 
-        <activity
-            android:name=".activities.Hulp"
-            android:label="@string/title_activity_hulp"
-            android:launchMode="singleInstance">
-
-        </activity>
-
         <activity android:name=".activities.Base">
 
         </activity>

@@ -1,21 +1,12 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
-import java.util.List;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
@@ -31,9 +21,8 @@ import nl.zoetermeer.onszoetermeer.data.RequestDAO;
 import nl.zoetermeer.onszoetermeer.models.Request;
 import nl.zoetermeer.onszoetermeer.models.Request.RequestType;
 
-public class RequestDetails extends AppCompatActivity
+public class RequestDetails extends Base
 {
-    private DrawerLayout mDrawerLayout;
     private int userId, requestTypeId;
     private RequestType requestType;
 
@@ -65,8 +54,12 @@ public class RequestDetails extends AppCompatActivity
                 requestType = RequestType.Vervoer;
             }
         }
+    }
 
-        drawToolbar();
+    @Override
+    public boolean useToolbar()
+    {
+        return false;
     }
 
     public void onClick(View view) {
@@ -115,45 +108,5 @@ public class RequestDetails extends AppCompatActivity
             Log.i("insertRequestAsync", "Request row inserted.");
             Toast.makeText(RequestDetails.this, "Hulpverzoek geregistreerd", Toast.LENGTH_LONG).show();
         }
-    }
-
-    private void drawToolbar() {
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        actionbar.setDisplayShowTitleEnabled(false);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener()
-
-                {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

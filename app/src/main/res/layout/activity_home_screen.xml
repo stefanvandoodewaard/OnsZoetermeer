@@ -6,14 +6,14 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="175dp"
         android:background="@color/colorPrimary">
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:background="@color/colorPrimaryLight"
             android:columnCount="2">
 
@@ -27,10 +27,10 @@
                 android:layout_row="0"
                 android:adjustViewBounds="true"
                 android:background="@color/colorWhite"
+                android:contentDescription="TODO"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_contact_logo"
-                android:contentDescription="TODO" />
+                android:src="@drawable/ic_contact_logo" />
 
             <ImageButton
                 android:id="@+id/vitaliteit_button"
@@ -41,12 +41,12 @@
                 android:layout_row="0"
                 android:adjustViewBounds="true"
                 android:background="@color/colorWhite"
+                android:contentDescription="TODO"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_vitaliteit_logo"
                 android:text="@string/vitaliteit_title"
-                android:textColor="@color/colorBlack"
-                android:contentDescription="TODO" />
+                android:textColor="@color/colorBlack" />
         </GridLayout>
     </FrameLayout>
 
@@ -71,12 +71,12 @@
                 android:layout_row="1"
                 android:adjustViewBounds="true"
                 android:background="@color/colorWhite"
+                android:contentDescription="TODO"
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_hulp_logo"
-                android:text="@string/hulp_title"
-                android:textColor="@color/colorBlack"
-                android:contentDescription="TODO" />
+                android:text="@string/help_title"
+                android:textColor="@color/colorBlack" />
 
             <ImageButton
                 android:id="@+id/achievement_button"
@@ -119,9 +119,9 @@
                 android:layout_row="0"
                 android:adjustViewBounds="true"
                 android:background="@color/colorWhite"
+                android:contentDescription="TODO"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_home_mentaal"
-                android:contentDescription="TODO" />
+                android:src="@drawable/ic_home_mentaal" />
 
             <ProgressBar
                 android:id="@+id/circularProgressbarMental"
@@ -160,9 +160,9 @@
                 android:layout_row="0"
                 android:adjustViewBounds="true"
                 android:background="@color/colorWhite"
+                android:contentDescription="TODO"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_home_fysiek"
-                android:contentDescription="TODO" />
+                android:src="@drawable/ic_home_fysiek" />
 
             <ProgressBar
                 android:id="@+id/circularProgressbarPhysical"

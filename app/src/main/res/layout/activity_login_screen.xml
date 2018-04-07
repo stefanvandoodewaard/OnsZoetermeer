@@ -16,7 +16,7 @@
     <FrameLayout
         android:id="@+id/basic_frame"
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="200dp"
         android:background="@color/colorPrimary">
 
     </FrameLayout>
@@ -30,7 +30,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="225dp"
-        android:paddingTop="130dp">
+        android:paddingTop="105dp">
 
 
         <EditText
@@ -114,7 +114,7 @@
         android:id="@+id/ons_zoetermeer_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="125dp"
+        android:paddingTop="100dp"
         android:src="@drawable/ic_logoscreen_logo_login" />
 
 </RelativeLayout>

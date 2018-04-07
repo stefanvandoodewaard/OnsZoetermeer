@@ -14,9 +14,9 @@
             android:icon="@drawable/ic_menu_vitaliteit"
             android:title="@string/vitaliteit_title" />
         <item
-            android:id="@+id/nav_hulp"
-            android:icon="@drawable/ic_menu_hulp"
-            android:title="@string/hulp_title" />
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_menu_help"
+            android:title="@string/help_title" />
         <item
             android:id="@+id/nav_achievement"
             android:icon="@drawable/ic_menu_achievement"

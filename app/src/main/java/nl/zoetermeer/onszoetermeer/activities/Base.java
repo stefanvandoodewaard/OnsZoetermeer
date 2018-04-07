@@ -1,7 +1,5 @@
 package nl.zoetermeer.onszoetermeer.activities;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-
-import java.util.Objects;
 
 import nl.zoetermeer.onszoetermeer.R;
 
@@ -107,10 +103,10 @@ public class Base extends AppCompatActivity
                 startActivity(intent);
             }
             break;
-            case R.id.nav_hulp:
+            case R.id.nav_help:
             {
-                Log.i("BUTTON:", "Activity > Hulp.");
-                intent = new Intent(this, Hulp.class);
+                Log.i("BUTTON:", "Activity > Help.");
+                intent = new Intent(this, Help.class);
                 startActivity(intent);
             }
             break;
