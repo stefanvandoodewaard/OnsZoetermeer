@@ -15,9 +15,11 @@ import java.util.List;
 import nl.zoetermeer.onszoetermeer.helpers.BadgeTypeConverter;
 import nl.zoetermeer.onszoetermeer.helpers.DateConverter;
 import nl.zoetermeer.onszoetermeer.helpers.GenderTypeConverter;
+import nl.zoetermeer.onszoetermeer.helpers.RequestTypeConverter;
 import nl.zoetermeer.onszoetermeer.helpers.VitalityTypeConverter;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
+import nl.zoetermeer.onszoetermeer.models.Request;
 import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.models.UserAchievements;
 import nl.zoetermeer.onszoetermeer.models.UserChallenges;
@@ -27,13 +29,15 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
         Challenge.class,
         UserChallenges.class,
         Achievement.class,
-        UserAchievements.class},
+        UserAchievements.class,
+        Request.class},
         version = 5)
 @TypeConverters({
         DateConverter.class,
         GenderTypeConverter.class,
         VitalityTypeConverter.class,
-        BadgeTypeConverter.class})
+        BadgeTypeConverter.class,
+        RequestTypeConverter.class})
 public abstract class DummyDatabase extends RoomDatabase
 {
     public abstract UserDAO userDAO();
@@ -41,6 +45,7 @@ public abstract class DummyDatabase extends RoomDatabase
     public abstract UserChallengesDAO userChallengesDAO();
     public abstract AchievementDAO achievementDAO();
     public abstract UserAchievementsDAO userAchievementsDAO();
+    public abstract RequestDAO requestDAO();
 
     private static DummyDatabase INSTANCE;
 
@@ -68,6 +73,7 @@ public abstract class DummyDatabase extends RoomDatabase
         private AchievementDAO achievementDAO;
         private UserAchievementsDAO userAchievementsDAO;
         private UserChallengesDAO userChallengesDAO;
+        private RequestDAO requestDAO;
 
         PopulateDbAsync(DummyDatabase db) {
             userDAO = db.userDAO();
@@ -75,6 +81,7 @@ public abstract class DummyDatabase extends RoomDatabase
             achievementDAO = db.achievementDAO();
             userAchievementsDAO = db.userAchievementsDAO();
             userChallengesDAO = db.userChallengesDAO();
+            requestDAO = db.requestDAO();
         }
 
         @Override
