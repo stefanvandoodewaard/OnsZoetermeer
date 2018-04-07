@@ -6,14 +6,14 @@
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="175dp"
         android:background="@color/colorPrimary">
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:background="@color/colorPrimaryLight"
             android:columnCount="2">
 
@@ -74,9 +74,9 @@
                 android:onClick="sendMessage"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_hulp_logo"
-                android:text="@string/hulp_title"
+                android:text="@string/help_title"
                 android:textColor="@color/colorBlack"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/image_button"/>
 
             <ImageButton
                 android:id="@+id/achievement_button"
@@ -90,7 +90,8 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_achievement_logo"
                 android:text="@string/achievement_title"
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"
+                android:contentDescription="@string/image_button"/>
         </GridLayout>
 
         <TextView
@@ -121,7 +122,7 @@
                 android:background="@color/colorWhite"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_home_mentaal"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/image_button"/>
 
             <ProgressBar
                 android:id="@+id/circularProgressbarMental"
@@ -162,7 +163,7 @@
                 android:background="@color/colorWhite"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_home_fysiek"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/image_button"/>
 
             <ProgressBar
                 android:id="@+id/circularProgressbarPhysical"
