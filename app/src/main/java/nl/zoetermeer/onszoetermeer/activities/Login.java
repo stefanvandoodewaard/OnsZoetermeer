@@ -184,6 +184,7 @@ public class Login extends AppCompatActivity
                 editor.putInt("user_id", user.getId());
                 editor.putString("first_name", user.getM_first_name());
                 editor.putString("last_name", user.getM_last_name());
+                editor.putString("email", user.getM_email());
                 editor.apply();
 
                 showProgress(false);

@@ -12,9 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.Objects;
 
@@ -23,15 +27,25 @@ import nl.zoetermeer.onszoetermeer.R;
 public class Base extends AppCompatActivity
 {
     private DrawerLayout fullView;
+    private String firstName, lastName, fullName, eMail;
+    private TextView hamburgerName, hamburgerEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        SharedPreferences mUserPreferences = getSharedPreferences("user_details",
+                MODE_PRIVATE);
+        firstName = mUserPreferences.getString("first_name", null);
+        lastName = mUserPreferences.getString("last_name", null);
+        fullName = firstName + " " + lastName;
+        eMail = mUserPreferences.getString("email", null);
+
     }
 
     @Override
     public void setContentView(int layoutResID)
+
     {
         fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base,
                 null);
@@ -46,9 +60,20 @@ public class Base extends AppCompatActivity
 
         if (useToolbar())
         {
+
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
             actionbar.setDisplayShowTitleEnabled(false);
             NavigationView navigationView = findViewById(R.id.nav_view);
+
+            View view = (View) getLayoutInflater().inflate(R.layout.nav_header,
+                    null);
+
+            hamburgerName = (TextView) view.findViewById(R.id.hamburger_name);
+            hamburgerEmail = (TextView) view.findViewById(R.id.hamburger_email);
+
+            hamburgerName.setText(fullName);
+            hamburgerEmail.setText(eMail);
+
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener()
                     {
@@ -71,6 +96,8 @@ public class Base extends AppCompatActivity
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_back);
             actionbar.setDisplayShowTitleEnabled(true);
         }
+
+
     }
 
     public boolean useToolbar()
@@ -110,7 +137,7 @@ public class Base extends AppCompatActivity
             case R.id.nav_hulp:
             {
                 Log.i("BUTTON:", "Activity > Hulp.");
-                intent = new Intent(this, Hulp.class);
+                intent = new Intent(this, Help.class);
                 startActivity(intent);
             }
             break;

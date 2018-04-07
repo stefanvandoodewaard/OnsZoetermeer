@@ -21,6 +21,7 @@ import nl.zoetermeer.onszoetermeer.models.User;
 
 public class Home extends Base
 {
+
     int pStatusMentaal = 0;
     int pStatusFysiek = 0;
     private double progressUserMental, progressUserPhysical;

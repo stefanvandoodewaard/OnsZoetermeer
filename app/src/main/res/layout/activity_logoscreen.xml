@@ -20,20 +20,20 @@
         android:layout_height="wrap_content"
         android:paddingTop="103dp"
         android:src="@drawable/ic_logoscreen_logo"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/image_button" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/src_logo_onszoetermeer"
         android:paddingTop="390dp"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/image_button" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/src_logo_gemeente_zoetermeer"
         android:paddingTop="520dp"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/image_button" />
 
 </android.support.constraint.ConstraintLayout>

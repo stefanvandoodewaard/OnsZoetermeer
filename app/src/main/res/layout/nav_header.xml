@@ -19,6 +19,7 @@
         android:contentDescription="@string/gebruikersProfiel" />
 
     <TextView
+        android:id="@+id/hamburger_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
@@ -27,6 +28,7 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/hamburger_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"

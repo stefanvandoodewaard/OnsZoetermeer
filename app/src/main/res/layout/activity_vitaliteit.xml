@@ -44,7 +44,7 @@
             android:onClick="sendMessage"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_vitaliteit_mentaal"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/image_button" />
 
         <ImageButton
             android:id="@+id/vitaliteit_fysiek_button"
@@ -55,7 +55,7 @@
             android:onClick="sendMessage"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_vitaliteit_fysiek"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/image_button" />
 
     </GridLayout>
 
