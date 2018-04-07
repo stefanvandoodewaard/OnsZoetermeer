@@ -42,6 +42,7 @@ public class Chat extends Base
 
         // Set RecyclerView layout manager.
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // Create the initial data list.
