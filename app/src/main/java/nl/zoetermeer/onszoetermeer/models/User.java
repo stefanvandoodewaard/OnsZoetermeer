@@ -45,6 +45,7 @@ public class User
         //default values
         m_vit_ment = 0;
         m_vit_phys = 0;
+        loginDate = new Date();
     }
 
     public enum Gender
