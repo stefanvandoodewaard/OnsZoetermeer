@@ -12,6 +12,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Date;
 
 import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
@@ -21,30 +26,48 @@ import nl.zoetermeer.onszoetermeer.models.Request;
 public class RequestDetails extends AppCompatActivity
 {
     private DrawerLayout mDrawerLayout;
-    private int userId;
+    private int userId, requestTypeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_details);
-        Log.i("ACTIVITY: ", "RequestDetails created.");
 
         SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
         userId = pref.getInt("user_id", 0);
 
+        Bundle bundleDetails = getIntent().getExtras();
+        if (bundleDetails != null) {
+            TextView request_detail_type = findViewById(R.id.request_details_name);
+            requestTypeId = bundleDetails.getInt("request_type");
+            Log.i("ACTIVITY: ", "RequestDetails succesfully created, requestTypeId = " + requestTypeId);
+            if (requestTypeId == 0) {
+                request_detail_type.setText("Maaltijd");
+            }
+        }
+
         drawToolbar();
+    }
+
+    public void onClick(View view) {
+        EditText request_input = findViewById(R.id.request_input);
+        String input = request_input.getText().toString();
+        if (!input.isEmpty()) {
+            Request request = new Request(userId, input, new Date(), Request.RequestType.Maaltijd);
+            new insertRequestAsync().execute(request);
+            return;
+        }
+        finish();
     }
 
     private class insertRequestAsync extends AsyncTask<Request, Void, Void>
     {
         private DummyDatabase dummyDB;
         private RequestDAO requestDAO;
-        private int userId;
 
-        insertRequestAsync(int userId) {
+        insertRequestAsync() {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             requestDAO = dummyDB.requestDAO();
-            this.userId = userId;
         }
 
         @Override
@@ -62,8 +85,7 @@ public class RequestDetails extends AppCompatActivity
         }
     }
 
-    private void drawToolbar()
-    {
+    private void drawToolbar() {
         mDrawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,8 +100,7 @@ public class RequestDetails extends AppCompatActivity
 
                 {
                     @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-                    {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
@@ -94,10 +115,8 @@ public class RequestDetails extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;

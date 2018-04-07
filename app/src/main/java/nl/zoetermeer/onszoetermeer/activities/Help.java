@@ -64,25 +64,25 @@ public class Help extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+//    //Types
+//    Maaltijd(0),
+//    Boodschappen(1),
+//    Klusjes(2),
+//    Vervoer(3);
+
     public void sendMessage(View view) {
         Bundle bundle = new Bundle();
-        Intent challengesIntent = new Intent(this, Challenges.class);
+        Intent requestDetailsIntent = new Intent(this, RequestDetails.class);
         switch (view.getId()) {
-            case R.id.vitaliteit_mentaal_button: {
-                Log.i("BUTTON:", "Vitaliteit > Mentaal.");
+            case R.id.help_meal_button: {
+                Log.i("BUTTON:", "Help > Meal.");
 
-                bundle.putInt("type", 1);
-                challengesIntent.putExtras(bundle);
-                startActivity(challengesIntent);
+                bundle.putInt("request_type", 0);
+                requestDetailsIntent.putExtras(bundle);
+                startActivity(requestDetailsIntent);
             }
             break;
-            case R.id.vitaliteit_fysiek_button: {
-                Log.i("BUTTON:", "Vitaliteit > Fysiek.");
 
-                bundle.putInt("type", 2);
-                challengesIntent.putExtras(bundle);
-                startActivity(challengesIntent);
-            }
         }
     }
 }

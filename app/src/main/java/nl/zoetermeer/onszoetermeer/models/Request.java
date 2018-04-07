@@ -7,6 +7,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
+import java.util.Date;
+
 import nl.zoetermeer.onszoetermeer.helpers.RequestTypeConverter;
 
 @Entity(tableName = "REQUESTS", foreignKeys = {
@@ -24,20 +26,20 @@ public class Request
     private int ID;
     @ColumnInfo(name = "USER_ID")
     @NonNull
-    private int mUserId;
+    private int userId;
     @ColumnInfo(name = "DETAILS")
-    private String mDetails;
+    private String details;
     @ColumnInfo(name = "REQUEST_DATE")
-    private String mRequestDate;
+    private Date requestDate;
 
     @TypeConverters(RequestTypeConverter.class)
     public RequestType requestType;
 
-    public Request(int ID, int mUserId, String mDetails, String mRequestDate) {
-        this.ID = ID;
-        this.mUserId = mUserId;
-        this.mDetails = mDetails;
-        this.mRequestDate = mRequestDate;
+    public Request(int userId, String details, Date requestDate, RequestType requestType) {
+        this.userId = userId;
+        this.details = details;
+        this.requestDate = requestDate;
+        this.requestType = requestType;
 
     }
 
@@ -67,28 +69,28 @@ public class Request
         this.ID = ID;
     }
 
-
-    public int getmUserId() {
-        return mUserId;
+    @NonNull
+    public int getUserId() {
+        return userId;
     }
 
-    public void setmUserId(int mUserId) {
-        this.mUserId = mUserId;
+    public void setUserId(@NonNull int userId) {
+        this.userId = userId;
     }
 
-    public String getmDetails() {
-        return mDetails;
+    public String getDetails() {
+        return details;
     }
 
-    public void setmDetails(String mDetails) {
-        this.mDetails = mDetails;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
-    public String getmRequestDate() {
-        return mRequestDate;
+    public Date getRequestDate() {
+        return requestDate;
     }
 
-    public void setmRequestDate(String mRequestDate) {
-        this.mRequestDate = mRequestDate;
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
     }
 }

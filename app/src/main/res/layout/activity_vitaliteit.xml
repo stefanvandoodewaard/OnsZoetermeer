@@ -33,7 +33,7 @@
             android:textAlignment="center"
             android:text="@string/vitality_header"
             android:textColor="@color/colorWhite"
-            android:textSize="35sp"
+            android:textSize="40sp"
             android:letterSpacing="0.1"/>
 
     </FrameLayout>
