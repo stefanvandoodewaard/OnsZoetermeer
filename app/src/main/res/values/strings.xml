@@ -43,6 +43,8 @@
     <string name="switch_details">Vink de uitdaging af als u de uitdaging (of een soortgelijke uitdaging in bijvoorbeeld de krant of een website) heeft voltooid .</string>
     <string name="challenge_details_back_button">Terug naar uitdagingen</string>
     <string name="switch_text">De uitdaging is voltooid.  </string>
+    <string name="vitality_header">Vitaliteit</string>
+    <string name="help_header">Hulp</string>
 
 
 </resources>

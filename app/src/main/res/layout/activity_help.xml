@@ -26,7 +26,15 @@
             android:layout_height="225dp"
             android:background="@color/colorPrimary">
 
-
+            <TextView
+                android:id="@+id/challenge_details_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/help_header"
+                android:textColor="@color/colorWhite"
+                android:textSize="35sp"
+                android:letterSpacing="0.1" />
 
         </FrameLayout>
 
@@ -34,7 +42,7 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-170dp"
+            android:layout_marginTop="-160dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_gravity="center_horizontal"

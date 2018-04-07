@@ -225,8 +225,9 @@ public class Home extends AppCompatActivity
             }
             case R.id.hulp_button:
             {
-//                Intent messageContact = new Intent(this, Hulp.class);
-//                startActivity(messageContact);
+                Log.i("BUTTON:", "Home > Help.");
+                Intent messageHelp = new Intent(this, Help.class);
+                startActivity(messageHelp);
             }
             break;
             case R.id.achievement_button:

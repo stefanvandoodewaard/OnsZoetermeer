@@ -26,7 +26,15 @@
         android:layout_height="225dp"
         android:background="@color/colorPrimary">
 
-
+        <TextView
+            android:id="@+id/challenge_details_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/vitality_header"
+            android:textColor="@color/colorWhite"
+            android:textSize="35sp"
+            android:letterSpacing="0.1"/>
 
     </FrameLayout>
 
