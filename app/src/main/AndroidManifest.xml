@@ -63,7 +63,8 @@
             android:label="@string/title_activity_chat" />
         <activity
             android:name=".activities.Challenges"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
         <activity
             android:name=".activities.PasswordRecovery"
             android:launchMode="singleInstance"

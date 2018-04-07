@@ -16,16 +16,18 @@ import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.ChallengeDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserChallengesDAO;
+import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.AchievementTrigger;
 import nl.zoetermeer.onszoetermeer.models.Challenge;
+import nl.zoetermeer.onszoetermeer.models.User;
 import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 
 public class ChallengeDetails extends Base
 {
-    private DrawerLayout mDrawerLayout;
-    private int challengeId, userId;
+    private int challengeId, userId, challengeType;
     private TextView challengeName, challengeDetails;
     private boolean challengeCompleted;
+    private Bundle bundleDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +35,15 @@ public class ChallengeDetails extends Base
         setContentView(R.layout.activity_challenge_details);
         Log.i("ACTIVITY: ", "ChallengeDetails created.");
 
-        Bundle bundleDetails = getIntent().getExtras();
+        bundleDetails = getIntent().getExtras();
         if(bundleDetails != null) {
             challengeId = bundleDetails.getInt("challenge_id");
+            challengeType = bundleDetails.getInt("challenge_type");
             Log.i("ACTIVITY: ", "ChallengeDetails succesfully created, challengeId = " + challengeId);
         } else {
             Log.e("Challengedetails", "Oncreate() no challenge ID passed");
             finish();
         }
-
 
         SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
         userId = pref.getInt("user_id", 0);
@@ -68,6 +70,13 @@ public class ChallengeDetails extends Base
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bundleDetails.clear();
+
+    }
+
     public void onClick(View view) {
         if (challengeCompleted) {
             UserChallenges userChallenge = new UserChallenges(userId, challengeId, new Date());
@@ -81,11 +90,13 @@ public class ChallengeDetails extends Base
     {
         private DummyDatabase dummyDB;
         private UserChallengesDAO userChallengesDAO;
+        private UserDAO userDAO;
         private int userId;
 
         insertUserChallengeAsync(int userId) {
             dummyDB = DummyDatabase.getDatabase(getApplication());
             userChallengesDAO = dummyDB.userChallengesDAO();
+            userDAO = dummyDB.userDAO();
             this.userId = userId;
         }
 
@@ -93,8 +104,24 @@ public class ChallengeDetails extends Base
         protected Void doInBackground(final UserChallenges... params) {
             userChallengesDAO.insert(params[0]);
 
-            //Pass all completed challenges to achievement trigger class.
-//            List<Challenge> challenges = userChallengesDAO.getChallengesForUser(userId);
+            //update vitality percentages
+            int percentage;
+            User user = userDAO.getByID(userId);
+            if (challengeType == 1) {
+                percentage = user.getM_vit_ment();
+                percentage = percentage + 10;
+                user.setM_vit_ment(percentage);
+            } else if (challengeType == 2) {
+                percentage = user.getM_vit_phys();
+                percentage = percentage + 10;
+                user.setM_vit_phys(percentage);
+            }
+            userDAO.update(user);
+
+            user = userDAO.getByID(userId);
+
+
+            //Check if user has passed achievements
             new AchievementTrigger(getApplication(), userId).execute();
 
             return null;

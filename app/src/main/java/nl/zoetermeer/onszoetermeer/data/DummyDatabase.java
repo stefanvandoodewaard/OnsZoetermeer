@@ -31,7 +31,7 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
         Achievement.class,
         UserAchievements.class,
         Request.class},
-        version = 6)
+        version = 7)
 @TypeConverters({
         DateConverter.class,
         GenderTypeConverter.class,
