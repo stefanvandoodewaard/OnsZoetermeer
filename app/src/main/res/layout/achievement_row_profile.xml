@@ -9,16 +9,15 @@
 
     <Button
         android:id="@+id/badge_button_1"
-        android:layout_width="100dp"
-        android:layout_weight=".33"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/badge_gold_small"
         android:backgroundTint="@color/colorWhite"
+        android:drawableTop="@drawable/badge_gold_small"
         android:text="text"
-        android:textSize="15sp"
-        android:textColor="@color/ColorText"
         android:textAllCaps="false"
-        style="?android:attr/borderlessButtonStyle"/>
+        android:textColor="@color/ColorText"
+        android:textSize="14sp" />
 
 
 </LinearLayout>
