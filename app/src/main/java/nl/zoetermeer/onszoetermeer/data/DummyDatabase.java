@@ -106,11 +106,11 @@ public abstract class DummyDatabase extends RoomDatabase
             kenny.gender = User.Gender.Man;
             userDAO.insert(kenny);
             User jolanda = new User();
-            jolanda.setM_email("j.koetsier@onszoetemeer.nl");
+            jolanda.setM_email("j.koetsier@onszoetermeer.nl");
             jolanda.setM_password("koetsier");
             jolanda.setM_first_name("Jolanda");
             jolanda.setM_last_name("Koetsier");
-            jolanda.gender = User.Gender.Man;
+            jolanda.gender = User.Gender.Vrouw;
             userDAO.insert(jolanda);
 
                 challengeDAO.deleteAll();
