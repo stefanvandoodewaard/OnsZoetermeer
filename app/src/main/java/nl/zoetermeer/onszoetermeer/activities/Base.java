@@ -23,6 +23,7 @@ import nl.zoetermeer.onszoetermeer.R;
 public class Base extends AppCompatActivity
 {
     private DrawerLayout fullView;
+    private int userId;
     private String firstName, lastName, fullName, eMail;
     private TextView hamburgerName, hamburgerEmail;
 
@@ -32,6 +33,7 @@ public class Base extends AppCompatActivity
         super.onCreate(savedInstanceState);
         SharedPreferences mUserPreferences = getSharedPreferences("user_details",
                 MODE_PRIVATE);
+        userId = mUserPreferences.getInt("user_id", 0);
         firstName = mUserPreferences.getString("first_name", null);
         lastName = mUserPreferences.getString("last_name", null);
         fullName = firstName + " " + lastName;
@@ -177,5 +179,15 @@ public class Base extends AppCompatActivity
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        Intent messageContact = new Intent(
+                Base.this, Profile.class);
+        bundle.putInt("user_id", userId);
+        messageContact.putExtras(bundle);
+        startActivity(messageContact);
+
     }
 }
