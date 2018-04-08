@@ -102,6 +102,12 @@ public abstract class DummyDatabase extends RoomDatabase
             kenny.setM_last_name("Dillewaard");
             kenny.gender = User.Gender.Man;
             userDAO.insert(kenny);
+            kenny.setM_email("j.koetsier@onszoetemeer.nl");
+            kenny.setM_password("koetsier");
+            kenny.setM_first_name("Jolanda");
+            kenny.setM_last_name("Koetsier");
+            kenny.gender = User.Gender.Man;
+            userDAO.insert(kenny);
 
             challengeDAO.deleteAll();
             List<Challenge> challenges = new ArrayList<Challenge>();

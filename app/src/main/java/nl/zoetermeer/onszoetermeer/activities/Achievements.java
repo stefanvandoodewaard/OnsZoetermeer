@@ -28,8 +28,6 @@ public class Achievements extends Base
         SharedPreferences pref = getSharedPreferences("user_details", MODE_PRIVATE);
         int userId = pref.getInt("user_id", 0);
 
-        useToolbar();
-
         new selectAchievementsAsync(userId).execute();
     }
 
