@@ -13,7 +13,7 @@
         android:id="@+id/image_user_profile"
         android:layout_width="134dp"
         android:layout_height="124dp"
-        android:background="@drawable/ic_contact_jolanda"
+        android:background="@drawable/ic_profile_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:contentDescription="@string/gebruikersProfiel" />
