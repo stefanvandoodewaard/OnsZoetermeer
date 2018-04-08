@@ -90,21 +90,28 @@ public abstract class DummyDatabase extends RoomDatabase
             User checkUser = userDAO.getByEmail("k.dillewaard@hotmail.com");
 
             if (checkUser == null) {
-                userDAO.deleteAll();
-                User stefan = new User();
-                stefan.setM_email("doodewaard@hotmail.com");
-                stefan.setM_password("wachtwoord");
-                stefan.setM_first_name("Stefan");
-                stefan.setM_last_name("van Doodewaard");
-                stefan.gender = User.Gender.Man;
-                userDAO.insert(stefan);
-                User kenny = new User();
-                kenny.setM_email("k.dillewaard@hotmail.com");
-                kenny.setM_password("wachtwoord");
-                kenny.setM_first_name("Kenny");
-                kenny.setM_last_name("Dillewaard");
-                kenny.gender = User.Gender.Man;
-                userDAO.insert(kenny);
+            userDAO.deleteAll();
+            User stefan = new User();
+            stefan.setM_email("doodewaard@hotmail.com");
+            stefan.setM_password("wachtwoord");
+            stefan.setM_first_name("Stefan");
+            stefan.setM_last_name("van Doodewaard");
+            stefan.gender = User.Gender.Man;
+            userDAO.insert(stefan);
+            User kenny = new User();
+            kenny.setM_email("k.dillewaard@hotmail.com");
+            kenny.setM_password("wachtwoord");
+            kenny.setM_first_name("Kenny");
+            kenny.setM_last_name("Dillewaard");
+            kenny.gender = User.Gender.Man;
+            userDAO.insert(kenny);
+            User jolanda = new User();
+            jolanda.setM_email("j.koetsier@onszoetemeer.nl");
+            jolanda.setM_password("koetsier");
+            jolanda.setM_first_name("Jolanda");
+            jolanda.setM_last_name("Koetsier");
+            jolanda.gender = User.Gender.Man;
+            userDAO.insert(jolanda);
 
                 challengeDAO.deleteAll();
                 List<Challenge> challenges = new ArrayList<Challenge>();
