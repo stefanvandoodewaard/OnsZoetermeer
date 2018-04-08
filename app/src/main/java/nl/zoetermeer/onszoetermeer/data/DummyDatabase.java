@@ -31,7 +31,7 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
         Achievement.class,
         UserAchievements.class,
         Request.class},
-        version = 6)
+        version = 1)
 @TypeConverters({
         DateConverter.class,
         GenderTypeConverter.class,
@@ -87,6 +87,9 @@ public abstract class DummyDatabase extends RoomDatabase
         @Override
         protected Void doInBackground(final Void... params) {
 
+            User checkUser = userDAO.getByEmail("k.dillewaard@hotmail.com");
+
+            if (checkUser == null) {
             userDAO.deleteAll();
             User stefan = new User();
             stefan.setM_email("doodewaard@hotmail.com");
@@ -102,78 +105,79 @@ public abstract class DummyDatabase extends RoomDatabase
             kenny.setM_last_name("Dillewaard");
             kenny.gender = User.Gender.Man;
             userDAO.insert(kenny);
-            kenny.setM_email("j.koetsier@onszoetemeer.nl");
-            kenny.setM_password("koetsier");
-            kenny.setM_first_name("Jolanda");
-            kenny.setM_last_name("Koetsier");
-            kenny.gender = User.Gender.Man;
-            userDAO.insert(kenny);
+            User jolanda = new User();
+            jolanda.setM_email("j.koetsier@onszoetemeer.nl");
+            jolanda.setM_password("koetsier");
+            jolanda.setM_first_name("Jolanda");
+            jolanda.setM_last_name("Koetsier");
+            jolanda.gender = User.Gender.Man;
+            userDAO.insert(jolanda);
 
-            challengeDAO.deleteAll();
-            List<Challenge> challenges = new ArrayList<Challenge>();
-            String turbo_lopen_details = "Maak gedurende 3x10 tellen snelle pasjes op de plaats" +
-                    "zodat je uit je hoofd gaat. Je gronding versterkt en de energie lekker door" +
-                    " je lichaam stroomt. Dribbel op je tenen. Voer zo mogelijk de intensiteit op" +
-                    "door je voeten van de grond te halen en je knieen hoger op te trekken. Als " +
-                    "je klaar bent, laat je je bovenlichaam en hoofd even ontspannen tussen je " +
-                    "benen hangen. Kom dan weer langzaam rechtop en rek je uit.";
-            String kloppen_details = "Ga stevig staan. Beklop je hele lichaam liefdevol van top " +
-                    "tot teen met je vingers, vuisten en met je hele hand. Begin bij je hoofd, je" +
-                    "schouders, armen en handen. Verplaats je aandacht dan naar je borst en buik." +
-                    "Ga dan verder met je billen en rug. Eindig met je benen en voeten. Je lichaam" +
-                    "gaat tintelen en de warmtestroom komt op gang.";
-            String boksen_details = "Maak boksbewegingen afwisselend met je armen en benen. " +
-                    "Varieer met rechts en links. Adem uit als je een boksbeweging maakt. Het is" +
-                    "nog effectiever als je er een geluid bij maakt of het woord 'weg' roept. " +
-                    "Deze exercitie is ook goed om boosheid en stress los te laten.";
-            String aanspannen_loslaten_details = "Deze oefening kun je liggend, zittend of staand" +
-                    "doen. Span in 1 keer al je spieren in je lichaam aan inclusief je " +
-                    "gezichtsspieren. Houd deze spanning tien tellen vast en adem door. Laat " +
-                    "daarna de aanspanning in 1 keer los zodat al je spieren ontspannen. Herhaal" +
-                    "deze oefening een paar keer.";
-            String houthakken_details = "Ga stevig op de grond staan met je voeten ongeveer een" +
-                    "halve meter uit elkaar. Strek beide armen met je handen in elkaar boven je " +
-                    "hoofd. Buig iets achterover en laat je bovenlichaam vervolgens snel. Soepel," +
-                    "met zoveel mogelijk kracht en een 'Ah'-kreet vallen met je armen tussen je " +
-                    "benen door. Herhaal deze oefening 10x. Het is een goede oefening om irritatie" +
-                    "boosheid, frustratie en stress los te laten.";
+                challengeDAO.deleteAll();
+                List<Challenge> challenges = new ArrayList<Challenge>();
+                String turbo_lopen_details = "Maak gedurende 3x10 tellen snelle pasjes op de plaats" +
+                        "zodat je uit je hoofd gaat. Je gronding versterkt en de energie lekker door" +
+                        " je lichaam stroomt. Dribbel op je tenen. Voer zo mogelijk de intensiteit op" +
+                        "door je voeten van de grond te halen en je knieen hoger op te trekken. Als " +
+                        "je klaar bent, laat je je bovenlichaam en hoofd even ontspannen tussen je " +
+                        "benen hangen. Kom dan weer langzaam rechtop en rek je uit.";
+                String kloppen_details = "Ga stevig staan. Beklop je hele lichaam liefdevol van top " +
+                        "tot teen met je vingers, vuisten en met je hele hand. Begin bij je hoofd, je" +
+                        "schouders, armen en handen. Verplaats je aandacht dan naar je borst en buik." +
+                        "Ga dan verder met je billen en rug. Eindig met je benen en voeten. Je lichaam" +
+                        "gaat tintelen en de warmtestroom komt op gang.";
+                String boksen_details = "Maak boksbewegingen afwisselend met je armen en benen. " +
+                        "Varieer met rechts en links. Adem uit als je een boksbeweging maakt. Het is" +
+                        "nog effectiever als je er een geluid bij maakt of het woord 'weg' roept. " +
+                        "Deze exercitie is ook goed om boosheid en stress los te laten.";
+                String aanspannen_loslaten_details = "Deze oefening kun je liggend, zittend of staand" +
+                        "doen. Span in 1 keer al je spieren in je lichaam aan inclusief je " +
+                        "gezichtsspieren. Houd deze spanning tien tellen vast en adem door. Laat " +
+                        "daarna de aanspanning in 1 keer los zodat al je spieren ontspannen. Herhaal" +
+                        "deze oefening een paar keer.";
+                String houthakken_details = "Ga stevig op de grond staan met je voeten ongeveer een" +
+                        "halve meter uit elkaar. Strek beide armen met je handen in elkaar boven je " +
+                        "hoofd. Buig iets achterover en laat je bovenlichaam vervolgens snel. Soepel," +
+                        "met zoveel mogelijk kracht en een 'Ah'-kreet vallen met je armen tussen je " +
+                        "benen door. Herhaal deze oefening 10x. Het is een goede oefening om irritatie" +
+                        "boosheid, frustratie en stress los te laten.";
 
-            challenges.add(new Challenge("Turbo lopen", turbo_lopen_details, Challenge.VitalityType.Fysiek));
-            challenges.add(new Challenge("Kloppen", kloppen_details, Challenge.VitalityType.Fysiek));
-            challenges.add(new Challenge("Boksen", boksen_details, Challenge.VitalityType.Fysiek));
-            challenges.add(new Challenge("Aanspannen & loslaten", aanspannen_loslaten_details, Challenge.VitalityType.Fysiek));
-            challenges.add(new Challenge("Houthakken", houthakken_details, Challenge.VitalityType.Fysiek));
-            challenges.add(new Challenge("Sudoku", null, Challenge.VitalityType.Mentaal));
-            challenges.add(new Challenge("Kruiswoordpuzzel", null, Challenge.VitalityType.Mentaal));
-            challenges.add(new Challenge("Zoek de verschillen", null, Challenge.VitalityType.Mentaal));
-            challenges.add(new Challenge("Memocoly", null, Challenge.VitalityType.Mentaal));
-            challenges.add(new Challenge("Tik de juiste volgorde", null, Challenge.VitalityType.Mentaal));
-            challengeDAO.insertAll(challenges);
+                challenges.add(new Challenge("Turbo lopen", turbo_lopen_details, Challenge.VitalityType.Fysiek));
+                challenges.add(new Challenge("Kloppen", kloppen_details, Challenge.VitalityType.Fysiek));
+                challenges.add(new Challenge("Boksen", boksen_details, Challenge.VitalityType.Fysiek));
+                challenges.add(new Challenge("Aanspannen & loslaten", aanspannen_loslaten_details, Challenge.VitalityType.Fysiek));
+                challenges.add(new Challenge("Houthakken", houthakken_details, Challenge.VitalityType.Fysiek));
+                challenges.add(new Challenge("Sudoku", null, Challenge.VitalityType.Mentaal));
+                challenges.add(new Challenge("Kruiswoordpuzzel", null, Challenge.VitalityType.Mentaal));
+                challenges.add(new Challenge("Zoek de verschillen", null, Challenge.VitalityType.Mentaal));
+                challenges.add(new Challenge("Memocoly", null, Challenge.VitalityType.Mentaal));
+                challenges.add(new Challenge("Tik de juiste volgorde", null, Challenge.VitalityType.Mentaal));
+                challengeDAO.insertAll(challenges);
 
-            achievementDAO.deleteAll();
-            List<Achievement> achievements = new ArrayList<Achievement>();
-            achievements.add(new Achievement(1,"50 Mentale Uitdagingen", Achievement.BadgeType.Goud));
-            achievements.add(new Achievement(2,"25 Mentale Uitdagingen", Achievement.BadgeType.Zilver));
-            achievements.add(new Achievement(3,"10 Mentale Uitdagingen", Achievement.BadgeType.Brons));
-            achievements.add(new Achievement(4,"50 Fysieke Uitdagingen", Achievement.BadgeType.Goud));
-            achievements.add(new Achievement(5,"25 Fysieke Uitdagingen", Achievement.BadgeType.Zilver));
-            achievements.add(new Achievement(6,"10 Fysieke Uitdagingen", Achievement.BadgeType.Brons));
-            achievementDAO.insertAll(achievements);
+                achievementDAO.deleteAll();
+                List<Achievement> achievements = new ArrayList<Achievement>();
+                achievements.add(new Achievement(1, "50 Mentale Uitdagingen", Achievement.BadgeType.Goud));
+                achievements.add(new Achievement(2, "25 Mentale Uitdagingen", Achievement.BadgeType.Zilver));
+                achievements.add(new Achievement(3, "10 Mentale Uitdagingen", Achievement.BadgeType.Brons));
+                achievements.add(new Achievement(4, "50 Fysieke Uitdagingen", Achievement.BadgeType.Goud));
+                achievements.add(new Achievement(5, "25 Fysieke Uitdagingen", Achievement.BadgeType.Zilver));
+                achievements.add(new Achievement(6, "10 Fysieke Uitdagingen", Achievement.BadgeType.Brons));
+                achievementDAO.insertAll(achievements);
 
-            User testKenny = userDAO.getByEmail("k.dillewaard@hotmail.com");
-            User testStefan = userDAO.getByEmail("doodewaard@hotmail.com");
-            int testIdKenny = testKenny.getId();
-            int testIdStefan = testStefan.getId();
+                User testKenny = userDAO.getByEmail("k.dillewaard@hotmail.com");
+                User testStefan = userDAO.getByEmail("doodewaard@hotmail.com");
+                int testIdKenny = testKenny.getId();
+                int testIdStefan = testStefan.getId();
 
-            challenges = challengeDAO.getAllChallenges();
-            List<UserChallenges> userChallenges = new ArrayList<UserChallenges>();
-            for(int i = 0; i < 10; i++) {
-                int challengeId = challenges.get(i).getId();
-                userChallenges.add(new UserChallenges(testIdKenny, challengeId, new Date()));
-                userChallenges.add(new UserChallenges(testIdStefan, challengeId, new Date()));
+                challenges = challengeDAO.getAllChallenges();
+                List<UserChallenges> userChallenges = new ArrayList<UserChallenges>();
+                for (int i = 0; i < 10; i++) {
+                    int challengeId = challenges.get(i).getId();
+                    userChallenges.add(new UserChallenges(testIdKenny, challengeId, new Date()));
+                    userChallenges.add(new UserChallenges(testIdStefan, challengeId, new Date()));
+                }
+                userChallengesDAO.insertAll(userChallenges);
             }
-            userChallengesDAO.insertAll(userChallenges);
-
             return null;
         }
 

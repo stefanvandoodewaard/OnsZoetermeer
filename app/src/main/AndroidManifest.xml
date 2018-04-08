@@ -31,7 +31,8 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".activities.Registration"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
         <activity
             android:name=".activities.Contact"
             android:label="@string/contact_title_bar"
@@ -55,18 +56,31 @@
         <activity
             android:name=".activities.Chat"
             android:label="@string/title_activity_chat" />
-        <activity android:name=".activities.Challenges" />
-        <activity android:name=".activities.PasswordRecovery" />
-        <activity android:name=".activities.Achievements" />
+        <activity
+            android:name=".activities.Challenges"
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
+        <activity
+            android:name=".activities.PasswordRecovery"
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
+        <activity
+            android:name=".activities.Achievements"
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
         <activity
             android:name=".activities.ChallengeDetails"
+            android:launchMode="singleInstance"
             android:noHistory="true" />
-        <activity android:name=".activities.Help" />
+        <activity
+            android:name=".activities.Help"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".activities.RequestDetails"
+            android:launchMode="singleInstance"
             android:noHistory="true" />
-        <activity android:name=".activities.Base">
-        </activity>
+        <activity
+            android:name=".activities.Base"/>
         <activity
             android:name=".activities.Profile"
             android:label="@string/title_activity_profile"

@@ -15,6 +15,7 @@ import nl.zoetermeer.onszoetermeer.R;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.helpers.InputValidator;
+import nl.zoetermeer.onszoetermeer.helpers.VitalityTimeTrigger;
 import nl.zoetermeer.onszoetermeer.models.User;
 
 public class Login extends AppCompatActivity
@@ -33,7 +34,6 @@ public class Login extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Log.i("ACTIVITY:", "Login created.");
-
 
         inputValidator = new InputValidator();
 
@@ -154,6 +154,9 @@ public class Login extends AppCompatActivity
                 {
                     if (user.getM_password().equals(mPassword))
                     {
+                        //Calculate and adjust vitality percentages based on away time .
+                        new VitalityTimeTrigger(getApplication(), user.getId()).execute();
+
                         return true;
                     }
                 }
@@ -180,6 +183,7 @@ public class Login extends AppCompatActivity
             {
                 finish();
 
+                //write user details to session
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putInt("user_id", user.getId());
                 editor.putString("first_name", user.getM_first_name());

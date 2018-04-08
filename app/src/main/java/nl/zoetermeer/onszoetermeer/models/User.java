@@ -6,6 +6,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
+import java.util.Date;
+
 import nl.zoetermeer.onszoetermeer.helpers.GenderTypeConverter;
 
 @Entity(tableName = "USERS")
@@ -35,12 +37,14 @@ public class User
     private int m_vit_ment;
     @ColumnInfo(name = "VITALITY_PHYSICAL")
     private int m_vit_phys;
+    @ColumnInfo(name = "LAST_LOGIN")
+    private Date loginDate;
 
     public User() {
 
         //default values
-        m_vit_ment = 50;
-        m_vit_phys = 50;
+        m_vit_ment = 0;
+        m_vit_phys = 0;
     }
 
     public enum Gender
@@ -141,4 +145,11 @@ public class User
         this.m_vit_phys = m_vit_phys;
     }
 
+    public Date getLoginDate() {
+        return loginDate;
+    }
+
+    public void setLoginDate(Date loginDate) {
+        this.loginDate = loginDate;
+    }
 }

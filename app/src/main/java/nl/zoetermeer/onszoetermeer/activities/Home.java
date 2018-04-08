@@ -22,6 +22,7 @@ import nl.zoetermeer.onszoetermeer.models.User;
 public class Home extends Base
 {
 
+    private int userId;
     int pStatusMentaal = 0;
     int pStatusFysiek = 0;
     private double progressUserMental, progressUserPhysical;
@@ -37,12 +38,19 @@ public class Home extends Base
 
         SharedPreferences mUserPreferences = getSharedPreferences("user_details",
                 MODE_PRIVATE);
-        int userId = mUserPreferences.getInt("user_id", 0);
+        userId = mUserPreferences.getInt("user_id", 0);
 
         useToolbar();
 
         new selectUserVitalitysAsync(userId).execute();
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        new selectUserVitalitysAsync(userId).execute();
+    }
+
 
     private class selectUserVitalitysAsync extends AsyncTask<Void, Integer, User>
     {

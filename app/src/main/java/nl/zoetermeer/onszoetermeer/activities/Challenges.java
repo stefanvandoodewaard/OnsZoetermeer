@@ -55,6 +55,7 @@ public class Challenges extends Base
             @Override
             public void onClick(View view, int position) {
                 bundleDetails.putInt("challenge_id", challengesList.get(position).getId());
+                bundleDetails.putInt("challenge_type", type);
                 challengeDetailsIntent.putExtras(bundleDetails);
                 startActivity(challengeDetailsIntent);
             }
