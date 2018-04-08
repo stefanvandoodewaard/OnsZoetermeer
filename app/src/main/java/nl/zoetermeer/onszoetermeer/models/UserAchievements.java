@@ -3,12 +3,13 @@ package nl.zoetermeer.onszoetermeer.models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
 
 @Entity(tableName = "USER_ACHIEVEMENTS",
-        primaryKeys = { "USER_ID", "ACHIEVEMENT_ID" },
+        primaryKeys = { "ID", "USER_ID", "ACHIEVEMENT_ID" },
         foreignKeys = {
                 @ForeignKey(entity = User.class,
                         parentColumns = "ID",
@@ -19,6 +20,8 @@ import java.util.Date;
                         childColumns = "ACHIEVEMENT_ID")})
 public class UserAchievements
 {
+    @ColumnInfo(name = "ID")
+    private int id;
     @ColumnInfo(name = "USER_ID")
     @NonNull
     public int mUserId;
@@ -32,6 +35,14 @@ public class UserAchievements
         this.mUserId = mUserId;
         this.mAchievementId = mAchievementId;
         this.mAchievementDate = mAchievementDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @NonNull

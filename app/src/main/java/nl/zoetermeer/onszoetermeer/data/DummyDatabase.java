@@ -31,7 +31,7 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
         Achievement.class,
         UserAchievements.class,
         Request.class},
-        version = 1)
+        version = 4)
 @TypeConverters({
         DateConverter.class,
         GenderTypeConverter.class,
@@ -156,12 +156,12 @@ public abstract class DummyDatabase extends RoomDatabase
 
                 achievementDAO.deleteAll();
                 List<Achievement> achievements = new ArrayList<Achievement>();
-                achievements.add(new Achievement(1, "50 Mentale Uitdagingen", Achievement.BadgeType.Goud));
-                achievements.add(new Achievement(2, "25 Mentale Uitdagingen", Achievement.BadgeType.Zilver));
-                achievements.add(new Achievement(3, "10 Mentale Uitdagingen", Achievement.BadgeType.Brons));
-                achievements.add(new Achievement(4, "50 Fysieke Uitdagingen", Achievement.BadgeType.Goud));
-                achievements.add(new Achievement(5, "25 Fysieke Uitdagingen", Achievement.BadgeType.Zilver));
-                achievements.add(new Achievement(6, "10 Fysieke Uitdagingen", Achievement.BadgeType.Brons));
+                achievements.add(new Achievement(1, "20 Mentale Uitdagingen", Achievement.BadgeType.Goud));
+                achievements.add(new Achievement(2, "10 Mentale Uitdagingen", Achievement.BadgeType.Zilver));
+                achievements.add(new Achievement(3, "5 Mentale Uitdagingen", Achievement.BadgeType.Brons));
+                achievements.add(new Achievement(4, "20 Fysieke Uitdagingen", Achievement.BadgeType.Goud));
+                achievements.add(new Achievement(5, "10 Fysieke Uitdagingen", Achievement.BadgeType.Zilver));
+                achievements.add(new Achievement(6, "5 Fysieke Uitdagingen", Achievement.BadgeType.Brons));
                 achievementDAO.insertAll(achievements);
 
                 User testKenny = userDAO.getByEmail("k.dillewaard@hotmail.com");
@@ -177,6 +177,7 @@ public abstract class DummyDatabase extends RoomDatabase
                     userChallenges.add(new UserChallenges(testIdStefan, challengeId, new Date()));
                 }
                 userChallengesDAO.insertAll(userChallenges);
+                Log.i("DATABASE:", "Test data (re)created.");
             }
             return null;
         }
@@ -184,7 +185,7 @@ public abstract class DummyDatabase extends RoomDatabase
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Log.i("DATABASE:", "Test data (re)created.");
+
         }
     }
 

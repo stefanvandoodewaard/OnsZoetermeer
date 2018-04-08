@@ -42,25 +42,29 @@ import nl.zoetermeer.onszoetermeer.models.UserAchievements;
             int vitalityTotalCount = vitalityMentalCount + vitalityPhysicalCount;
             Log.i("UserChallenges:", "MENT = " + vitalityMentalCount + " PHYS = " + vitalityPhysicalCount + " TOTAL = " + vitalityTotalCount);
 
-//            achievement 1 - "50 Mentale Uitdagingen" - Goud
-//            achievement 2 - "25 Mentale Uitdagingen" - Zilver
-//            achievement 3 - "10 Mentale Uitdagingen" - Brons
-//            achievement 4 - "50 Fysieke Uitdagingen" - Goud
-//            achievement 5 - "25 Fysieke Uitdagingen" - Zilver
-//            achievement 6 - "10 Fysieke Uitdagingen" - Brons
+//            achievement 1 - "20 Mentale Uitdagingen" - Goud
+//            achievement 2 - "10 Mentale Uitdagingen" - Zilver
+//            achievement 3 - "5 Mentale Uitdagingen" - Brons
+//            achievement 4 - "20 Fysieke Uitdagingen" - Goud
+//            achievement 5 - "10 Fysieke Uitdagingen" - Zilver
+//            achievement 6 - "5 Fysieke Uitdagingen" - Brons
 
-            if (vitalityPhysicalCount == 10) {
+            if (vitalityPhysicalCount == 5) {
                 userAchievementsDAO.insert(new UserAchievements(userId, 6, new Date()));
-            } else if (vitalityPhysicalCount == 25) {
+            }
+            if (vitalityPhysicalCount == 10) {
                 userAchievementsDAO.insert(new UserAchievements(userId, 5, new Date()));
-            } else if (vitalityPhysicalCount == 50) {
+            }
+            if (vitalityPhysicalCount == 20) {
                 userAchievementsDAO.insert(new UserAchievements(userId, 4, new Date()));
             }
-            if (vitalityMentalCount == 10) {
+            if (vitalityMentalCount == 5) {
                 userAchievementsDAO.insert(new UserAchievements(userId, 3, new Date()));
-            } else if (vitalityMentalCount == 25) {
+            }
+            if (vitalityMentalCount == 10) {
                 userAchievementsDAO.insert(new UserAchievements(userId, 2, new Date()));
-            } else if (vitalityMentalCount == 50) {
+            }
+            if (vitalityMentalCount == 20) {
                 userAchievementsDAO.insert(new UserAchievements(userId, 1, new Date()));
             }
 

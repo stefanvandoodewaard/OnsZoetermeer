@@ -27,39 +27,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textColor="@color/ColorText"
+            android:textSize="17sp"
             android:text="Gebruikers Achievements"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/profile_recyclerview_achievements"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal">
-
-        </android.support.v7.widget.RecyclerView>
 
         <TextView
             android:id="@+id/achievements_empty_text_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-20dp"
+            android:layout_marginBottom="-20dp"
             android:layout_gravity="center"
-            android:text="Nog geen behaalde achievements"
+            android:text="Nog geen achievements"
             android:textColor="@color/ColorText"
             android:textSize="15sp"
             android:visibility="invisible"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/profile_recyclerview_achievements"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_gravity="center_horizontal">
+
+        </android.support.v7.widget.RecyclerView>
+
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textColor="@color/ColorText"
+            android:textSize="17sp"
             android:text="Gebruikers Hulpverzoeken"/>
+
+        <TextView
+            android:id="@+id/requests_empty_text_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-20dp"
+            android:layout_gravity="center"
+            android:text="Nog geen hulpverzoeken"
+            android:textColor="@color/ColorText"
+            android:textSize="15sp"
+            android:visibility="invisible"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/profile_recyclerview_requests"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal">
-
         </android.support.v7.widget.RecyclerView>
 
         <Button
@@ -92,8 +108,6 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_column="0"
-            android:layout_row="0"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_home_mentaal"
@@ -104,9 +118,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_column="0"
             android:layout_marginTop="-15dp"
-            android:layout_row="1"
             android:indeterminate="false"
             android:max="100"
             android:progressDrawable="@drawable/profile_progressbarstyle"
@@ -116,10 +128,8 @@
             android:id="@+id/percentageMentaalProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="0"
             android:layout_gravity="center"
             android:layout_marginTop="-44dp"
-            android:layout_row="1"
             android:gravity="center"
             android:text="@string/percentageMentaal"
             android:textColor="@color/colorBlack"
@@ -183,6 +193,6 @@
         android:textAlignment="center"
         android:layout_marginTop="155dp"
         android:textColor="@color/colorWhite"
-        android:textSize="25sp"
+        android:textSize="26sp"
         android:text="Gebruikersnaam"/>
 </RelativeLayout>

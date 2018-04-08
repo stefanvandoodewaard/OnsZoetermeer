@@ -10,5 +10,6 @@
     <color name="ColorButtonTint">#F9FBFD</color>
     <color name="ColorButtonTintPressed">#C3D7EB</color>
     <color name="ColorText">#535353</color>
+    <color name="colorRed">#bc0000</color>
 </resources>
 

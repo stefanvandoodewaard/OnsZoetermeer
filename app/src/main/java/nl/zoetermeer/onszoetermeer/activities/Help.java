@@ -52,6 +52,12 @@ public class Help extends Base
                 startActivity(requestDetailsIntent);
             }
             break;
+            case R.id.help_social_services: {
+                Log.i("BUTTON:", "Help > Social services information.");
+                Intent socialServicesIntent = new Intent(this, HelpInformation.class);
+                startActivity(socialServicesIntent);
+            }
+            break;
         }
     }
 }
