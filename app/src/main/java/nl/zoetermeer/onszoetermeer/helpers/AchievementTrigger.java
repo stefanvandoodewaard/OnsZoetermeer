@@ -1,14 +1,11 @@
 package nl.zoetermeer.onszoetermeer.helpers;
 
-
 import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.util.Date;
 import java.util.List;
 
-import nl.zoetermeer.onszoetermeer.data.AchievementDAO;
 import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserAchievementsDAO;
 import nl.zoetermeer.onszoetermeer.data.UserChallengesDAO;

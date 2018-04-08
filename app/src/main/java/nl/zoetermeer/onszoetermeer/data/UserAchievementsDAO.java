@@ -16,11 +16,6 @@ import nl.zoetermeer.onszoetermeer.models.UserAchievements;
 public interface UserAchievementsDAO
 {
 
-    @Query("SELECT * FROM USERS INNER JOIN USER_ACHIEVEMENTS " +
-            "ON USERS.id = USER_ACHIEVEMENTS.USER_ID " +
-            "WHERE USER_ACHIEVEMENTS.ACHIEVEMENT_ID = :achievID")
-    List<User> getUsersWithAchievement(final int achievID);
-
     @Query("SELECT * FROM ACHIEVEMENTS INNER JOIN USER_ACHIEVEMENTS " +
             "ON ACHIEVEMENTS.id = USER_ACHIEVEMENTS.ACHIEVEMENT_ID " +
             "WHERE USER_ACHIEVEMENTS.USER_ID = :userId " +

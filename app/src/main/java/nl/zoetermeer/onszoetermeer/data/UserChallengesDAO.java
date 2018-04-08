@@ -16,16 +16,6 @@ import nl.zoetermeer.onszoetermeer.models.UserChallenges;
 @Dao
 public interface UserChallengesDAO
 {
-    @Query("SELECT * FROM USERS INNER JOIN USER_CHALLENGES " +
-            "ON USERS.id = USER_CHALLENGES.USER_ID " +
-            "WHERE USER_CHALLENGES.CHALLENGE_ID = :challengeId")
-    List<User> getUsersWithChallenge(final int challengeId);
-
-    @Query("SELECT * FROM CHALLENGES INNER JOIN USER_CHALLENGES " +
-            "ON CHALLENGES.id = USER_CHALLENGES.CHALLENGE_ID " +
-            "WHERE USER_CHALLENGES.USER_ID = :userId")
-    List<Challenge> getChallengesForUser(final int userId);
-
     @Query("SELECT * FROM CHALLENGES INNER JOIN USER_CHALLENGES " +
             "ON CHALLENGES.id = USER_CHALLENGES.CHALLENGE_ID " +
             "WHERE USER_CHALLENGES.USER_ID = :userId AND CHALLENGES.VITALITY_TYPE = 1")

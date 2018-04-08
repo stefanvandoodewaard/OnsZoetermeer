@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -48,9 +47,7 @@ public class Profile extends Base
         Bundle bundleDetails = getIntent().getExtras();
         userId = bundleDetails.getInt("user_id", 0);
 
-
         profileName = findViewById(R.id.profile_user_name);
-
 
         new selectUserInfoAsync(userId).execute();
         new selectAchievementsAsync(userId).execute();

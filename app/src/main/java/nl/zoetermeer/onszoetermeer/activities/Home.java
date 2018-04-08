@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.text.MessageFormat;
 
 import nl.zoetermeer.onszoetermeer.R;
