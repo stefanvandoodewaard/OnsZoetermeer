@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import nl.zoetermeer.onszoetermeer.R;
@@ -23,8 +24,10 @@ import nl.zoetermeer.onszoetermeer.R;
 public class Base extends AppCompatActivity
 {
     private DrawerLayout fullView;
+    private int userId;
     private String firstName, lastName, fullName, eMail;
     private TextView hamburgerName, hamburgerEmail;
+    private ImageButton hamburgerImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,11 +35,11 @@ public class Base extends AppCompatActivity
         super.onCreate(savedInstanceState);
         SharedPreferences mUserPreferences = getSharedPreferences("user_details",
                 MODE_PRIVATE);
+        userId = mUserPreferences.getInt("user_id", 0);
         firstName = mUserPreferences.getString("first_name", null);
         lastName = mUserPreferences.getString("last_name", null);
         fullName = firstName + " " + lastName;
         eMail = mUserPreferences.getString("email", null);
-
     }
 
     @Override
@@ -64,8 +67,24 @@ public class Base extends AppCompatActivity
             View headerView = navigationView.getHeaderView(0);
             hamburgerName = headerView.findViewById(R.id.hamburger_name);
             hamburgerEmail = headerView.findViewById(R.id.hamburger_email);
+            hamburgerImage = headerView.findViewById(R.id.image_user_profile);
             hamburgerName.setText(fullName);
             hamburgerEmail.setText(eMail);
+
+            //Setting up on click event function on image button.
+            hamburgerImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                Intent messageContact = new Intent(
+                        Base.this, Profile.class);
+                bundle.putInt("user_id", userId);
+                messageContact.putExtras(bundle);
+                startActivity(messageContact);
+
+            }
+        });
 
             navigationView.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener()
@@ -178,4 +197,5 @@ public class Base extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

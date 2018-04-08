@@ -87,12 +87,12 @@ public class Home extends Base
     private void drawMentalProgress()
     {
         Drawable drawableMental = ResourcesCompat.getDrawable(getResources(), R.drawable.progressbarstyle, null);
-        final ProgressBar mProgressMentaal = findViewById(R.id.circularProgressbarMental);
+        final ProgressBar mProgressMentaal = findViewById(R.id.circularProgressbarMentalProfile);
         mProgressMentaal.setProgress(100);
         mProgressMentaal.setSecondaryProgress(100);
         mProgressMentaal.setMax(100);
         mProgressMentaal.setProgressDrawable(drawableMental);
-        percentageMentaal = findViewById(R.id.percentageMentaal);
+        percentageMentaal = findViewById(R.id.percentageMentaalProfile);
 
         new Thread(new Runnable()
         {
@@ -129,12 +129,12 @@ public class Home extends Base
     private void drawPhysicalProgress()
     {
         Drawable drawablePhysical = ResourcesCompat.getDrawable(getResources(), R.drawable.progressbarstyle, null);
-        final ProgressBar progressFysiek = findViewById(R.id.circularProgressbarPhysical);
+        final ProgressBar progressFysiek = findViewById(R.id.circularProgressbarPhysicalProfile);
         progressFysiek.setProgress(100);
         progressFysiek.setSecondaryProgress(100);
         progressFysiek.setMax(100);
         progressFysiek.setProgressDrawable(drawablePhysical);
-        percentageFysiek = findViewById(R.id.percentageFysiek);
+        percentageFysiek = findViewById(R.id.percentageFysiekProfile);
 
         new Thread(new Runnable()
         {
