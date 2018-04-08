@@ -16,7 +16,6 @@
         android:background="@drawable/ic_profile_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick=""
         android:contentDescription="@string/gebruikersProfiel" />
 
     <TextView
