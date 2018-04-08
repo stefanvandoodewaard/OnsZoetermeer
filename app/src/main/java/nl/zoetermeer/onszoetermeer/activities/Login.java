@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import nl.zoetermeer.onszoetermeer.R;
@@ -158,11 +160,25 @@ public class Login extends AppCompatActivity
                     if (user.getM_password().equals(mPassword))
                     {
                         //Calculate and adjust vitality percentages based on away time .
-                        new VitalityTimeTrigger(getApplication(), user.getId(), user.getLoginDate()).execute();
+                        new VitalityTimeTrigger(getApplication(), user.getId()).execute();
 
-                        //set latest login date
-                        user.setLoginDate(new Date());
-                        userDAO.update(user);
+//                        //set latest login date
+//
+//                        // (1) get today's date
+//                        Date date = Calendar.getInstance().getTime();
+//
+//                        // (2) create a date "formatter" (the date format we want)
+////                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh.mm.ss");
+//                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-hh.mm");
+//
+//                        // (3) create a new String using the date format we want
+//                        String folderName = formatter.format(date);
+//
+//                        user.setLoginDate(date);
+//                        userDAO.update(user);
+//
+//                        //for debugging only
+//                        user = userDAO.getByEmail(mEmail);
 
                         return true;
                     }

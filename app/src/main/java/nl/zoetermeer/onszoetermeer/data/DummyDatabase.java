@@ -55,7 +55,7 @@ public abstract class DummyDatabase extends RoomDatabase
                             .fallbackToDestructiveMigration()
                             .build();
             Log.i("DATABASE:", "New instance created.");
-            new PopulateDbAsync(INSTANCE).execute();
+//            new PopulateDbAsync(INSTANCE).execute();
         }
         return INSTANCE;
     }
