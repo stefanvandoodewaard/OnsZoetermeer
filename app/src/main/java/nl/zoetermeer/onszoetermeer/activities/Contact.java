@@ -90,7 +90,7 @@ public class Contact extends Base
     {
         mMap = googleMap;
 
-        getLocation();
+        enableMyLocation();
 
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
@@ -127,14 +127,6 @@ public class Contact extends Base
         mMap.setMaxZoomPreference(18.0f);
     }
 
-    public void getLocation()
-    {
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        enableMyLocation();
-    }
-
     /**
      * Enables the My Location layer if the fine location permission has been granted.
      */
@@ -149,6 +141,10 @@ public class Contact extends Base
         }
         else if (mMap != null)
         {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria, false);
+
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(false);
             location = locationManager.getLastKnownLocation(provider);
@@ -241,7 +237,7 @@ public class Contact extends Base
         @Override
         protected List<User> doInBackground(Void... voids) {
             usersList = new ArrayList<>();
-            usersList.add(userDAO.getByEmail("j.koetsier@onszoetemeer.nl"));
+            usersList.add(userDAO.getByEmail("j.koetsier@onszoetermeer.nl"));
             return usersList;
         }
 
