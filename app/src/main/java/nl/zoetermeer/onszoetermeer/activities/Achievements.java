@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -38,6 +40,10 @@ public class Achievements extends Base
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         RecyclerView.Adapter adapter = new AchievementsAdapter(achievementsList, getApplicationContext());
         recyclerView.setAdapter(adapter);
+        if (achievementsList.size() == 0) {
+            TextView emptyAchievements = findViewById(R.id.achievements_empty_text);
+            emptyAchievements.setVisibility(View.VISIBLE);
+        }
     }
 
     private class selectAchievementsAsync extends AsyncTask<Void,Integer,List<Achievement>>
