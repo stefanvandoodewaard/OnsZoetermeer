@@ -51,6 +51,10 @@
     <string name="help_header">Hulp</string>
     <string name="image_button">image button</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="bel_1_4_0_7_9">BEL 1-4-0-7-9</string>
+    <string name="bel_1_1_2">BEL 1-1-2</string>
+    <string name="gemeente_zoetermeer">Gemeente Zoetermeer</string>
+    <string name="ambulance_politie_brandweer"><![CDATA[Ambulance, Politie & Brandweer]]></string>
 
 
 </resources>

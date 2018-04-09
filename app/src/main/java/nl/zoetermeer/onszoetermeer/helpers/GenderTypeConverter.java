@@ -1,6 +1,5 @@
 package nl.zoetermeer.onszoetermeer.helpers;
 
-
 import android.arch.persistence.room.TypeConverter;
 
 import nl.zoetermeer.onszoetermeer.models.User;

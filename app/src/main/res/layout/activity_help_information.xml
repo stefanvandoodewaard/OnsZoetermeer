@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/basic_frame"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/challenge_details_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:text="@string/help_header"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="40sp" />
+
+    </FrameLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:columnCount="1">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:textAlignment="center"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:text="@string/ambulance_politie_brandweer"/>
+
+        <Button
+            android:id="@+id/call_112"
+            android:layout_width="280dp"
+            android:layout_height="35dp"
+            android:layout_row="2"
+            android:layout_gravity="bottom|center"
+            android:onClick="sendMessage"
+            android:text="@string/bel_1_1_2"
+            android:textAllCaps="false"
+            android:background="@drawable/button_rounded"
+            android:textSize="20sp"
+            android:textColor="@color/colorRed"
+            android:layout_marginBottom="30dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:text="@string/gemeente_zoetermeer"/>
+
+        <Button
+            android:id="@+id/call_14079"
+            android:layout_width="280dp"
+            android:layout_height="35dp"
+            android:layout_row="4"
+            android:layout_gravity="bottom|center"
+            android:onClick="sendMessage"
+            android:text="@string/bel_1_4_0_7_9"
+            android:textAllCaps="false"
+            android:background="@drawable/button_rounded"
+            android:textSize="20sp"
+            android:textColor="@color/ColorText"
+            android:layout_marginBottom="60dp"/>
+
+        <Button
+            android:id="@+id/help_info_back"
+            android:layout_width="280dp"
+            android:layout_height="35dp"
+            android:layout_row="8"
+            android:layout_gravity="center"
+            android:onClick="sendMessage"
+            android:text="Terug"
+            android:textAllCaps="false"
+            android:background="@drawable/button_rounded"
+            android:letterSpacing="0.1"
+            android:textColor="@color/ColorText" />
+
+    </GridLayout>
+
+</LinearLayout>

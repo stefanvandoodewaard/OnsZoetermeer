@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -22,12 +21,14 @@ import nl.zoetermeer.onszoetermeer.data.DummyDatabase;
 import nl.zoetermeer.onszoetermeer.data.UserAchievementsDAO;
 import nl.zoetermeer.onszoetermeer.data.UserDAO;
 import nl.zoetermeer.onszoetermeer.models.Achievement;
+import nl.zoetermeer.onszoetermeer.models.Request;
 import nl.zoetermeer.onszoetermeer.models.User;
 
 public class Profile extends Base
 {
     private Bundle bundleDetails;
     private List<Achievement> achievementsList;
+    private List<Request> requestsList;
     private int userId;
     private User profileUser;
     int pStatusMentaal = 0;
@@ -46,9 +47,7 @@ public class Profile extends Base
         Bundle bundleDetails = getIntent().getExtras();
         userId = bundleDetails.getInt("user_id", 0);
 
-
         profileName = findViewById(R.id.profile_user_name);
-
 
         new selectUserInfoAsync(userId).execute();
         new selectAchievementsAsync(userId).execute();
@@ -77,6 +76,12 @@ public class Profile extends Base
             TextView emptyAchievements = findViewById(R.id.achievements_empty_text_profile);
             emptyAchievements.setVisibility(View.VISIBLE);
         }
+//        if (requestsList.size() == 0) {
+//            TextView emptyRequests = findViewById(R.id.requests_empty_text_profile);
+//            emptyRequests.setVisibility(View.VISIBLE);
+//        }
+        TextView emptyRequests = findViewById(R.id.requests_empty_text_profile);
+        emptyRequests.setVisibility(View.VISIBLE);
     }
 
 
@@ -154,7 +159,7 @@ public class Profile extends Base
 
     private void drawMentalProgress()
     {
-        Drawable drawableMental = ResourcesCompat.getDrawable(getResources(), R.drawable.progressbarstyle, null);
+        Drawable drawableMental = ResourcesCompat.getDrawable(getResources(), R.drawable.profile_progressbarstyle, null);
         final ProgressBar mProgressMentaal = findViewById(R.id.circularProgressbarMentalProfile);
         mProgressMentaal.setProgress(100);
         mProgressMentaal.setSecondaryProgress(100);
@@ -196,7 +201,7 @@ public class Profile extends Base
 
     private void drawPhysicalProgress()
     {
-        Drawable drawablePhysical = ResourcesCompat.getDrawable(getResources(), R.drawable.progressbarstyle, null);
+        Drawable drawablePhysical = ResourcesCompat.getDrawable(getResources(), R.drawable.profile_progressbarstyle, null);
         final ProgressBar progressFysiek = findViewById(R.id.circularProgressbarPhysicalProfile);
         progressFysiek.setProgress(100);
         progressFysiek.setSecondaryProgress(100);
